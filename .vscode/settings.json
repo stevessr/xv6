@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "riscv.h": "c",
-        "sleeplock.h": "c"
+        "sleeplock.h": "c",
+        "param.h": "c",
+        "defs.h": "c",
+        "types.h": "c"
     }
 }
