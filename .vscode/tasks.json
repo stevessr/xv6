@@ -1,0 +1,32 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make pdf",
+            "type": "shell",
+            "command": "cd xv6-riscv-book && make pdf",
+        },
+        {
+            "label": "make zh pdf",
+            "type": "shell",
+            "command": "cd xv6-riscv-book && make book_zh.pdf",
+        },
+        {
+            "label": "make kernel",
+            "type": "shell",
+            "command": "cd xv6-riscv && make",
+        },
+        {
+            "label": "open qemu",
+            "type": "shell",
+            "command": "cd xv6-riscv && ma qemu",
+        },
+        {
+            "label": "open qemu gdb",
+            "type": "shell",
+            "command": "cd xv6-riscv && make qemu-gdb",
+        }
+    ]
+}
