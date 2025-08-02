@@ -33,5 +33,13 @@ export default defineConfig({
         ]
       }
     ]
+  },
+  markdown: {
+    languageAlias: {
+      s: 'asm',
+      assembly: 'asm',
+      gas: 'asm',
+      ld: 'makefile'
+    }
   }
 })

@@ -14,7 +14,7 @@
 
 一个典型的例子就是 Shell。Shell 本身是一个普通的用户程序，它读取用户输入的命令，然后通过一系列系统调用来执行这些命令。xv6 的 Shell 实现位于 [`user/sh.c`](source/xv6-riscv/user/sh.c)，它的简洁与强大充分体现了 Unix-like 系统接口设计的精髓。
 
-整个流程的核心在 [`main`](source/xv6-riscv/user/sh.c:147) 函数和 [`runcmd`](source/xv6-riscv/user/sh.c:59) 函数中。[`main`](source/xv6-riscv/user/sh.c:147) 函数循环调用 [`getcmd`](source/xv6-riscv/user/sh.c:136) 来获取用户输入，然后调用 `fork` 创建一个子进程，子进程再调用 [`runcmd`](source/xv6-riscv/user/sh.c:59) 来解析并执行命令。
+整个流程的核心在 [`main`](source/xv6-riscv/user/sh.c) 函数和 [`runcmd`](source/xv6-riscv/user/sh.c) 函数中。[`main`](source/xv6-riscv/user/sh.c) 函数循环调用 [`getcmd`](source/xv6-riscv/user/sh.c) 来获取用户输入，然后调用 `fork` 创建一个子进程，子进程再调用 [`runcmd`](source/xv6-riscv/user/sh.c) 来解析并执行命令。
 
 ```c
 // user/sh.c: main 函数的核心循环
@@ -37,10 +37,10 @@ while(getcmd(buf, sizeof(buf)) >= 0){
 
 `fork()` 是 Unix 系统中创建新进程的唯一方式。它会创建一个与调用进程（父进程）几乎完全相同的副本（子进程）。
 
-*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 中，shell 通过调用 [`fork1`](source/xv6-riscv/user/sh.c:184)（一个 `fork` 的简单封装）来为每个命令创建一个新的子进程。`fork` 调用在父子进程中都会返回：在父进程中返回子进程的 PID，在子进程中返回 0。这种机制使得程序可以根据返回值区分父子进程，执行不同的逻辑。
+*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 中，shell 通过调用 [`fork1`](source/xv6-riscv/user/sh.c)（一个 `fork` 的简单封装）来为每个命令创建一个新的子进程。`fork` 调用在父子进程中都会返回：在父进程中返回子进程的 PID，在子进程中返回 0。这种机制使得程序可以根据返回值区分父子进程，执行不同的逻辑。
 
-*   **内核实现**: `fork` 的内核实现位于 [`kernel/proc.c`](source/xv6-riscv/kernel/proc.c) 的 [`fork`](source/xv6-riscv/kernel/proc.c:284) 函数。其主要步骤包括：
-    1.  调用 [`allocproc`](source/xv6-riscv/kernel/proc.c:112) 在进程表中找到一个空闲的 `struct proc`，并为其分配内核栈和陷阱帧。
+*   **内核实现**: `fork` 的内核实现位于 [`kernel/proc.c`](source/xv6-riscv/kernel/proc.c) 的 [`fork`](source/xv6-riscv/kernel/proc.c) 函数。其主要步骤包括：
+    1.  调用 [`allocproc`](source/xv6-riscv/kernel/proc.c) 在进程表中找到一个空闲的 `struct proc`，并为其分配内核栈和陷阱帧。
     2.  调用 `uvmcopy` 复制父进程的用户内存空间到子进程。
     3.  复制父进程的文件描述符表、当前工作目录等状态。
     4.  将子进程的状态设置为 `RUNNABLE`，使其可以被调度器调度运行。
@@ -50,12 +50,12 @@ while(getcmd(buf, sizeof(buf)) >= 0){
 
 `exec()` 系统调用用于将一个新程序加载到当前进程的内存空间中，并从该程序的入口点开始执行。它会替换当前进程的内存映像，但 PID 和文件描述符表保持不变。
 
-*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的 [`runcmd`](source/xv6-riscv/user/sh.c:59) 函数中，对于简单的执行命令（`EXEC` 类型），子进程最终会调用 `exec`。例如，当用户输入 `ls -l` 时，子进程会调用 `exec("ls", {"ls", "-l", 0})`。如果 `exec` 成功，它将永不返回；如果失败（例如找不到文件），则会返回 -1。
+*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的 [`runcmd`](source/xv6-riscv/user/sh.c) 函数中，对于简单的执行命令（`EXEC` 类型），子进程最终会调用 `exec`。例如，当用户输入 `ls -l` 时，子进程会调用 `exec("ls", {"ls", "-l", 0})`。如果 `exec` 成功，它将永不返回；如果失败（例如找不到文件），则会返回 -1。
 
-*   **内核实现**: `exec` 的实现位于 [`kernel/exec.c`](source/xv6-riscv/kernel/exec.c) 的 [`exec`](source/xv6-riscv/kernel/exec.c:36) 函数。其核心步骤是：
+*   **内核实现**: `exec` 的实现位于 [`kernel/exec.c`](source/xv6-riscv/kernel/exec.c) 的 [`exec`](source/xv6-riscv/kernel/exec.c) 函数。其核心步骤是：
     1.  通过 `namei` 找到可执行文件的 inode。
     2.  读取并验证文件的 [ELF (Executable and Linkable Format)](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) 头，以确保它是一个合法的可执行文件。
-    3.  创建一个新的页表，并根据 ELF 程序头的信息，使用 `uvmalloc` 分配内存，并调用 [`loadseg`](source/xv6-riscv/kernel/exec.c:188) 将程序的代码段和数据段从文件加载到内存中。
+    3.  创建一个新的页表，并根据 ELF 程序头的信息，使用 `uvmalloc` 分配内存，并调用 [`loadseg`](source/xv6-riscv/kernel/exec.c) 将程序的代码段和数据段从文件加载到内存中。
     4.  分配并设置用户栈，将命令行参数 `argv` 复制到栈顶。
     5.  替换进程的页表、大小，并设置程序计数器 (`epc`) 为 ELF 文件中指定的入口点。
     6.  释放旧的页表和内存。
@@ -66,12 +66,12 @@ while(getcmd(buf, sizeof(buf)) >= 0){
 
 父进程通常需要等待子进程执行完毕并收集其退出状态。`wait()` 系统调用就是为此设计的。
 
-*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的主循环中，父进程在 `fork` 之后会调用 [`wait(0)`](source/xv6-riscv/user/sh.c:171)。这会使父进程（shell）暂停执行，直到子进程（正在执行的命令）调用 `exit()` 退出。
+*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的主循环中，父进程在 `fork` 之后会调用 [`wait(0)`](source/xv6-riscv/user/sh.c)。这会使父进程（shell）暂停执行，直到子进程（正在执行的命令）调用 `exit()` 退出。
 
-*   **内核实现**: `wait` 的实现位于 [`kernel/proc.c`](source/xv6-riscv/kernel/proc.c) 的 [`wait`](source/xv6-riscv/kernel/proc.c:400) 函数。它会扫描进程表：
+*   **内核实现**: `wait` 的实现位于 [`kernel/proc.c`](source/xv6-riscv/kernel/proc.c) 的 [`wait`](source/xv6-riscv/kernel/proc.c) 函数。它会扫描进程表：
     1.  查找调用进程的所有子进程。
     2.  如果找到一个处于 `ZOMBIE`（僵尸）状态的子进程，说明该子进程已经退出。`wait` 会收集子进程的退出状态，释放其 `proc` 结构和相关资源，并返回该子进程的 PID。
-    3.  如果没有找到已退出的子进程，`wait` 会调用 [`sleep`](source/xv6-riscv/kernel/proc.c:553) 使父进程休眠，等待任意一个子进程退出时通过 [`wakeup`](source/xv6-riscv/kernel/proc.c:581) 将其唤醒。
+    3.  如果没有找到已退出的子进程，`wait` 会调用 [`sleep`](source/xv6-riscv/kernel/proc.c) 使父进程休眠，等待任意一个子进程退出时通过 [`wakeup`](source/xv6-riscv/kernel/proc.c) 将其唤醒。
 
 ## 1.4 I/O 与文件描述符
 
@@ -86,7 +86,7 @@ while(getcmd(buf, sizeof(buf)) >= 0){
 
 Shell 的一个强大功能是 I/O 重定向，例如 `echo hello > output.txt`。这正是通过巧妙地操纵文件描述符实现的。
 
-*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的 [`runcmd`](source/xv6-riscv/user/sh.c:59) 函数中，当解析到重定向命令（`REDIR` 类型）时，子进程会：
+*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的 [`runcmd`](source/xv6-riscv/user/sh.c) 函数中，当解析到重定向命令（`REDIR` 类型）时，子进程会：
     1.  调用 [`close()`](source/xv6-riscv/kernel/sysfile.c) 关闭标准输出（文件描述符 1）。
     2.  调用 [`open("output.txt", ...)` ](source/xv6-riscv/kernel/sysfile.c)。由于文件描述符是按最小可用值分配的，新打开的文件 `output.txt` 会自动获得文件描述符 1。
     3.  之后调用 `exec` 执行 `echo` 命令。此时，`echo` 对标准输出的所有写入都会被重定向到 `output.txt` 文件中。
@@ -105,24 +105,24 @@ case REDIR:
 ```
 
 *   **内核实现**:
-    *   [`filealloc`](source/xv6-riscv/kernel/file.c:40): 从全局文件表 `ftable` 中分配一个 `struct file`。
-    *   [`fileclose`](source/xv6-riscv/kernel/file.c:72): 减少文件的引用计数，当计数为 0 时，释放资源。
+    *   [`filealloc`](source/xv6-riscv/kernel/file.c): 从全局文件表 `ftable` 中分配一个 `struct file`。
+    *   [`fileclose`](source/xv6-riscv/kernel/file.c): 减少文件的引用计数，当计数为 0 时，释放资源。
     *   每个进程的 `struct proc` 中都有一个 `ofile` 数组，用于存放指向 `struct file` 的指针，数组的索引就是文件描述符。
 
 ## 1.5 管道 (`pipe`)
 
 管道是一种特殊的“文件”，它由内核维护一个小的缓冲区，用于在进程间传递数据。一个命令的输出可以通过管道直接作为另一个命令的输入，例如 `grep fork sh.c | wc -l`。
 
-*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的 [`runcmd`](source/xv6-riscv/user/sh.c:59) 中，当处理管道命令（`PIPE` 类型）时，shell 的处理过程如下：
+*   **用户视角**: 在 [`sh.c`](source/xv6-riscv/user/sh.c) 的 [`runcmd`](source/xv6-riscv/user/sh.c) 中，当处理管道命令（`PIPE` 类型）时，shell 的处理过程如下：
     1.  调用 `pipe(p)` 创建一个管道。`p` 是一个包含两个整数的数组，`p[0]` 是管道的读取端，`p[1]` 是管道的写入端。
     2.  创建第一个子进程（管道左侧，如 `grep`）。该子进程关闭其标准输出（fd 1），然后用 [`dup`](source/xv6-riscv/kernel/sysfile.c) 复制管道的写入端 `p[1]` 到 fd 1，最后关闭不再需要的 `p[0]` 和 `p[1]`，再 `exec` 执行 `grep`。
     3.  创建第二个子进程（管道右侧，如 `wc`）。该子进程关闭其标准输入（fd 0），然后用 `dup` 复制管道的读取端 `p[0]` 到 fd 0，最后关闭不再需要的 `p[0]` 和 `p[1]`，再 `exec` 执行 `wc`。
     4.  父进程关闭自己持有的管道两端 `p[0]` 和 `p[1]`，并等待两个子进程都结束。
 
 *   **内核实现**: `pipe` 的实现位于 [`kernel/pipe.c`](source/xv6-riscv/kernel/pipe.c)。
-    1.  `sys_pipe` 调用 [`pipealloc`](source/xv6-riscv/kernel/pipe.c:29)，该函数会分配一个 `struct pipe` 和两个 `struct file`（一个可读，一个可写），并将它们都指向同一个 `struct pipe`。
+    1.  `sys_pipe` 调用 [`pipealloc`](source/xv6-riscv/kernel/pipe.c)，该函数会分配一个 `struct pipe` 和两个 `struct file`（一个可读，一个可写），并将它们都指向同一个 `struct pipe`。
     2.  `struct pipe` 包含一个固定大小的缓冲区 `data`，以及读写指针 `nread` 和 `nwrite`，并用一个锁 `lock` 来保护并发访问。
-    3.  [`piperead`](source/xv6-riscv/kernel/pipe.c:146) 和 [`pipewrite`](source/xv6-riscv/kernel/pipe.c:103) 负责数据的读写。如果管道为空，`piperead` 会 `sleep`；如果管道已满，`pipewrite` 会 `sleep`。当另一端操作后，会调用 `wakeup` 唤醒对方。
+    3.  [`piperead`](source/xv6-riscv/kernel/pipe.c) 和 [`pipewrite`](source/xv6-riscv/kernel/pipe.c) 负责数据的读写。如果管道为空，`piperead` 会 `sleep`；如果管道已满，`pipewrite` 会 `sleep`。当另一端操作后，会调用 `wakeup` 唤醒对方。
 
 ## 1.6 实验要求：实现 `pipe`
 

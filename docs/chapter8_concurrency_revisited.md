@@ -73,7 +73,7 @@ struct buf {
 
 ### 2.1 文件系统中的引用计数
 
-xv6 在多个地方使用了引用计数。例如，`struct inode`（[`kernel/fs.h`](source/xv6-riscv/kernel/fs.h:1) 和 `struct file`（[`kernel/file.h`](source/xv6-riscv/kernel/file.h:1)) 都有一个 `refcnt` 字段。
+xv6 在多个地方使用了引用计数。例如，`struct inode`（[`kernel/fs.h`](source/xv6-riscv/kernel/fs.h) 和 `struct file`（[`kernel/file.h`](source/xv6-riscv/kernel/file.h)) 都有一个 `refcnt` 字段。
 
 *   **`struct inode`**: 代表一个文件在磁盘上的元数据。多个进程可能通过不同的文件描述符指向同一个文件，因此需要引用计数来跟踪有多少指针指向这个 inode。当 `refcnt` 为 0 时，可以回收这个 inode。
 *   **`struct file`**: 代表一个打开的文件。`fork()` 系统调用会复制父进程的文件描述符表，导致子进程和父进程共享同一个 `struct file`。`dup()` 系统调用也会创建对同一个 `struct file` 的新引用。

@@ -5,3 +5,4 @@ docs/d/.vitepress/cache
 
 /docs/.vitepress/sidebar-source.js
 docs/.vitepress/cache
+docs/.vitepress/dist
