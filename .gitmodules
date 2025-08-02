@@ -1,3 +1,6 @@
 [submodule "xv6-riscv"]
 	path = xv6-riscv
 	url = https://github.com/stevessr/xv6-riscv.git
+[submodule "xv6-chinese"]
+	path = xv6-chinese
+	url = https://github.com/ranxian/xv6-chinese.git
