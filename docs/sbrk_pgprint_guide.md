@@ -59,7 +59,7 @@ main(int argc, char *argv[])
 
 为了让 `make` 命令能够编译我们的新程序 `sbrktest.c`，我们需要将其添加到 `Makefile` 中的 `UPROGS` 列表中。
 
-打开位于 `xv6-riscv/` 目录下的 `Makefile` 文件。找到 `UPROGS` 变量的定义（大约在第 137 行），并在列表的末尾添加 `$U/_sbrktest\`。
+打开位于 `source/xv6-riscv/` 目录下的 `Makefile` 文件。找到 `UPROGS` 变量的定义（大约在第 137 行），并在列表的末尾添加 `$U/_sbrktest\`。
 
 **找到以下代码块：**
 

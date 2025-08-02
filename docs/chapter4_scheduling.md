@@ -6,8 +6,8 @@
 
 1.  **理解多路复用**：明白为什么需要调度机制，以及操作系统如何通过在进程间切换来创造每个进程都拥有自己 CPU 的假象。
 2.  **掌握进程生命周期**：熟悉 xv6 中进程的五种状态 (`UNUSED`, `SLEEPING`, `RUNNABLE`, `RUNNING`, `ZOMBIE`) 及其转换关系。
-3.  **分析上下文切换**：深入理解上下文切换的底层机制，特别是 [`kernel/swtch.S`](xv6-riscv/kernel/swtch.S:5) 中 `swtch` 函数如何保存和恢复寄存器。
-4.  **理解调度算法**：掌握 xv6 使用的简单轮询（Round-Robin）调度策略，并能分析 [`kernel/proc.c`](xv6-riscv/kernel/proc.c:456) 中 `scheduler` 函数的实现。
+3.  **分析上下文切换**：深入理解上下文切换的底层机制，特别是 [`kernel/swtch.S`](source/xv6-riscv/kernel/swtch.S:5) 中 `swtch` 函数如何保存和恢复寄存器。
+4.  **理解调度算法**：掌握 xv6 使用的简单轮询（Round-Robin）调度策略，并能分析 [`kernel/proc.c`](source/xv6-riscv/kernel/proc.c:456) 中 `scheduler` 函数的实现。
 
 ---
 
@@ -23,7 +23,7 @@
 
 ## 3. 进程的生命周期
 
-在 xv6 中，每个进程在其生命周期内都会经历一系列状态。这些状态定义在 [`kernel/proc.h`](xv6-riscv/kernel/proc.h:86) 的 `enum procstate` 中。
+在 xv6 中，每个进程在其生命周期内都会经历一系列状态。这些状态定义在 [`kernel/proc.h`](source/xv6-riscv/kernel/proc.h:86) 的 `enum procstate` 中。
 
 ```c
 // kernel/proc.h
@@ -63,11 +63,11 @@ graph TD
 
 ## 4. 上下文切换：`swtch` 的魔力
 
-上下文切换是调度的核心机制。它指的是保存当前运行进程（或内核线程）的 CPU 状态（寄存器），并加载下一个要运行进程（或内核线程）的状态。在 xv6 中，这个神奇的过程由 [`kernel/swtch.S`](xv6-riscv/kernel/swtch.S:5) 中的 `swtch` 函数完成。
+上下文切换是调度的核心机制。它指的是保存当前运行进程（或内核线程）的 CPU 状态（寄存器），并加载下一个要运行进程（或内核线程）的状态。在 xv6 中，这个神奇的过程由 [`kernel/swtch.S`](source/xv6-riscv/kernel/swtch.S:5) 中的 `swtch` 函数完成。
 
 ### 4.1 上下文 (`struct context`)
 
-一个线程的内核上下文被保存在 `struct context` 结构体中（定义于 [`kernel/proc.h`](xv6-riscv/kernel/proc.h:7)）。它只包含**被调用者保存 (callee-saved)** 的寄存器。这是因为调用 `swtch` 的 C 代码会负责保存**调用者保存 (caller-saved)** 的寄存器。
+一个线程的内核上下文被保存在 `struct context` 结构体中（定义于 [`kernel/proc.h`](source/xv6-riscv/kernel/proc.h:7)）。它只包含**被调用者保存 (callee-saved)** 的寄存器。这是因为调用 `swtch` 的 C 代码会负责保存**调用者保存 (caller-saved)** 的寄存器。
 
 ```c
 // kernel/proc.h
@@ -122,7 +122,7 @@ swtch:
 
 ## 5. xv6 的调度器
 
-xv6 的调度器非常简单，采用 **轮询 (Round-Robin)** 策略。每个 CPU 核心都有一个独立的调度器线程，该线程在一个无限循环中执行 [`scheduler`](xv6-riscv/kernel/proc.c:456) 函数。
+xv6 的调度器非常简单，采用 **轮询 (Round-Robin)** 策略。每个 CPU 核心都有一个独立的调度器线程，该线程在一个无限循环中执行 [`scheduler`](source/xv6-riscv/kernel/proc.c:456) 函数。
 
 ### 5.1 `scheduler` 函数
 

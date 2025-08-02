@@ -23,13 +23,13 @@
 为了深入理解这些概念，请阅读并分析以下 xv6 用户程序的源代码。这些简单的程序展示了系统调用的典型用法。
 
 *   **Shell (`sh.c`)**: shell 是理解系统调用组合使用的绝佳范例。请重点关注 `main` 循环、`runcmd` 函数以及它如何处理不同类型的命令。
-    *   代码链接: [`user/sh.c`](xv6-riscv/user/sh.c)
+    *   代码链接: [`user/sh.c`](source/xv6-riscv/user/sh.c)
 *   **Cat (`cat.c`)**: `cat` 程序简单地将其输入复制到输出。它的实现展示了文件描述符的通用性——`cat` 无需关心其输入/输出是来自文件、控制台还是管道。
-    *   代码链接: [`user/cat.c`](xv6-riscv/user/cat.c)
+    *   代码链接: [`user/cat.c`](source/xv6-riscv/user/cat.c)
 *   **Grep (`grep.c`)**: `grep` 在其输入中搜索特定模式。与 `cat` 类似，它也是围绕 `read()` 系统调用构建的。
-    *   代码链接: [`user/grep.c`](xv6-riscv/user/grep.c)
+    *   代码链接: [`user/grep.c`](source/xv6-riscv/user/grep.c)
 *   **ls (`ls.c`)**: `ls` 列出目录内容，这需要与文件系统进行交互以读取目录条目。
-    *   代码链接: [`user/ls.c`](xv6-riscv/user/ls.c)
+    *   代码链接: [`user/ls.c`](source/xv6-riscv/user/ls.c)
 
 ## 4. 引导性问题
 

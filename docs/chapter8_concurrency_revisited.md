@@ -19,7 +19,7 @@
 
 ### 1.1 块缓存 (`bcache`) 中的并发控制
 
-xv6 的块缓存（[`kernel/bio.c`](xv6-riscv/kernel/bio.c)）是一个很好的例子。它维护了一个磁盘块的内存缓存，供文件系统代码使用。`bcache` 结构体包含一个全局锁 `bcache.lock` 和一个由 `NBUF` 个缓冲区组成的数组 `bcache.buf`。
+xv6 的块缓存（[`kernel/bio.c`](source/xv6-riscv/kernel/bio.c)）是一个很好的例子。它维护了一个磁盘块的内存缓存，供文件系统代码使用。`bcache` 结构体包含一个全局锁 `bcache.lock` 和一个由 `NBUF` 个缓冲区组成的数组 `bcache.buf`。
 
 ```c
 // kernel/bio.c
@@ -73,12 +73,12 @@ struct buf {
 
 ### 2.1 文件系统中的引用计数
 
-xv6 在多个地方使用了引用计数。例如，`struct inode`（[`kernel/fs.h`](xv6-riscv/kernel/fs.h:1) 和 `struct file`（[`kernel/file.h`](xv6-riscv/kernel/file.h:1)) 都有一个 `refcnt` 字段。
+xv6 在多个地方使用了引用计数。例如，`struct inode`（[`kernel/fs.h`](source/xv6-riscv/kernel/fs.h:1) 和 `struct file`（[`kernel/file.h`](source/xv6-riscv/kernel/file.h:1)) 都有一个 `refcnt` 字段。
 
 *   **`struct inode`**: 代表一个文件在磁盘上的元数据。多个进程可能通过不同的文件描述符指向同一个文件，因此需要引用计数来跟踪有多少指针指向这个 inode。当 `refcnt` 为 0 时，可以回收这个 inode。
 *   **`struct file`**: 代表一个打开的文件。`fork()` 系统调用会复制父进程的文件描述符表，导致子进程和父进程共享同一个 `struct file`。`dup()` 系统调用也会创建对同一个 `struct file` 的新引用。
 
-[`kernel/file.c`](xv6-riscv/kernel/file.c) 中的 `filealloc`、`filedup` 和 `fileclose` 函数共同管理着 `struct file` 的引用计数。
+[`kernel/file.c`](source/xv6-riscv/kernel/file.c) 中的 `filealloc`、`filedup` 和 `fileclose` 函数共同管理着 `struct file` 的引用计数。
 
 ```c
 // kernel/file.c
@@ -127,7 +127,7 @@ fileclose(struct file *f)
 
 ### 2.2 管道中的引用计数
 
-管道（[`kernel/pipe.c`](xv6-riscv/kernel/pipe.c)) 也使用了引用计数来管理读端和写端。一个管道 `struct pipe` 包含 `readopen` 和 `writeopen` 两个布尔值以及各自的引用计数。当一个管道的所有读端或写端都被关闭时，相应的读写操作会表现出特定的行为（例如，读一个没有写端的管道会返回 EOF）。
+管道（[`kernel/pipe.c`](source/xv6-riscv/kernel/pipe.c)) 也使用了引用计数来管理读端和写端。一个管道 `struct pipe` 包含 `readopen` 和 `writeopen` 两个布尔值以及各自的引用计数。当一个管道的所有读端或写端都被关闭时，相应的读写操作会表现出特定的行为（例如，读一个没有写端的管道会返回 EOF）。
 
 ### 2.3 内存分配器中的引用计数
 
@@ -156,13 +156,13 @@ xv6 在设计上试图平衡这对矛盾。例如，`bcache` 使用了全局锁�
 
 ### 实验 1: 优化管道 (Concurrent Pipe)
 
-**目标**：修改 [`pipe.c`](xv6-riscv/kernel/pipe.c) 中的代码，使其能够并发地执行 `pipewrite` 和 `piperead`。当前的实现使用一个锁来保护整个管道的数据缓冲区，这意味着读和写操作是互斥的。请设计一种方案，允许一个线程写入数据的同时，另一个线程可以从中读取数据，而不会发生数据竞争。
+**目标**：修改 [`pipe.c`](source/xv6-riscv/kernel/pipe.c) 中的代码，使其能够并发地执行 `pipewrite` 和 `piperead`。当前的实现使用一个锁来保护整个管道的数据缓冲区，这意味着读和写操作是互斥的。请设计一种方案，允许一个线程写入数据的同时，另一个线程可以从中读取数据，而不会发生数据竞争。
 
 **提示**：你可能需要使用两个索引来分别跟踪缓冲区的读写位置，并仔细处理缓冲区为空或为满时的边界情况。你需要确保你的锁方案能正确地协调读写操作。
 
 ### 实验 2: 优化调度器 (Concurrent Scheduler)
 
-**目标**：当前的 xv6 调度器为每个 CPU 核心维护一个单独的进程列表，但调度和进程窃取（work-stealing）的逻辑可能仍然存在性能瓶颈或需要更精细的锁。请分析 [`kernel/proc.c`](xv6-riscv/kernel/proc.c) 中与调度相关的锁（如 `proc->lock`），并尝试优化它们。例如，是否可以减少锁的持有时间？或者使用更细粒度的锁来提高并行性？
+**目标**：当前的 xv6 调度器为每个 CPU 核心维护一个单独的进程列表，但调度和进程窃取（work-stealing）的逻辑可能仍然存在性能瓶颈或需要更精细的锁。请分析 [`kernel/proc.c`](source/xv6-riscv/kernel/proc.c) 中与调度相关的锁（如 `proc->lock`），并尝试优化它们。例如，是否可以减少锁的持有时间？或者使用更细粒度的锁来提高并行性？
 
 **提示**：这个实验是开放性的。你需要识别出调度器中的潜在瓶颈，并设计出一种既能提高性能又不会引入竞争条件或死锁的方案。
 

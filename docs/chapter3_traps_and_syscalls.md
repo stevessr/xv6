@@ -63,7 +63,7 @@ xv6 通过**跳板页 (Trampoline Page)** 解决了这个问题。
 
 这样，无论当前 `satp` 寄存器指向用户页表还是内核页表，`TRAMPOLINE` 这个虚拟地址总是有效的，CPU 总能在这里取到正确的指令。
 
-### 4.1 代码分析: [`kernel/trampoline.S`](xv6-riscv/kernel/trampoline.S:1)
+### 4.1 代码分析: [`kernel/trampoline.S`](source/xv6-riscv/kernel/trampoline.S:1)
 
 #### 4.1.1 `uservec`: 进入内核
 
@@ -107,9 +107,9 @@ uservec:
 
 ## 5. C 语言陷阱处理
 
-在 `uservec` 完成底层设置后，控制权转移到 C 函数 [`usertrap()`](xv6-riscv/kernel/trap.c:49)。
+在 `uservec` 完成底层设置后，控制权转移到 C 函数 [`usertrap()`](source/xv6-riscv/kernel/trap.c:49)。
 
-### 5.1 代码分析: [`kernel/trap.c`](xv6-riscv/kernel/trap.c:49)
+### 5.1 代码分析: [`kernel/trap.c`](source/xv6-riscv/kernel/trap.c:49)
 
 ```c
 void
@@ -157,9 +157,9 @@ usertrap(void)
 
 ### 5.2 系统调用分发
 
-如果陷阱是系统调用，`usertrap` 会调用 [`syscall()`](xv6-riscv/kernel/syscall.c:164)。
+如果陷阱是系统调用，`usertrap` 会调用 [`syscall()`](source/xv6-riscv/kernel/syscall.c:164)。
 
-#### 5.2.1 代码分析: [`kernel/syscall.c`](xv6-riscv/kernel/syscall.c:1) & [`kernel/syscall.h`](xv6-riscv/kernel/syscall.h:1)
+#### 5.2.1 代码分析: [`kernel/syscall.c`](source/xv6-riscv/kernel/syscall.c:1) & [`kernel/syscall.h`](source/xv6-riscv/kernel/syscall.h:1)
 
 `syscall()` 的实现非常直观：
 
@@ -265,10 +265,10 @@ syscall(void)
 
 1.  在 `user/user.h` 中添加 `trace` 的用户空间声明。
 2.  在 `user/usys.pl` 中添加 `trace` 的入口。
-3.  在 [`kernel/syscall.h`](xv6-riscv/kernel/syscall.h:1) 中定义 `SYS_trace`。
-4.  在 [`kernel/syscall.c`](xv6-riscv/kernel/syscall.c:1) 的 `syscalls` 数组中添加 `sys_trace`。
+3.  在 [`kernel/syscall.h`](source/xv6-riscv/kernel/syscall.h:1) 中定义 `SYS_trace`。
+4.  在 [`kernel/syscall.c`](source/xv6-riscv/kernel/syscall.c:1) 的 `syscalls` 数组中添加 `sys_trace`。
 5.  在 `kernel/proc.h` 的 `struct proc` 中添加一个字段来保存追踪掩码 (e.g., `int tracemask`)。
 6.  在 `kernel/sysproc.c` 中实现 `sys_trace()` 函数。它应该获取整型参数并将其保存到当前进程的 `tracemask` 字段。
-7.  修改 [`syscall()`](xv6-riscv/kernel/syscall.c:164) 函数。在执行系统调用之后，检查当前进程的 `tracemask` 是否设置了对应系统调用号的位。如果设置了，就打印所需的追踪信息。
+7.  修改 [`syscall()`](source/xv6-riscv/kernel/syscall.c:164) 函数。在执行系统调用之后，检查当前进程的 `tracemask` 是否设置了对应系统调用号的位。如果设置了，就打印所需的追踪信息。
 
 (**注意**: 本文稿只提供实验要求和高级指引，不提供完整的代码实现。)
