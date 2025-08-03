@@ -80,7 +80,7 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
 ### 阶段一：机器模式启动 (entry.S -> start.c)
 
 1.  **QEMU 加载内核**: 当我们使用 `qemu` 启动 xv6 时，QEMU 会将编译好的内核镜像加载到物理地址 `0x80000000` 处。
-2.  **CPU 从 `_entry` 开始执行**: 所有 CPU 核心（hart）都会在机器模式下，从 [`kernel/entry.S`](source/xv6-riscv/kernel/entry.S) 的 `_entry` 标签处开始执行。此时，分页机制是关闭的，虚拟地址直接等于物理地址。
+2.  **CPU 从 `_entry` 开始执行**: 所有 CPU 核心（hart）都会在机器模式下，从 [`kernel/entry.S`](source/xv6-riscv/kernel/entry.S.md) 的 `_entry` 标签处开始执行。此时，分页机制是关闭的，虚拟地址直接等于物理地址。
 3.  **设置初始栈**: `_entry` 的首要任务是为 C 代码的执行准备一个栈。它读取当前核心的 `mhartid`，计算出该核心在 `stack0` 数组中的专属栈空间，并将栈顶指针 `sp` 指向该区域的末尾（因为 RISC-V 的栈是向下增长的）。
     ```assembly
     # kernel/entry.S
@@ -93,8 +93,8 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
             mul a0, a0, a1
             add sp, sp, a0
     ```
-4.  **跳转到 `start` 函数**: 栈设置好后，`_entry` 通过 `call` 指令跳转到 C 函数 [`start()`](source/xv6-riscv/kernel/start.c)。
-5.  **切换到监管者模式**: [`start()`](source/xv6-riscv/kernel/start.c) 函数执行一系列只能在机器模式下完成的配置：
+4.  **跳转到 `start` 函数**: 栈设置好后，`_entry` 通过 `call` 指令跳转到 C 函数 [`start()`](source/xv6-riscv/kernel/start.c.md)。
+5.  **切换到监管者模式**: [`start()`](source/xv6-riscv/kernel/start.c.md) 函数执行一系列只能在机器模式下完成的配置：
     *   设置 `mstatus` 寄存器，告诉 `mret` 指令下次要切换到监管者模式（S-mode）。
     *   将 `main` 函数的地址写入 `mepc` 寄存器，作为 `mret` 的返回地址。
     *   通过将 `satp` 寄存器置零，暂时禁用 S-mode 下的虚拟地址转换。
@@ -108,13 +108,13 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
 `main` 函数是内核的 C 代码主入口。它由 hart 0（主 CPU）和其它 hart 并发执行。
 
 1.  **主 CPU 初始化**: hart 0 负责执行一系列一次性的初始化工作：
-    *   [`consoleinit()`](source/xv6-riscv/kernel/console.c), [`printfinit()`](source/xv6-riscv/kernel/printf.c): 初始化控制台和打印函数，这样内核才能输出信息。
-    *   [`kinit()`](source/xv6-riscv/kernel/kalloc.c): 初始化物理内存分配器。
-    *   [`kvminit()`](source/xv6-riscv/kernel/vm.c), [`kvminithart()`](source/xv6-riscv/kernel/vm.c): 创建并启用内核页表，开启分页机制。
-    *   [`procinit()`](source/xv6-riscv/kernel/proc.c): 初始化进程表。
-    *   [`trapinit()`](source/xv6-riscv/kernel/trap.c), [`trapinithart()`](source/xv6-riscv/kernel/trap.c): 初始化陷阱处理。
+    *   [`consoleinit()`](source/xv6-riscv/kernel/console.c.md), [`printfinit()`](source/xv6-riscv/kernel/printf.c.md): 初始化控制台和打印函数，这样内核才能输出信息。
+    *   [`kinit()`](source/xv6-riscv/kernel/kalloc.c.md): 初始化物理内存分配器。
+    *   [`kvminit()`](source/xv6-riscv/kernel/vm.c.md), [`kvminithart()`](source/xv6-riscv/kernel/vm.c.md): 创建并启用内核页表，开启分页机制。
+    *   [`procinit()`](source/xv6-riscv/kernel/proc.c.md): 初始化进程表。
+    *   [`trapinit()`](source/xv6-riscv/kernel/trap.c.md), [`trapinithart()`](source/xv6-riscv/kernel/trap.c.md): 初始化陷阱处理。
     *   ... 初始化其他各种设备和子系统 ...
-    *   **[`userinit()`](source/xv6-riscv/kernel/proc.c): 创建第一个用户进程！**
+    *   **[`userinit()`](source/xv6-riscv/kernel/proc.c.md): 创建第一个用户进程！**
     *   最后，设置 `started` 标志为 1，通知其他 CPU 初始化已完成。
 2.  **其他 CPU 等待**: 其他 hart 会在一个 `while` 循环中自旋，等待 `started` 标志变为 1。之后，它们会各自完成自己的 `kvminithart()` 和 `trapinithart()` 等初始化，然后和主 CPU 一样，进入调度器循环。
 3.  **进入调度器**: 所有 CPU 在完成初始化后，都会调用 `scheduler()`，开始永不返回的进程调度循环。
@@ -123,9 +123,9 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
 
 这是整个启动流程的高潮部分。
 
-1.  **`userinit()` 创建进程**: [`main()`](source/xv6-riscv/kernel/main.c) 调用的 [`userinit()`](source/xv6-riscv/kernel/proc.c) 函数负责创建第一个进程，通常称为 `init` 进程。
+1.  **`userinit()` 创建进程**: [`main()`](source/xv6-riscv/kernel/main.c.md) 调用的 [`userinit()`](source/xv6-riscv/kernel/proc.c.md) 函数负责创建第一个进程，通常称为 `init` 进程。
     *   调用 `allocproc()` 分配一个 `proc` 结构体。
-    *   调用 `uvmfirst()` 分配一页内存，并将一小段硬编码的二进制程序 `initcode` 复制进去。这段代码来自 [`user/initcode.S`](source/xv6-riscv/user/initcode.S)。
+    *   调用 `uvmfirst()` 分配一页内存，并将一小段硬编码的二进制程序 `initcode` 复制进去。这段代码来自 [`user/initcode.S`](source/xv6-riscv/user/initcode.S.md)。
     *   设置进程的陷阱帧（`trapframe`），使得当进程从内核态“返回”到用户态时，程序计数器 `epc` 指向地址 0，栈指针 `sp` 指向该页的最高地址。
     *   将进程状态设置为 `RUNNABLE`，表示它已经准备好被调度器执行了。
 
@@ -140,9 +140,9 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
     ```
     `ecall` 指令再次将控制权交给内核。
 
-3.  **内核执行 `exec`**: 内核的系统调用处理程序会找到 `exec` 对应的实现 `sys_exec`。`exec` 系统调用会用新的程序（这里是 `/init`，其代码在 [`user/init.c`](source/xv6-riscv/user/init.c) 中）替换掉当前进程的内存和寄存器，然后返回用户空间。
+3.  **内核执行 `exec`**: 内核的系统调用处理程序会找到 `exec` 对应的实现 `sys_exec`。`exec` 系统调用会用新的程序（这里是 `/init`，其代码在 [`user/init.c`](source/xv6-riscv/user/init.c.md) 中）替换掉当前进程的内存和寄存器，然后返回用户空间。
 
-4.  **`init.c` 运行**: 控制权返回用户空间后，进程开始执行 `/init` 程序的 `main` 函数。[`init.c`](source/xv6-riscv/user/init.c) 的主要工作是：
+4.  **`init.c` 运行**: 控制权返回用户空间后，进程开始执行 `/init` 程序的 `main` 函数。[`init.c`](source/xv6-riscv/user/init.c.md) 的主要工作是：
     *   确保控制台文件描述符被正确设置。
     *   在一个无限循环中，`fork` 一个子进程。
     *   在子进程中，`exec("sh", ...)` 启动一个 shell。

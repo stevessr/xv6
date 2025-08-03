@@ -7,7 +7,7 @@
 1.  **理解页表的核心作用**: 明白为什么需要页表以及它在虚拟内存管理中扮演的角色。
 2.  **掌握 RISC-V Sv39 分页机制**: 学习 RISC-V 架构下三级页表的结构和地址翻译过程。
 3.  **分析 xv6 地址空间布局**: 探究 xv6 如何设计和映射内核与用户进程的地址空间。
-4.  **掌握核心函数原理**: 理解页表硬件（如 `satp` 寄存器）与内核软件（如 [`walk`](source/xv6-riscv/kernel/vm.c) 函数）的协同工作方式。
+4.  **掌握核心函数原理**: 理解页表硬件（如 `satp` 寄存器）与内核软件（如 [`walk`](source/xv6-riscv/kernel/vm.c.md) 函数）的协同工作方式。
 
 ## 2. 核心概念：为什么需要页表？
 
@@ -57,7 +57,7 @@ xv6 运行在 RISC-V 的 Sv39 分页模式下。这意味着在 64 位的虚拟�
 
 ### 3.3. 页表项 (PTE)
 
-每个 PTE 是一个 64 位的值，其结构定义在 [`kernel/riscv.h`](source/xv6-riscv/kernel/riscv.h)。
+每个 PTE 是一个 64 位的值，其结构定义在 [`kernel/riscv.h`](source/xv6-riscv/kernel/riscv.h.md)。
 
 ```c
 // 定义在 kernel/riscv.h
@@ -83,7 +83,7 @@ xv6 运行在 RISC-V 的 Sv39 分页模式下。这意味着在 64 位的虚拟�
 
 ## 4. xv6 地址空间布局
 
-xv6 为内核和每个进程都维护了独立的页表。其地址空间布局在 [`kernel/memlayout.h`](source/xv6-riscv/kernel/memlayout.h) 中定义。
+xv6 为内核和每个进程都维护了独立的页表。其地址空间布局在 [`kernel/memlayout.h`](source/xv6-riscv/kernel/memlayout.h.md) 中定义。
 
 ![xv6 Address Space Layout](/assets/images/f2-3.png)
 
@@ -110,11 +110,11 @@ xv6 为内核和每个进程都维护了独立的页表。其地址空间布局�
 
 ## 5. 核心代码分析
 
-页表管理的核心逻辑位于 [`kernel/vm.c`](source/xv6-riscv/kernel/vm.c)。
+页表管理的核心逻辑位于 [`kernel/vm.c`](source/xv6-riscv/kernel/vm.c.md)。
 
 ### 5.1. `walk`: 查找 PTE
 
-[`walk`](source/xv6-riscv/kernel/vm.c) 函数是页表操作的核心，它模拟硬件的地址翻译过程，在三级页表中查找一个给定虚拟地址 `va` 对应的最底层 PTE 的地址。
+[`walk`](source/xv6-riscv/kernel/vm.c.md) 函数是页表操作的核心，它模拟硬件的地址翻译过程，在三级页表中查找一个给定虚拟地址 `va` 对应的最底层 PTE 的地址。
 
 ```c
 // kernel/vm.c
@@ -147,14 +147,14 @@ walk(pagetable_t pagetable, uint64 va, int alloc)
 }
 ```
 *   该函数循环两次（`level` 从 2 到 1）。
-*   在每一级，它使用 [`PX`](source/xv6-riscv/kernel/riscv.h) 宏从 `va` 中提取 9 位索引，定位到当前页表中的 `pte`。
-*   如果 `pte` 有效，它就使用 [`PTE2PA`](source/xv6-riscv/kernel/riscv.h) 提取下一级页表的物理地址，并继续下降。
-*   如果 `pte` 无效且 `alloc` 参数为真，它会调用 [`kalloc`](source/xv6-riscv/kernel/kalloc.c) 分配一个新的物理页作为下一级页表，并用其物理地址更新 `pte`。
+*   在每一级，它使用 [`PX`](source/xv6-riscv/kernel/riscv.h.md) 宏从 `va` 中提取 9 位索引，定位到当前页表中的 `pte`。
+*   如果 `pte` 有效，它就使用 [`PTE2PA`](source/xv6-riscv/kernel/riscv.h.md) 提取下一级页表的物理地址，并继续下降。
+*   如果 `pte` 无效且 `alloc` 参数为真，它会调用 [`kalloc`](source/xv6-riscv/kernel/kalloc.c.md) 分配一个新的物理页作为下一级页表，并用其物理地址更新 `pte`。
 *   最终，它返回指向 L0 中目标 PTE 的指针。
 
 ### 5.2. `mappages`: 创建映射
 
-[`mappages`](source/xv6-riscv/kernel/vm.c) 函数用于在页表中建立一段虚拟地址到物理地址的映射。
+[`mappages`](source/xv6-riscv/kernel/vm.c.md) 函数用于在页表中建立一段虚拟地址到物理地址的映射。
 
 ```c
 // kernel/vm.c
@@ -194,7 +194,7 @@ mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)
 
 ### 5.3. `kvmmake`: 构建内核页表
 
-系统启动时，[`kvmmake`](source/xv6-riscv/kernel/vm.c) 函数负责创建内核页表。
+系统启动时，[`kvmmake`](source/xv6-riscv/kernel/vm.c.md) 函数负责创建内核页表。
 
 ```c
 // kernel/vm.c
@@ -226,11 +226,11 @@ kvmmake(void)
   return kpgtbl;
 }
 ```
-`kvmmake` 的执行流程清晰地展示了内核地址空间的构建过程。它通过多次调用 [`kvmmap`](source/xv6-riscv/kernel/vm.c)（`mappages` 的一个包装器）来建立上一节描述的所有映射。
+`kvmmake` 的执行流程清晰地展示了内核地址空间的构建过程。它通过多次调用 [`kvmmap`](source/xv6-riscv/kernel/vm.c.md)（`mappages` 的一个包装器）来建立上一节描述的所有映射。
 
 ## 6. 物理内存分配器
 
-物理内存页的分配和释放由 [`kernel/kalloc.c`](source/xv6-riscv/kernel/kalloc.c) 中的代码负责。它维护一个空闲物理页的 **空闲链表 (freelist)**。
+物理内存页的分配和释放由 [`kernel/kalloc.c`](source/xv6-riscv/kernel/kalloc.c.md) 中的代码负责。它维护一个空闲物理页的 **空闲链表 (freelist)**。
 *   **`kinit()`**: 在系统启动时被调用，将从内核末尾 (`end`) 到 `PHYSTOP` 之间的所有物理内存逐页加入空闲链表。
 *   **`kalloc()`**: 从空闲链表的头部取下一个空闲页并返回其地址。
 *   **`kfree()`**: 将一个释放的物理页重新加入到空闲链表的头部。

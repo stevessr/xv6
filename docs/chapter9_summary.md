@@ -12,7 +12,7 @@ xv6 的设计精妙地将操作系统的几大核心概念编织在一起，构�
     1.  **用户/内核模式切换**: CPU 通过硬件机制区分用户态和内核态，限制用户程序直接访问硬件和内核数据。我们在第三章看到的陷阱（trap）机制是实现这种切换的关键。
     2.  **虚拟内存与页表**: xv6 为每个进程提供独立的地址空间，使得一个进程无法读取或写入另一个进程的内存。第二章深入探讨的页表机制是实现地址空间虚拟化的基石。
 
-*   **系统调用 (System Calls)**: 如果进程被完全隔离，它们将一事无成。操作系统必须提供一组受控的接口，允许用户进程请求内核服务。[`fork()`](source/xv6-riscv/user/forktest.c)、[`exec()`](source/xv6-riscv/kernel/exec.c)、[`read()`](source/xv6-riscv/kernel/sysfile.c)、[`write()`](source/xv6-riscv/kernel/sysfile.c) 等系统调用构成了用户程序与操作系统之间的桥梁。
+*   **系统调用 (System Calls)**: 如果进程被完全隔离，它们将一事无成。操作系统必须提供一组受控的接口，允许用户进程请求内核服务。[`fork()`](source/xv6-riscv/user/forktest.c.md)、[`exec()`](source/xv6-riscv/kernel/exec.c.md)、[`read()`](source/xv6-riscv/kernel/sysfile.c.md)、[`write()`](source/xv6-riscv/kernel/sysfile.c.md) 等系统调用构成了用户程序与操作系统之间的桥梁。
 
 *   **并发 (Concurrency)**: 现代操作系统天然是并发的，需要同时处理来自多个 CPU 核心、多个进程和多个设备的中断。xv6 向我们展示了处理并发带来的挑战：
     *   **竞争条件 (Race Conditions)**: 当多个执行流同时访问共享数据时，可能导致不一致的结果。
