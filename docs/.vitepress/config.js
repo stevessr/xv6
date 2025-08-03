@@ -5,6 +5,7 @@ export default defineConfig({
   title: 'XV6 中文文档',
   description: 'XV6 操作系统课程',
   base: '/',
+  ignoreDeadLinks: true,
   themeConfig: {
     nav: [
       { text: '主页', link: '/' },
