@@ -53,7 +53,7 @@ xv6 运行在 RISC-V 的 Sv39 分页模式下。这意味着在 64 位的虚拟�
 
 如果在此过程中任何一个PTE被标记为无效，硬件会触发一个 **缺页异常 (Page Fault)**，交由内核处理。
 
-![RISC-V Page Table Translation](../xv6-chinese/pic/f2-2.png)
+![RISC-V Page Table Translation](/assets/images/f2-2.png)
 
 ### 3.3. 页表项 (PTE)
 
@@ -85,7 +85,7 @@ xv6 运行在 RISC-V 的 Sv39 分页模式下。这意味着在 64 位的虚拟�
 
 xv6 为内核和每个进程都维护了独立的页表。其地址空间布局在 [`kernel/memlayout.h`](source/xv6-riscv/kernel/memlayout.h) 中定义。
 
-![xv6 Address Space Layout](../xv6-chinese/pic/f2-3.png)
+![xv6 Address Space Layout](/assets/images/f2-3.png)
 
 ### 4.1. 内核地址空间
 
