@@ -1,8 +1,4 @@
 docs/node_modules
-docs/d/.vitepress/cache
-
-/docs/source/
-
-/docs/.vitepress/sidebar-source.js
+docs/source
 docs/.vitepress/cache
 docs/.vitepress/dist
