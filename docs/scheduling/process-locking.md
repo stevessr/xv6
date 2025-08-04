@@ -6,12 +6,12 @@
 
 *   与`p->state`一起，它防止了为新进程分配`proc[]`槽位时的竞争。
 *   它在进程创建或销毁时将其隐藏起来。
-*   它防止父进程的`wait`收集一个已经将其状态设置为`ZOMBIE`但尚未让出CPU的进程。
-*   它防止另一个CPU的调度器在让出进程将其状态设置为`RUNNABLE`之后但在完成`swtch`之前决定运行它。
+*   它防止父进程的[`wait`](/source/xv6-riscv/user/user.h)收集一个已经将其状态设置为`ZOMBIE`但尚未让出CPU的进程。
+*   它防止另一个CPU的调度器在让出进程将其状态设置为`RUNNABLE`之后但在完成[`swtch`](/source/xv6-riscv/kernel/defs.h)之前决定运行它。
 *   它确保只有一个CPU的调度器决定运行一个`RUNNABLE`的进程。
-*   它防止定时器中断导致进程在`swtch`中让出。
-*   与条件锁一起，它有助于防止`wakeup`忽略一个正在调用`sleep`但尚未完成让出CPU的进程。
-*   它防止`kill`的受害者进程在`kill`检查`p->pid`和设置`p->killed`之间退出并可能被重新分配。
-*   它使`kill`对`p->state`的检查和写入成为原子操作。
+*   它防止定时器中断导致进程在[`swtch`](/source/xv6-riscv/kernel/defs.h)中让出。
+*   与条件锁一起，它有助于防止[`wakeup`](/source/xv6-riscv/kernel/defs.h)忽略一个正在调用[`sleep`](/source/xv6-riscv/user/user.h)但尚未完成让出CPU的进程。
+*   它防止[`kill`](/source/xv6-riscv/user/user.h)的受害者进程在[`kill`](/source/xv6-riscv/user/user.h)检查`p->pid`和设置`p->killed`之间退出并可能被重新分配。
+*   它使[`kill`](/source/xv6-riscv/user/user.h)对`p->state`的检查和写入成为原子操作。
 
-`p->parent`字段由全局锁`wait_lock`而不是`p->lock`保护。只有一个进程的父进程会修改`p->parent`，尽管该字段由进程本身和其他正在寻找其子进程的进程读取。`wait_lock`的目的是当`wait`休眠等待任何子进程退出时充当条件锁。一个正在退出的子进程持有`wait_lock`或`p->lock`直到它将其状态设置为`ZOMBIE`，唤醒其父进程，并让出CPU。`wait_lock`还序列化了父进程和子进程并发的`exit`，以便`init`进程（继承了子进程）保证从其`wait`中被唤醒。`wait_lock`是一个全局锁而不是每个父进程的锁，因为，在一个进程获取它之前，它无法知道它的父进程是谁。
+`p->parent`字段由全局锁`wait_lock`而不是`p->lock`保护。只有一个进程的父进程会修改`p->parent`，尽管该字段由进程本身和其他正在寻找其子进程的进程读取。`wait_lock`的目的是当[`wait`](/source/xv6-riscv/user/user.h)休眠等待任何子进程退出时充当条件锁。一个正在退出的子进程持有`wait_lock`或`p->lock`直到它将其状态设置为`ZOMBIE`，唤醒其父进程，并让出CPU。`wait_lock`还序列化了父进程和子进程并发的[`exit`](/source/xv6-riscv/kernel/defs.h)，以便`init`进程（继承了子进程）保证从其[`wait`](/source/xv6-riscv/user/user.h)中被唤醒。`wait_lock`是一个全局锁而不是每个父进程的锁，因为，在一个进程获取它之前，它无法知道它的父进程是谁。

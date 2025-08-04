@@ -32,7 +32,7 @@
 ### 3.1. 核心接口
 
 该层向高层提供三个核心函数：
--   [`bread(dev, blockno)`](source/xv6-riscv/kernel/bio.c.md)：获取一个包含指定磁盘块内容的缓冲区（`struct buf`）。如果该块不在缓存中，`bread` 会从磁盘读取它。返回的缓冲区是锁定的，调用者拥有对其的独占访问权。
+-   [`bread(dev, blockno)`](source/xv6-riscv/kernel/bio.c.md)：获取一个包含指定磁盘块内容的缓冲区（`struct buf`）。如果该块不在缓存中，[`bread`](../xv6-riscv/kernel/bio.c) 会从磁盘读取它。返回的缓冲区是锁定的，调用者拥有对其的独占访问权。
 -   [`bwrite(b)`](source/xv6-riscv/kernel/bio.c.md)：将一个已被修改的缓冲区的内容写回磁盘。
 -   [`brelse(b)`](source/xv6-riscv/kernel/bio.c.md)：释放一个缓冲区。调用者在完成对缓冲区的操作后必须调用此函数，以解除锁定并让其他进程可以使用它。
 
@@ -40,7 +40,9 @@
 
 缓冲区缓存由一个全局的 `bcache` 结构管理，它包含一个 `buf` 数组和一个双向循环链表 `head`。
 
-```c
+
+```
+c
 // kernel/bio.c
 
 struct {
@@ -48,13 +50,15 @@ struct {
   struct buf buf[NBUF]; // 缓冲区数组
   struct buf head;      // LRU 链表头
 } bcache;
+
 ```
 
-每个 `struct buf` 代表一个缓存的磁盘块，并包含一个休眠锁 (`sleeplock`)，`bread` 在返回缓冲区时会获取该锁，`brelse` 则会释放它。
+
+每个 `struct buf` 代表一个缓存的磁盘块，并包含一个休眠锁 (`sleeplock`)，[`bread`](../xv6-riscv/kernel/bio.c) 在返回缓冲区时会获取该锁，[`brelse`](../xv6-riscv/kernel/defs.h) 则会释放它。
 
 ### 3.3. LRU 策略
 
-当需要一个新的缓冲区来缓存磁盘块，但所有现有缓冲区都已被使用时，`bcache` 需要回收一个。xv6 采用 **最近最少使用 (Least Recently Used, LRU)** 策略。它通过一个双向链表来实现：`brelse` 会将被释放的缓冲区移动到链表的头部，因此链表尾部的缓冲区就是最久未被使用的。[`bget`](source/xv6-riscv/kernel/bio.c.md) 函数在需要回收时，会从链表尾部开始查找。
+当需要一个新的缓冲区来缓存磁盘块，但所有现有缓冲区都已被使用时，`bcache` 需要回收一个。xv6 采用 **最近最少使用 (Least Recently Used, LRU)** 策略。它通过一个双向链表来实现：[`brelse`](../xv6-riscv/kernel/defs.h) 会将被释放的缓冲区移动到链表的头部，因此链表尾部的缓冲区就是最久未被使用的。[[`bget`](../xv6-riscv/kernel/bio.c)](source/xv6-riscv/kernel/bio.c.md) 函数在需要回收时，会从链表尾部开始查找。
 
 ## 4. 日志层 (`log.c`)
 
@@ -65,9 +69,9 @@ xv6 通过**预写式日志 (Write-ahead Logging)** 机制来解决这个问题�
 ### 4.1. 事务与提交
 
 1.  **开始事务**: 文件系统调用开始时，调用 [`begin_op()`](source/xv6-riscv/kernel/log.c.md)，声明一个新事务的开始。
-2.  **记录写操作**: 当需要修改一个缓冲区时，调用 [`log_write(b)`](source/xv6-riscv/kernel/log.c.md) 而不是 `bwrite(b)`。`log_write` 不会立即将数据写入磁盘，而是将该缓冲区的块号记录在内存的日志头中，并将其“钉”在缓冲区缓存中，防止被驱逐。
-3.  **结束事务与提交**: 文件系统调用结束时，调用 [`end_op()`](source/xv6-riscv/kernel/log.c.md)。如果这是当前唯一正在进行的操作，`end_op` 会触发**提交 (commit)** 过程：
-    a.  **写入日志**: 将所有被 `log_write` 记录的块的当前内容，从缓冲区缓存写入到磁盘的日志区。
+2.  **记录写操作**: 当需要修改一个缓冲区时，调用 [`log_write(b)`](source/xv6-riscv/kernel/log.c.md) 而不是 `bwrite(b)`。[`log_write`](../xv6-riscv/kernel/defs.h) 不会立即将数据写入磁盘，而是将该缓冲区的块号记录在内存的日志头中，并将其“钉”在缓冲区缓存中，防止被驱逐。
+3.  **结束事务与提交**: 文件系统调用结束时，调用 [`end_op()`](source/xv6-riscv/kernel/log.c.md)。如果这是当前唯一正在进行的操作，[`end_op`](../xv6-riscv/kernel/defs.h) 会触发**提交 (commit)** 过程：
+    a.  **写入日志**: 将所有被 [`log_write`](../xv6-riscv/kernel/defs.h) 记录的块的当前内容，从缓冲区缓存写入到磁盘的日志区。
     b.  **写入日志头**: 将包含所有被修改块号的日志头写入磁盘。这是**提交点**。一旦日志头成功写入，即使系统崩溃，这个事务也被认为是完整的，可以在重启后恢复。
     c.  **安装事务**: 将日志区中的数据块复制到它们在文件系统中的最终位置。
     d.  **清除日志**: 将日志头清零并写回磁盘，表示事务已完成，日志区可以被下一个事务使用。
@@ -76,7 +80,7 @@ xv6 通过**预写式日志 (Write-ahead Logging)** 机制来解决这个问题�
 
 系统启动时，[`fsinit()`](source/xv6-riscv/kernel/fs.c.md) 会调用 [`recover_from_log()`](source/xv6-riscv/kernel/log.c.md)。恢复函数会读取日志头：
 -   如果日志头为空 (n=0)，说明上次关机前所有事务都已成功完成，无需操作。
--   如果日志头不为空，说明在上次的 `commit` 过程中发生了崩溃。恢复函数会重新执行**安装事务**的步骤，将日志中的数据写入文件系统，从而保证数据的一致性。
+-   如果日志头不为空，说明在上次的 [`commit`](../xv6-riscv/kernel/log.c) 过程中发生了崩溃。恢复函数会重新执行**安装事务**的步骤，将日志中的数据写入文件系统，从而保证数据的一致性。
 
 这个机制保证了文件系统操作的**原子性**：相对于系统崩溃，一个事务中的所有写操作要么全部完成，要么一个都不生效。
 
@@ -105,9 +109,9 @@ Inode（索引节点）是 Unix 文件系统的核心概念。它是一个数据
 -   [`ialloc(dev, type)`](source/xv6-riscv/kernel/fs.c.md)：在磁盘上分配一个新的 inode。
 -   [`iget(dev, inum)`](source/xv6-riscv/kernel/fs.c.md)：获取一个指向内存中 inode 的指针，并增加其引用计数。这确保了只要有指针引用该 inode，它就不会从缓存中被移除。
 -   [`iput(ip)`](source/xv6-riscv/kernel/fs.c.md)：释放一个指向 inode 的指针，并减少其引用计数。当 `ref` 和 `nlink` 都降为零时，该 inode 及其数据块会被彻底释放。
--   [`ilock(ip)`](source/xv6-riscv/kernel/fs.c.md)：锁定一个 inode，以进行读写操作。如果 inode 的数据尚未从磁盘加载到内存，`ilock` 会负责加载。
+-   [`ilock(ip)`](source/xv6-riscv/kernel/fs.c.md)：锁定一个 inode，以进行读写操作。如果 inode 的数据尚未从磁盘加载到内存，[`ilock`](../xv6-riscv/kernel/defs.h) 会负责加载。
 -   [`iunlock(ip)`](source/xv6-riscv/kernel/fs.c.md)：解锁一个 inode。
--   [`readi(ip, ...)` / `writei(ip, ...)` ](source/xv6-riscv/kernel/fs.c.md)：在锁定 inode 的前提下，从 inode 读取或向其写入数据。它们通过 [`bmap`](source/xv6-riscv/kernel/fs.c.md) 函数将文件的逻辑块偏移量转换为物理磁盘块号。
+-   [`readi(ip, ...)` / `writei(ip, ...)` ](source/xv6-riscv/kernel/fs.c.md)：在锁定 inode 的前提下，从 inode 读取或向其写入数据。它们通过 [[`bmap`](../xv6-riscv/kernel/fs.c)](source/xv6-riscv/kernel/fs.c.md) 函数将文件的逻辑块偏移量转换为物理磁盘块号。
 
 ## 6. 路径名与文件描述符层 (`file.c`, `sysfile.c`)
 
@@ -115,7 +119,7 @@ Inode（索引节点）是 Unix 文件系统的核心概念。它是一个数据
 
 ### 6.1. 路径名解析
 
-路径名查找通过 [`namei(path)`](source/xv6-riscv/kernel/fs.c.md) 函数实现，它接收一个路径字符串（如 `"/a/b"`），并返回其对应的 inode。`namei` 通过循环调用 [`dirlookup`](source/xv6-riscv/kernel/fs.c.md) 来逐级解析路径。例如，解析 `"/a/b"` 的过程是：
+路径名查找通过 [`namei(path)`](source/xv6-riscv/kernel/fs.c.md) 函数实现，它接收一个路径字符串（如 `"/a/b"`），并返回其对应的 inode。[`namei`](../xv6-riscv/kernel/fs.c) 通过循环调用 [[`dirlookup`](../xv6-riscv/kernel/fs.c)](source/xv6-riscv/kernel/fs.c.md) 来逐级解析路径。例如，解析 `"/a/b"` 的过程是：
 1.  从根目录 (`/`) 的 inode 开始。
 2.  在根目录中查找名为 `"a"` 的目录项，获取 `"a"` 的 inode。
 3.  在 `"a"` 的 inode (必须是目录类型) 中查找名为 `"b"` 的目录项，获取 `"b"` 的 inode。
@@ -128,13 +132,13 @@ Inode（索引节点）是 Unix 文件系统的核心概念。它是一个数据
 -   **进程文件描述符表**: 每个进程有自己的文件描述符表 (`p->ofile`)，它是一个指针数组，每个指针指向全局文件表中的一个 `struct file`。文件描述符就是这个数组的索引。
 
 当一个进程调用 [`open()`](source/xv6-riscv/kernel/sysfile.c.md)，内核会：
-1.  调用 `namei` 或 `create` 找到或创建文件的 inode。
+1.  调用 [`namei`](../xv6-riscv/kernel/fs.c) 或 [`create`](../xv6-riscv/kernel/sysfile.c) 找到或创建文件的 inode。
 2.  调用 [`filealloc()`](source/xv6-riscv/kernel/file.c.md) 从全局文件表中分配一个 `struct file`。
 3.  用 inode 信息和打开模式填充该 `struct file`。
 4.  调用 [`fdalloc()`](source/xv6-riscv/kernel/sysfile.c.md) 在进程的文件描述符表中找一个空位，存放指向 `struct file` 的指针。
 5.  返回这个空位的索引，即文件描述符。
 
-后续的 `read` 和 `write` 等系统调用就会通过文件描述符找到对应的 `struct file`，并执行相应的操作。
+后续的 [`read`](../xv6-riscv/user/user.h) 和 [`write`](../xv6-riscv/user/user.h) 等系统调用就会通过文件描述符找到对应的 `struct file`，并执行相应的操作。
 
 ---
 
@@ -146,7 +150,7 @@ xv6 的默认文件系统对文件大小有限制。一个文件的块地址由 
 
 具体要求如下：
 1.  修改 `fs.h` 中的 `struct dinode`，将 `addrs` 数组中的一个直接块指针改为双重间接块指针。例如，将 `addrs[NDIRECT-1]` 作为双重间接块指针。
-2.  修改 [`bmap()`](source/xv6-riscv/kernel/fs.c.md) 函数，使其能够理解并处理双重间接块。当访问的块号超出直接块和单间接块的范围时，`bmap` 需要：
+2.  修改 [`bmap()`](source/xv6-riscv/kernel/fs.c.md) 函数，使其能够理解并处理双重间接块。当访问的块号超出直接块和单间接块的范围时，[`bmap`](../xv6-riscv/kernel/fs.c) 需要：
     a.  读取双重间接块。
     b.  从双重间接块中找到对应的单间接块的地址。
     c.  读取该单间接块。

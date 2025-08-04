@@ -22,13 +22,13 @@
 
 为了深入理解这些概念，请阅读并分析以下 xv6 用户程序的源代码。这些简单的程序展示了系统调用的典型用法。
 
-*   **Shell (`sh.c`)**: shell 是理解系统调用组合使用的绝佳范例。请重点关注 `main` 循环、`runcmd` 函数以及它如何处理不同类型的命令。
+*   **Shell (`sh.c`)**: shell 是理解系统调用组合使用的绝佳范例。请重点关注 [`main`](../xv6-riscv/user/zombie.c) 循环、[`runcmd`](../xv6-riscv/user/sh.c) 函数以及它如何处理不同类型的命令。
     *   代码链接: [`user/sh.c`](source/xv6-riscv/user/sh.c.md)
-*   **Cat (`cat.c`)**: `cat` 程序简单地将其输入复制到输出。它的实现展示了文件描述符的通用性——`cat` 无需关心其输入/输出是来自文件、控制台还是管道。
+*   **Cat (`cat.c`)**: [`cat`](../xv6-riscv/user/cat.c) 程序简单地将其输入复制到输出。它的实现展示了文件描述符的通用性——[`cat`](../xv6-riscv/user/cat.c) 无需关心其输入/输出是来自文件、控制台还是管道。
     *   代码链接: [`user/cat.c`](source/xv6-riscv/user/cat.c.md)
-*   **Grep (`grep.c`)**: `grep` 在其输入中搜索特定模式。与 `cat` 类似，它也是围绕 `read()` 系统调用构建的。
+*   **Grep (`grep.c`)**: [`grep`](../xv6-riscv/user/grep.c) 在其输入中搜索特定模式。与 [`cat`](../xv6-riscv/user/cat.c) 类似，它也是围绕 `read()` 系统调用构建的。
     *   代码链接: [`user/grep.c`](source/xv6-riscv/user/grep.c.md)
-*   **ls (`ls.c`)**: `ls` 列出目录内容，这需要与文件系统进行交互以读取目录条目。
+*   **ls (`ls.c`)**: [`ls`](../xv6-riscv/user/ls.c) 列出目录内容，这需要与文件系统进行交互以读取目录条目。
     *   代码链接: [`user/ls.c`](source/xv6-riscv/user/ls.c.md)
 
 ## 4. 引导性问题
@@ -39,10 +39,10 @@
 
 2.  **Shell 的管道实现**: 当 shell 执行一个管道命令，例如 `grep fork sh.c | wc -l` 时，它创建了多少个进程？这些进程之间是如何通过 `pipe()`、`dup()`、`fork()` 和 `close()` 系统调用连接起来的？尝试画出进程树和文件描述符的变化图。
 
-3.  **文件描述符的抽象能力**: `cat` 程序不知道它的输入是来自键盘（控制台）还是一个文件。这种抽象是如何通过文件描述符实现的？当子进程通过 `fork()` 继承父进程的文件描述符时，文件偏移量是共享的还是独立的？这对于 `(echo hello; echo world) > output.txt` 这样的命令序列有什么影响？
+3.  **文件描述符的抽象能力**: [`cat`](../xv6-riscv/user/cat.c) 程序不知道它的输入是来自键盘（控制台）还是一个文件。这种抽象是如何通过文件描述符实现的？当子进程通过 `fork()` 继承父进程的文件描述符时，文件偏移量是共享的还是独立的？这对于 `(echo hello; echo world) > output.txt` 这样的命令序列有什么影响？
 
-4.  **`cd` 命令的特殊性**: 为什么 `cd` 命令必须作为 shell 的内置命令来实现，而 `ls`、`cat` 等命令可以作为独立的程序存在？如果你尝试将 `cd` 实现为一个独立的程序，会发生什么？
+4.  **`cd` 命令的特殊性**: 为什么 `cd` 命令必须作为 shell 的内置命令来实现，而 [`ls`](../xv6-riscv/user/ls.c)、[`cat`](../xv6-riscv/user/cat.c) 等命令可以作为独立的程序存在？如果你尝试将 `cd` 实现为一个独立的程序，会发生什么？
 
 ## 5. 总结
 
-通过完成本章的学习和实验，你应该对 Unix 风格的操作系统接口有了更深入的理解。这些看似简单的系统调用（`fork`, `exec`, `pipe`, `read`, `write`, `open`, `close`）可以被组合起来，构建出非常复杂和强大的应用程序，而 shell 本身就是最好的证明。
+通过完成本章的学习和实验，你应该对 Unix 风格的操作系统接口有了更深入的理解。这些看似简单的系统调用（[`fork`](../xv6-riscv/user/user.h), [`exec`](../xv6-riscv/user/user.h), [`pipe`](../xv6-riscv/user/user.h), [`read`](../xv6-riscv/user/user.h), [`write`](../xv6-riscv/user/user.h), [`open`](../xv6-riscv/user/user.h), [`close`](../xv6-riscv/user/user.h)）可以被组合起来，构建出非常复杂和强大的应用程序，而 shell 本身就是最好的证明。

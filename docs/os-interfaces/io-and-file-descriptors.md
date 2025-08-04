@@ -9,20 +9,22 @@
 按照惯例，进程从文件描述符0（标准输入）读取，将输出写入文件描述符1（标准输出），并将错误消息写入文件描述符2（标准错误）。
 正如我们将看到的，shell利用这个惯例来实现I/O重定向和管道。shell确保它始终有三个打开的文件描述符([`user/sh.c:53`](/source/xv6-riscv/user/sh.c.md#L53))，默认情况下是控制台的文件描述符。
 
-`read`和`write`系统调用从由文件描述符命名的打开文件中读取字节和写入字节。
+[`read`](/source/xv6-riscv/user/user.h)和[`write`](/source/xv6-riscv/user/user.h)系统调用从由文件描述符命名的打开文件中读取字节和写入字节。
 调用`read(fd, buf, n)`最多从文件描述符`fd`读取`n`个字节，将它们复制到`buf`中，并返回读取的字节数。
 每个引用文件的文件描述符都有一个与之关联的偏移量。
-`read`从当前文件偏移量读取数据，然后将该偏移量增加读取的字节数：
-随后的`read`将返回第一个`read`返回的字节之后的字节。
-当没有更多字节可读时，`read`返回零以指示文件结尾。
+[`read`](/source/xv6-riscv/user/user.h)从当前文件偏移量读取数据，然后将该偏移量增加读取的字节数：
+随后的[`read`](/source/xv6-riscv/user/user.h)将返回第一个[`read`](/source/xv6-riscv/user/user.h)返回的字节之后的字节。
+当没有更多字节可读时，[`read`](/source/xv6-riscv/user/user.h)返回零以指示文件结尾。
 
 调用`write(fd, buf, n)`将`n`个字节从`buf`写入文件描述符`fd`并返回写入的字节数。
 只有在发生错误时才会写入少于`n`个字节。
-像`read`一样，`write`在当前文件偏移量处写入数据，然后将该偏移量增加写入的字节数：
-每个`write`都从前一个停止的地方继续。
+像[`read`](/source/xv6-riscv/user/user.h)一样，[`write`](/source/xv6-riscv/user/user.h)在当前文件偏移量处写入数据，然后将该偏移量增加写入的字节数：
+每个[`write`](/source/xv6-riscv/user/user.h)都从前一个停止的地方继续。
 
-以下程序片段（构成程序`cat`的精髓）将其标准输入的数据复制到其标准输出。如果发生错误，它会向标准错误写入一条消息。
-```c
+以下程序片段（构成程序[`cat`](/source/xv6-riscv/user/cat.c)的精髓）将其标准输入的数据复制到其标准输出。如果发生错误，它会向标准错误写入一条消息。
+
+```
+c
 char buf[512];
 int n;
 for(;;){
@@ -38,20 +40,24 @@ for(;;){
     exit(1);
   }
 }
-```
-代码片段中需要注意的重要一点是，`cat`不知道它是在从文件、控制台还是管道读取。
-同样，`cat`也不知道它是在向控制台、文件还是其他任何地方打印。
-文件描述符的使用以及文件描述符0是输入、文件描述符1是输出的惯例，使得`cat`的实现很简单。
 
-`close`系统调用释放一个文件描述符，使其可以被未来的`open`、`pipe`或`dup`系统调用（见下文）重用。
+```
+
+代码片段中需要注意的重要一点是，[`cat`](/source/xv6-riscv/user/cat.c)不知道它是在从文件、控制台还是管道读取。
+同样，[`cat`](/source/xv6-riscv/user/cat.c)也不知道它是在向控制台、文件还是其他任何地方打印。
+文件描述符的使用以及文件描述符0是输入、文件描述符1是输出的惯例，使得[`cat`](/source/xv6-riscv/user/cat.c)的实现很简单。
+
+[`close`](/source/xv6-riscv/user/user.h)系统调用释放一个文件描述符，使其可以被未来的[`open`](/source/xv6-riscv/user/user.h)、[`pipe`](/source/xv6-riscv/user/user.h)或[`dup`](/source/xv6-riscv/user/user.h)系统调用（见下文）重用。
 新分配的文件描述符始终是当前进程的最低编号的未使用描述符。
 
-文件描述符和`fork`的交互使得I/O重定向易于实现。
-`fork`复制父进程的文件描述符表及其内存，因此子进程以与父进程完全相同的打开文件开始。
-系统调用`exec`替换调用进程的内存，但保留其文件表。
-这种行为允许shell通过forking，在子进程中重新打开选定的文件描述符，然后调用`exec`来运行新程序，从而实现**I/O重定向**。
+文件描述符和[`fork`](/source/xv6-riscv/user/user.h)的交互使得I/O重定向易于实现。
+[`fork`](/source/xv6-riscv/user/user.h)复制父进程的文件描述符表及其内存，因此子进程以与父进程完全相同的打开文件开始。
+系统调用[`exec`](/source/xv6-riscv/user/user.h)替换调用进程的内存，但保留其文件表。
+这种行为允许shell通过forking，在子进程中重新打开选定的文件描述符，然后调用[`exec`](/source/xv6-riscv/user/user.h)来运行新程序，从而实现**I/O重定向**。
 这是一个shell为命令`cat < input.txt`运行的代码的简化版本：
-```c
+
+```
+c
 char *argv[2];
 argv[0] = "cat";
 argv[1] = 0;
@@ -60,29 +66,33 @@ if(fork() == 0) {
   open("input.txt", O_RDONLY);
   exec("cat", argv);
 }
+
 ```
-子进程关闭文件描述符0后，`open`保证为新打开的`input.txt`使用该文件描述符：0将是最小的可用文件描述符。
-然后`cat`执行，其文件描述符0（标准输入）引用`input.txt`。
+
+子进程关闭文件描述符0后，[`open`](/source/xv6-riscv/user/user.h)保证为新打开的`input.txt`使用该文件描述符：0将是最小的可用文件描述符。
+然后[`cat`](/source/xv6-riscv/user/cat.c)执行，其文件描述符0（标准输入）引用`input.txt`。
 父进程的文件描述符不受此序列的影响，因为它只修改子进程的描述符。
 
 xv6 shell中I/O重定向的代码正是以这种方式工作的([`user/sh.c:83`](/source/xv6-riscv/user/sh.c.md#L83))。
-回想一下，在代码的这一点上，shell已经fork了子shell，并且`runcmd`将调用`exec`来加载新程序。
+回想一下，在代码的这一点上，shell已经fork了子shell，并且[`runcmd`](/source/xv6-riscv/user/sh.c)将调用[`exec`](/source/xv6-riscv/user/user.h)来加载新程序。
 
-`open`的第二个参数由一组标志组成，以位表示，控制`open`的功能。可能的值在文件控制(fcntl)头文件(`kernel/fcntl.h:1-5`)中定义：
-`O_RDONLY`、`O_WRONLY`、`O_RDWR`、`O_CREATE`和`O_TRUNC`，它们指示`open`
+[`open`](/source/xv6-riscv/user/user.h)的第二个参数由一组标志组成，以位表示，控制[`open`](/source/xv6-riscv/user/user.h)的功能。可能的值在文件控制(fcntl)头文件(`kernel/fcntl.h:1-5`)中定义：
+`O_RDONLY`、`O_WRONLY`、`O_RDWR`、`O_CREATE`和`O_TRUNC`，它们指示[`open`](/source/xv6-riscv/user/user.h)
 以只读方式打开文件，
 或以只写方式，
 或以读写方式，
 如果文件不存在则创建文件，
 并将文件截断为零长度。
 
-现在应该清楚为什么`fork`和`exec`是分开的调用很有帮助：在这两者之间，shell有机会重定向子进程的I/O，而不会干扰主shell的I/O设置。
+现在应该清楚为什么[`fork`](/source/xv6-riscv/user/user.h)和[`exec`](/source/xv6-riscv/user/user.h)是分开的调用很有帮助：在这两者之间，shell有机会重定向子进程的I/O，而不会干扰主shell的I/O设置。
 人们可以想象一个假设的组合`forkexec`系统调用，但使用这种调用进行I/O重定向的选项似乎很笨拙。
-shell可以在调用`forkexec`之前修改自己的I/O设置（然后撤消这些修改）；或者`forkexec`可以将I/O重定向的指令作为参数；或者（最不吸引人的）每个像`cat`这样的程序都可以被教导自己进行I/O重定向。
+shell可以在调用`forkexec`之前修改自己的I/O设置（然后撤消这些修改）；或者`forkexec`可以将I/O重定向的指令作为参数；或者（最不吸引人的）每个像[`cat`](/source/xv6-riscv/user/cat.c)这样的程序都可以被教导自己进行I/O重定向。
 
-尽管`fork`复制了文件描述符表，但每个底层的文件偏移量在父子进程之间是共享的。
+尽管[`fork`](/source/xv6-riscv/user/user.h)复制了文件描述符表，但每个底层的文件偏移量在父子进程之间是共享的。
 考虑这个例子：
-```c
+
+```
+c
 if(fork() == 0) {
   write(1, "hello ", 6);
   exit(0);
@@ -90,23 +100,29 @@ if(fork() == 0) {
   wait(0);
   write(1, "world\n", 6);
 }
+
 ```
+
 在这个片段的末尾，附加到文件描述符1的文件将包含数据`hello world`。
-父进程中的`write`（由于`wait`，仅在子进程完成后运行）从子进程的`write`停止的地方继续。
+父进程中的[`write`](/source/xv6-riscv/user/user.h)（由于[`wait`](/source/xv6-riscv/user/user.h)，仅在子进程完成后运行）从子进程的[`write`](/source/xv6-riscv/user/user.h)停止的地方继续。
 这种行为有助于从shell命令序列中产生顺序输出，例如`(echo hello; echo world) >output.txt`。
 
-`dup`系统调用复制一个现有的文件描述符，返回一个新的文件描述符，它引用相同的底层I/O对象。
-两个文件描述符共享一个偏移量，就像`fork`复制的文件描述符一样。
+[`dup`](/source/xv6-riscv/user/user.h)系统调用复制一个现有的文件描述符，返回一个新的文件描述符，它引用相同的底层I/O对象。
+两个文件描述符共享一个偏移量，就像[`fork`](/source/xv6-riscv/user/user.h)复制的文件描述符一样。
 这是另一种将`hello world`写入文件的方式：
-```c
+
+```
+c
 fd = dup(1);
 write(1, "hello ", 6);
 write(fd, "world\n", 6);
+
 ```
 
-如果两个文件描述符是通过一系列`fork`和`dup`调用从同一个原始文件描述符派生出来的，那么它们共享一个偏移量。
-否则，文件描述符不共享偏移量，即使它们是由对同一文件的`open`调用产生的。
-`dup`允许shell实现像这样的命令：
+
+如果两个文件描述符是通过一系列[`fork`](/source/xv6-riscv/user/user.h)和[`dup`](/source/xv6-riscv/user/user.h)调用从同一个原始文件描述符派生出来的，那么它们共享一个偏移量。
+否则，文件描述符不共享偏移量，即使它们是由对同一文件的[`open`](/source/xv6-riscv/user/user.h)调用产生的。
+[`dup`](/source/xv6-riscv/user/user.h)允许shell实现像这样的命令：
 `ls existing-file non-existing-file > tmp1 2>&1`。
 `2>&1`告诉shell给命令一个文件描述符2，它是描述符1的副本。
 现有文件的名称和不存在文件的错误消息都将显示在文件`tmp1`中。

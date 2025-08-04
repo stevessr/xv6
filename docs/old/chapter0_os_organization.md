@@ -17,7 +17,7 @@
 
 为了同时实现这三个看似矛盾的目标，操作系统采用的核心策略是**抽象物理资源**。它将复杂的、底层的硬件资源（如磁盘、CPU、物理内存）封装成一系列更简单、更易于使用的服务，并通过一组称为**系统调用 (System Calls)** 的接口提供给应用程序。
 
-*   **文件系统**: 应用程序通过 `open`, `read`, `write` 等系统调用来操作文件，而无需关心数据具体存储在磁盘的哪个扇区。操作系统负责管理磁盘空间和文件结构。
+*   **文件系统**: 应用程序通过 [`open`](../xv6-riscv/user/user.h), [`read`](../xv6-riscv/user/user.h), [`write`](../xv6-riscv/user/user.h) 等系统调用来操作文件，而无需关心数据具体存储在磁盘的哪个扇区。操作系统负责管理磁盘空间和文件结构。
 *   **进程**: 操作系统将 CPU 抽象为进程，每个进程都感觉自己独占了整个 CPU。操作系统负责在不同进程间透明地保存和恢复 CPU 状态，实现分时复用。
 *   **地址空间**: 操作系统为每个进程提供了一个私有的、连续的虚拟地址空间，使得进程无需关心数据在物理内存中的具体位置，同时也防止了它访问其他进程的内存。
 
@@ -82,7 +82,9 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
 1.  **QEMU 加载内核**: 当我们使用 `qemu` 启动 xv6 时，QEMU 会将编译好的内核镜像加载到物理地址 `0x80000000` 处。
 2.  **CPU 从 `_entry` 开始执行**: 所有 CPU 核心（hart）都会在机器模式下，从 [`kernel/entry.S`](source/xv6-riscv/kernel/entry.S.md) 的 `_entry` 标签处开始执行。此时，分页机制是关闭的，虚拟地址直接等于物理地址。
 3.  **设置初始栈**: `_entry` 的首要任务是为 C 代码的执行准备一个栈。它读取当前核心的 `mhartid`，计算出该核心在 `stack0` 数组中的专属栈空间，并将栈顶指针 `sp` 指向该区域的末尾（因为 RISC-V 的栈是向下增长的）。
-    ```assembly
+    
+```
+assembly
     # kernel/entry.S
     _entry:
             # 为 C 代码设置一个栈。
@@ -92,20 +94,22 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
             addi a1, a1, 1
             mul a0, a0, a1
             add sp, sp, a0
-    ```
-4.  **跳转到 `start` 函数**: 栈设置好后，`_entry` 通过 `call` 指令跳转到 C 函数 [`start()`](source/xv6-riscv/kernel/start.c.md)。
+    
+```
+
+4.  **跳转到 [`start`](../xv6-riscv/user/ulib.c) 函数**: 栈设置好后，`_entry` 通过 `call` 指令跳转到 C 函数 [`start()`](source/xv6-riscv/kernel/start.c.md)。
 5.  **切换到监管者模式**: [`start()`](source/xv6-riscv/kernel/start.c.md) 函数执行一系列只能在机器模式下完成的配置：
     *   设置 `mstatus` 寄存器，告诉 `mret` 指令下次要切换到监管者模式（S-mode）。
-    *   将 `main` 函数的地址写入 `mepc` 寄存器，作为 `mret` 的返回地址。
+    *   将 [`main`](../xv6-riscv/user/zombie.c) 函数的地址写入 `mepc` 寄存器，作为 `mret` 的返回地址。
     *   通过将 `satp` 寄存器置零，暂时禁用 S-mode 下的虚拟地址转换。
     *   将所有中断和异常委托给 S-mode 处理。
     *   配置物理内存保护（PMP），允许 S-mode 访问所有物理内存。
     *   调用 `timerinit()` 初始化时钟中断。
-    *   最后，执行 `mret` 指令。CPU 的特权级别降为监管者模式，并跳转到 `mepc` 中保存的地址——`main` 函数。
+    *   最后，执行 `mret` 指令。CPU 的特权级别降为监管者模式，并跳转到 `mepc` 中保存的地址——[`main`](../xv6-riscv/user/zombie.c) 函数。
 
 ### 阶段二：内核初始化 (main.c)
 
-`main` 函数是内核的 C 代码主入口。它由 hart 0（主 CPU）和其它 hart 并发执行。
+[`main`](../xv6-riscv/user/zombie.c) 函数是内核的 C 代码主入口。它由 hart 0（主 CPU）和其它 hart 并发执行。
 
 1.  **主 CPU 初始化**: hart 0 负责执行一系列一次性的初始化工作：
     *   [`consoleinit()`](source/xv6-riscv/kernel/console.c.md), [`printfinit()`](source/xv6-riscv/kernel/printf.c.md): 初始化控制台和打印函数，这样内核才能输出信息。
@@ -129,22 +133,26 @@ MINIX 3 和 QNX 是微内核设计的著名例子。尽管两种架构各有优�
     *   设置进程的陷阱帧（`trapframe`），使得当进程从内核态“返回”到用户态时，程序计数器 `epc` 指向地址 0，栈指针 `sp` 指向该页的最高地址。
     *   将进程状态设置为 `RUNNABLE`，表示它已经准备好被调度器执行了。
 
-2.  **`initcode.S` 执行 `exec`**: 当调度器第一次选中这个进程并运行时，它会从地址 0 开始执行 `initcode` 的代码。这段汇编代码非常短，只做一件事：执行 `exec` 系统调用。
-    ```assembly
+2.  **`initcode.S` 执行 [`exec`](../xv6-riscv/user/user.h)**: 当调度器第一次选中这个进程并运行时，它会从地址 0 开始执行 `initcode` 的代码。这段汇编代码非常短，只做一件事：执行 [`exec`](../xv6-riscv/user/user.h) 系统调用。
+    
+```
+assembly
     # user/initcode.S
     start:
             la a0, init     # 参数1: 要执行的程序路径 "/init"
             la a1, argv     # 参数2: 命令行参数
             li a7, SYS_exec # 系统调用号
             ecall           # 陷入内核
-    ```
+    
+```
+
     `ecall` 指令再次将控制权交给内核。
 
-3.  **内核执行 `exec`**: 内核的系统调用处理程序会找到 `exec` 对应的实现 `sys_exec`。`exec` 系统调用会用新的程序（这里是 `/init`，其代码在 [`user/init.c`](source/xv6-riscv/user/init.c.md) 中）替换掉当前进程的内存和寄存器，然后返回用户空间。
+3.  **内核执行 [`exec`](../xv6-riscv/user/user.h)**: 内核的系统调用处理程序会找到 [`exec`](../xv6-riscv/user/user.h) 对应的实现 [`sys_exec`](../xv6-riscv/kernel/sysfile.c)。[`exec`](../xv6-riscv/user/user.h) 系统调用会用新的程序（这里是 `/init`，其代码在 [`user/init.c`](source/xv6-riscv/user/init.c.md) 中）替换掉当前进程的内存和寄存器，然后返回用户空间。
 
-4.  **`init.c` 运行**: 控制权返回用户空间后，进程开始执行 `/init` 程序的 `main` 函数。[`init.c`](source/xv6-riscv/user/init.c.md) 的主要工作是：
+4.  **`init.c` 运行**: 控制权返回用户空间后，进程开始执行 `/init` 程序的 [`main`](../xv6-riscv/user/zombie.c) 函数。[`init.c`](source/xv6-riscv/user/init.c.md) 的主要工作是：
     *   确保控制台文件描述符被正确设置。
-    *   在一个无限循环中，`fork` 一个子进程。
+    *   在一个无限循环中，[`fork`](../xv6-riscv/user/user.h) 一个子进程。
     *   在子进程中，`exec("sh", ...)` 启动一个 shell。
     *   父进程（`init`）则调用 `wait()` 等待 shell 退出。如果 shell 意外退出，`init` 会再次循环，重新启动一个新的 shell，从而确保用户总能与系统交互。
 

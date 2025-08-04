@@ -21,7 +21,9 @@
 
 xv6 的块缓存（[`kernel/bio.c`](source/xv6-riscv/kernel/bio.c.md)）是一个很好的例子。它维护了一个磁盘块的内存缓存，供文件系统代码使用。`bcache` 结构体包含一个全局锁 `bcache.lock` 和一个由 `NBUF` 个缓冲区组成的数组 `bcache.buf`。
 
-```c
+
+```
+c
 // kernel/bio.c
 
 struct {
@@ -33,13 +35,17 @@ struct {
   // head.next is most recent, head.prev is least.
   struct buf head;
 } bcache;
+
 ```
 
-`bcache.lock` 保护了整个缓冲区的元数据，例如缓冲区的查找和 LRU 链表的维护。任何需要查找、分配或释放缓冲区的操作（如 `bget` 和 `brelse`）都必须先获取 `bcache.lock`。
+
+`bcache.lock` 保护了整个缓冲区的元数据，例如缓冲区的查找和 LRU 链表的维护。任何需要查找、分配或释放缓冲区的操作（如 [`bget`](../xv6-riscv/kernel/bio.c) 和 [`brelse`](../xv6-riscv/kernel/defs.h)）都必须先获取 `bcache.lock`。
 
 然而，仅仅一个全局锁是不够的。如果两个进程同时获得了同一个缓冲区的引用，并试图对其进行读写，就会产生数据竞争。因此，每个 `buf` 结构体都包含一个自己的 `sleeplock`，用于保护该缓冲区的内容。
 
-```c
+
+```
+c
 // kernel/buf.h
 
 struct buf {
@@ -53,10 +59,12 @@ struct buf {
   struct buf *next;
   uchar data[BSIZE];
 };
+
 ```
 
-*   `bget` 函数在返回一个缓冲区之前，会为其获取一个 `sleeplock`。
-*   `brelse` 函数在释放缓冲区之前，会释放其 `sleeplock`。
+
+*   [`bget`](../xv6-riscv/kernel/bio.c) 函数在返回一个缓冲区之前，会为其获取一个 `sleeplock`。
+*   [`brelse`](../xv6-riscv/kernel/defs.h) 函数在释放缓冲区之前，会释放其 `sleeplock`。
 
 这种“集合锁 + 条目锁”的模式，在保证集合元数据一致性的同时，也允许对不同数据条目的并行访问，从而提高了性能。
 
@@ -78,9 +86,11 @@ xv6 在多个地方使用了引用计数。例如，`struct inode`（[`kernel/fs
 *   **`struct inode`**: 代表一个文件在磁盘上的元数据。多个进程可能通过不同的文件描述符指向同一个文件，因此需要引用计数来跟踪有多少指针指向这个 inode。当 `refcnt` 为 0 时，可以回收这个 inode。
 *   **`struct file`**: 代表一个打开的文件。`fork()` 系统调用会复制父进程的文件描述符表，导致子进程和父进程共享同一个 `struct file`。`dup()` 系统调用也会创建对同一个 `struct file` 的新引用。
 
-[`kernel/file.c`](source/xv6-riscv/kernel/file.c.md) 中的 `filealloc`、`filedup` 和 `fileclose` 函数共同管理着 `struct file` 的引用计数。
+[`kernel/file.c`](source/xv6-riscv/kernel/file.c.md) 中的 [`filealloc`](../xv6-riscv/kernel/file.c)、[`filedup`](../xv6-riscv/kernel/file.c) 和 [`fileclose`](../xv6-riscv/kernel/defs.h) 函数共同管理着 `struct file` 的引用计数。
 
-```c
+
+```
+c
 // kernel/file.c
 
 // Increment ref count for file f.
@@ -122,7 +132,9 @@ fileclose(struct file *f)
     end_op();
   }
 }
+
 ```
+
 引用计数本身也需要锁来保护，以防止并发的 `++` 和 `--` 操作导致竞争。在 `file.c` 中，`ftable.lock` 保护了所有文件对象的引用计数。
 
 ### 2.2 管道中的引用计数
@@ -131,7 +143,7 @@ fileclose(struct file *f)
 
 ### 2.3 内存分配器中的引用计数
 
-物理内存分配器 (`kernel/kalloc.c`) 对每个物理页都维护一个引用计数。这对于实现写时复制 (Copy-on-Write) `fork` 至关重要。当 `fork` 创建一个新进程时，它不会立即复制父进程的所有内存页，而是让父子进程共享这些页，并将页标记为只读。同时，这些共享页的引用计数会增加。当任何一方试图写入共享页时，会触发一个页面错误，此时内核才会真正复制该页，并递减旧页的引用计数。
+物理内存分配器 (`kernel/kalloc.c`) 对每个物理页都维护一个引用计数。这对于实现写时复制 (Copy-on-Write) [`fork`](../xv6-riscv/user/user.h) 至关重要。当 [`fork`](../xv6-riscv/user/user.h) 创建一个新进程时，它不会立即复制父进程的所有内存页，而是让父子进程共享这些页，并将页标记为只读。同时，这些共享页的引用计数会增加。当任何一方试图写入共享页时，会触发一个页面错误，此时内核才会真正复制该页，并递减旧页的引用计数。
 
 ## 3. 并发性能与锁的粒度
 
@@ -156,7 +168,7 @@ xv6 在设计上试图平衡这对矛盾。例如，`bcache` 使用了全局锁�
 
 ### 实验 1: 优化管道 (Concurrent Pipe)
 
-**目标**：修改 [`pipe.c`](source/xv6-riscv/kernel/pipe.c.md) 中的代码，使其能够并发地执行 `pipewrite` 和 `piperead`。当前的实现使用一个锁来保护整个管道的数据缓冲区，这意味着读和写操作是互斥的。请设计一种方案，允许一个线程写入数据的同时，另一个线程可以从中读取数据，而不会发生数据竞争。
+**目标**：修改 [`pipe.c`](source/xv6-riscv/kernel/pipe.c.md) 中的代码，使其能够并发地执行 [`pipewrite`](../xv6-riscv/kernel/defs.h) 和 [`piperead`](../xv6-riscv/kernel/defs.h)。当前的实现使用一个锁来保护整个管道的数据缓冲区，这意味着读和写操作是互斥的。请设计一种方案，允许一个线程写入数据的同时，另一个线程可以从中读取数据，而不会发生数据竞争。
 
 **提示**：你可能需要使用两个索引来分别跟踪缓冲区的读写位置，并仔细处理缓冲区为空或为满时的边界情况。你需要确保你的锁方案能正确地协调读写操作。
 
@@ -166,8 +178,8 @@ xv6 在设计上试图平衡这对矛盾。例如，`bcache` 使用了全局锁�
 
 **提示**：这个实验是开放性的。你需要识别出调度器中的潜在瓶颈，并设计出一种既能提高性能又不会引入竞争条件或死锁的方案。
 
-### 实验 3: 优化 `fork` (Concurrent `fork`)
+### 实验 3: 优化 [`fork`](../xv6-riscv/user/user.h) (Concurrent [`fork`](../xv6-riscv/user/user.h))
 
-**目标**：`fork()` 系统调用在复制父进程的地址空间时，需要持有多个锁，并且会执行密集的内存操作，这可能成为一个性能瓶颈。当前的 `fork()` 在复制页表时会持有父进程的 `pagetable_lock` 很长时间。请研究 `uvmcopy()` 函数，并尝试通过优化锁的粒度来减少 `fork` 的延迟。
+**目标**：`fork()` 系统调用在复制父进程的地址空间时，需要持有多个锁，并且会执行密集的内存操作，这可能成为一个性能瓶颈。当前的 `fork()` 在复制页表时会持有父进程的 `pagetable_lock` 很长时间。请研究 `uvmcopy()` 函数，并尝试通过优化锁的粒度来减少 [`fork`](../xv6-riscv/user/user.h) 的延迟。
 
 **提示**：一个可能的思路是，在复制页表项（PTE）时，能否在不持有整个页表锁的情况下完成大部分工作？或者能否分阶段释放和重新获取锁，以允许其他线程在此期间运行？你需要非常小心，确保在任何时候都不会破坏页表的一致性。

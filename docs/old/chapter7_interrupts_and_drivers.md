@@ -36,10 +36,14 @@ CPU 如何与设备硬件通信？一种主流的方法是**内存映射 I/O**�
 
 在 xv6 中，所有硬件设备的物理地址都在 [`kernel/memlayout.h`](source/xv6-riscv/kernel/memlayout.h.md) 中定义。例如，UART (串口) 设备的基地址是 `0x10000000L`。
 
-```c
+
+```
+c
 // From kernel/memlayout.h
 #define UART0 0x10000000L
+
 ```
+
 
 驱动程序通过读写 `UART0` 及其偏移地址上的寄存器来控制串口设备。
 
@@ -58,14 +62,18 @@ CPU 如何与设备硬件通信？一种主流的方法是**内存映射 I/O**�
 
 [`uartinit()`](source/xv6-riscv/kernel/uart.c.md) 会配置 UART 的波特率、数据位等参数，并最关键地，**开启接收中断**：
 
-```c
+
+```
+c
 // From kernel/uart.c
 void uartinit(void) {
   // 此处进行波特率、数据位等硬件配置
   // 然后使能接收和发送中断
   WriteReg(IER, IER_RX_ENABLE | IER_TX_ENABLE);
 }
+
 ```
+
 
 从此，每当有字符通过串口到达，UART 硬件都会向 CPU 触发一个中断。
 
@@ -81,7 +89,9 @@ void uartinit(void) {
     *   **处理接收**：调用 [`uartgetc()`](source/xv6-riscv/kernel/uart.c.md) 从 UART 的接收保持寄存器 (RHR) 读取字符。
     *   **递交上层**：将读到的字符传递给上层控制台驱动的中断处理函数 [`consoleintr()`](source/xv6-riscv/kernel/console.c.md)。
 
-    ```c
+    
+```
+c
     // From kernel/uart.c
     void uartintr(void) {
       while(1){
@@ -92,11 +102,15 @@ void uartinit(void) {
       }
       // 此处还会启动下一次的发送
     }
-    ```
+    
+```
+
 
 5.  **上层驱动处理 (console.c)**：[`consoleintr()`](source/xv6-riscv/kernel/console.c.md) 实现了行缓冲逻辑。它将接收到的字符 `c` 存入一个环形缓冲区 `cons.buf`，并处理特殊字符。当用户输入换行符 `\n` 时，表示一行输入结束。
 
-    ```c
+    
+```
+c
     // From kernel/console.c
     void consoleintr(int c) {
       // 处理退格、删除行等特殊控制字符
@@ -108,7 +122,9 @@ void uartinit(void) {
         }
       }
     }
-    ```
+    
+```
+
     当一行完整输入后，它更新写指针 `cons.w`，使得这行数据对读取者可见，并调用 `wakeup(&cons.r)` 唤醒可能在等待输入的进程。
 
 ### 3.3. 进程读取（上半部分）
@@ -117,7 +133,9 @@ void uartinit(void) {
 
 2.  **等待数据**：[`consoleread()`](source/xv6-riscv/kernel/console.c.md) 检查环形缓冲区。如果读指针 `cons.r` 和写指针 `cons.w` 相等，说明没有完整的行可供读取。此时，进程会调用 `sleep(&cons.r, &cons.lock)`，进入休眠状态并释放锁，等待被唤醒。
 
-    ```c
+    
+```
+c
     // From kernel/console.c
     int consoleread(...) {
       acquire(&cons.lock);
@@ -130,11 +148,13 @@ void uartinit(void) {
       }
       // 被唤醒后，从此处继续执行，开始读取数据
     }
-    ```
+    
+```
 
-3.  **唤醒与读取**：当 [`consoleintr()`](source/xv6-riscv/kernel/console.c.md) 调用 `wakeup(&cons.r)` 时，在 `sleep` 中休眠的 shell 进程被唤醒。`sleep` 返回后会重新获取锁。此时 `cons.r != cons.w`，循环条件不满足，进程开始从 `cons.buf` 中读取字符，直到遇到换行符或读满用户提供的缓冲区。
 
-4.  **返回用户空间**：[`consoleread()`](source/xv6-riscv/kernel/console.c.md) 将读取到的行复制到用户提供的缓冲区，然后返回。`read` 系统调用完成，shell 拿到了用户输入的一整行命令。
+3.  **唤醒与读取**：当 [`consoleintr()`](source/xv6-riscv/kernel/console.c.md) 调用 `wakeup(&cons.r)` 时，在 [`sleep`](../xv6-riscv/user/user.h) 中休眠的 shell 进程被唤醒。[`sleep`](../xv6-riscv/user/user.h) 返回后会重新获取锁。此时 `cons.r != cons.w`，循环条件不满足，进程开始从 `cons.buf` 中读取字符，直到遇到换行符或读满用户提供的缓冲区。
+
+4.  **返回用户空间**：[`consoleread()`](source/xv6-riscv/kernel/console.c.md) 将读取到的行复制到用户提供的缓冲区，然后返回。[`read`](../xv6-riscv/user/user.h) 系统调用完成，shell 拿到了用户输入的一整行命令。
 
 ## 4. 定时器中断与调度
 
@@ -150,7 +170,9 @@ RISC-V 架构为每个 CPU 核心配备了时钟硬件（在 xv6 的 QEMU 环境
 
 时钟中断的处理流程与设备中断类似，最终会调用到 [`clockintr()`](source/xv6-riscv/kernel/trap.c.md)。
 
-```c
+
+```
+c
 // From kernel/trap.c
 void clockintr()
 {
@@ -159,16 +181,20 @@ void clockintr()
   wakeup(&ticks);
   release(&tickslock);
 }
+
 ```
+
 *   **更新滴答计数**：[`clockintr()`](source/xv6-riscv/kernel/trap.c.md) 会给一个全局变量 `ticks` 加一。这个变量是内核衡量时间流逝的标尺，例如 `sleep(n)` 系统调用就依赖它来计时。
-*   **唤醒休眠进程**：它会唤醒所有因调用 `sleep` 而休眠在 `ticks` 上的进程。
+*   **唤醒休眠进程**：它会唤醒所有因调用 [`sleep`](../xv6-riscv/user/user.h) 而休眠在 `ticks` 上的进程。
 *   **重新设置定时器**：处理函数会再次向 `stimecmp` 写入新的时间戳，以安排下一次时钟中断。
 
 ### 4.3. 协作调度
 
-时钟中断是实现**抢占式调度**的关键。当一个进程在用户空间执行时，如果发生时钟中断，`usertrap` 中的 [`devintr()`](source/xv6-riscv/kernel/trap.c.md) 会检测到它并返回 2。
+时钟中断是实现**抢占式调度**的关键。当一个进程在用户空间执行时，如果发生时钟中断，[`usertrap`](../xv6-riscv/kernel/trap.c) 中的 [`devintr()`](source/xv6-riscv/kernel/trap.c.md) 会检测到它并返回 2。
 
-```c
+
+```
+c
 // From kernel/trap.c
 void usertrap(void) {
   int which_dev = 0;
@@ -188,7 +214,9 @@ void usertrap(void) {
   
   usertrapret(); // 返回用户空间
 }
+
 ```
+
 看到返回值是 2，[`usertrap()`](source/xv6-riscv/kernel/trap.c.md) 就会调用 [`yield()`](source/xv6-riscv/kernel/proc.c.md)，该进程会主动放弃 CPU，让调度器有机会选择另一个进程来运行。这样，即便是计算密集型的死循环程序，也无法永久霸占 CPU，保证了系统的公平性和响应性。
 
 ## 5. 实验要求
@@ -197,12 +225,12 @@ void usertrap(void) {
 
 **要求**:
 1.  修改 [`kernel/uart.c`](source/xv6-riscv/kernel/uart.c.md) 和/或 [`kernel/console.c`](source/xv6-riscv/kernel/console.c.md)，以移除对 UART 中断的依赖。
-2.  在 `uartinit` 中，不要开启 UART 中断。
-3.  `consoleread` 不能再 `sleep` 等待输入。它必须主动、循环地从 UART 硬件查询（轮询）是否有新的字符到来。
-4.  同样，`consolewrite`（或其调用的底层函数）也应通过轮询方式，等待 UART 发送寄存器空闲后再写入下一个字符。
+2.  在 [`uartinit`](../xv6-riscv/kernel/defs.h) 中，不要开启 UART 中断。
+3.  [`consoleread`](../xv6-riscv/kernel/console.c) 不能再 [`sleep`](../xv6-riscv/user/user.h) 等待输入。它必须主动、循环地从 UART 硬件查询（轮询）是否有新的字符到来。
+4.  同样，[`consolewrite`](../xv6-riscv/kernel/console.c)（或其调用的底层函数）也应通过轮询方式，等待 UART 发送寄存器空闲后再写入下一个字符。
 5.  修改后，系统应能正常工作，shell 可以正确地接收命令并输出结果。
 
 **提示**:
 *   你需要关注 [`uartgetc()`](source/xv6-riscv/kernel/uart.c.md) 和 [`uartputc_sync()`](source/xv6-riscv/kernel/uart.c.md) 的实现逻辑。
-*   思考在何处进行轮询是最高效的。是在 `consoleread` 里，还是在某个周期性执行的地方？
+*   思考在何处进行轮询是最高效的。是在 [`consoleread`](../xv6-riscv/kernel/console.c) 里，还是在某个周期性执行的地方？
 *   这个实验将帮助你深刻理解轮询和中断驱动两种 I/O 模式的根本区别和各自的优缺点。
