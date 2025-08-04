@@ -40,7 +40,7 @@ mknod("/console", 1, 1);
 以及文件的链接数。
 
 `fstat`系统调用从文件描述符引用的inode中检索信息。
-它填充一个在`stat.h` ([`kernel/stat.h`](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/stat.h))中定义的`struct stat`：
+它填充一个在`stat.h` ([`kernel/stat.h`](/source/xv6-riscv/kernel/stat.h.md))中定义的`struct stat`：
 ```c
 #define T_DIR     1   // Directory
 #define T_FILE    2   // File
@@ -82,5 +82,5 @@ unlink("/tmp/xyz");
 Unix提供了可从shell调用的用户级程序作为文件实用程序，例如`mkdir`、`ln`和`rm`。
 这种设计允许任何人通过添加新的用户级程序来扩展命令行界面。事后看来，这个计划似乎是显而易见的，但在Unix时代设计的其他系统通常将这些命令内置到shell中（并将shell内置到内核中）。
 
-一个例外是`cd`，它内置在shell中(`user/sh.c:66`)。
+一个例外是`cd`，它内置在shell中([`user/sh.c:66`](/source/xv6-riscv/user/sh.c.md#L66))。
 `cd`必须更改shell本身的当前工作目录。如果`cd`作为常规命令运行，那么shell将派生一个子进程，子进程将运行`cd`，并且`cd`将更改*子进程*的工作目录。父进程（即shell）的工作目录不会改变。

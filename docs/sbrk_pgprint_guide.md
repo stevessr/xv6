@@ -6,7 +6,7 @@
 
 本指南将引导您完成以下步骤：
 
-1.  创建一个测试程序 `user/sbrktest.c`。
+1.  创建一个测试程序 [`user/sbrktest.c`](/source/xv6-riscv/user/sbrktest.c.md)。
 2.  修改 `Makefile` 以包含新的测试程序。
 3.  在用户空间和内核空间中添加新的系统调用 `pgprint`。
 4.  实现 `pgprint` 的核心逻辑，即打印页表。
@@ -18,7 +18,7 @@
 
 首先，我们需要创建一个用户程序，它将使用我们即将添加的新系统调用。
 
-在 `user/` 目录下创建一个名为 `sbrktest.c` 的新文件，并将以下内容复制到其中：
+在 `user/` 目录下创建一个名为 [`sbrktest.c`](/source/xv6-riscv/user/sbrktest.c.md) 的新文件，并将以下内容复制到其中：
 
 ```c
 #include "kernel/param.h"
@@ -128,7 +128,7 @@ UPROGS=\
 
 这个 Perl 脚本负责生成用户级系统调用存根。我们需要在这里添加 `pgprint`。
 
-打开 `user/usys.pl` 并找到 `entry("freemem");` 这一行。在它下面添加新的一行 `entry("pgprint");`。
+打开 [`user/usys.pl`](/source/xv6-riscv/user/usys.pl.md) 并找到 `entry("freemem");` 这一行。在它下面添加新的一行 `entry("pgprint");`。
 
 ```perl
 ...
@@ -143,7 +143,7 @@ entry("pgprint");
 
 这是用户程序包含的头文件，其中声明了所有可用的系统调用。我们需要在这里添加 `pgprint` 的函数原型。
 
-打开 `user/user.h` 并在 `freemem` 的声明之后添加 `pgprint` 的声明。
+打开 [`user/user.h`](/source/xv6-riscv/user/user.h.md) 并在 `freemem` 的声明之后添加 `pgprint` 的声明。
 
 ```c
 ...
@@ -159,7 +159,7 @@ int pgprint(void); // 打印页表
 
 这个文件定义了每个系统调用对应的唯一编号。我们需要为 `pgprint` 分配一个新的编号。
 
-打开 `kernel/syscall.h` 并在文件末尾添加 `SYS_pgprint` 的定义。我们将使用下一个可用的编号，即 25。
+打开 [`kernel/syscall.h`](/source/xv6-riscv/kernel/syscall.h.md) 并在文件末尾添加 `SYS_pgprint` 的定义。我们将使用下一个可用的编号，即 25。
 
 ```c
 ...
@@ -172,7 +172,7 @@ int pgprint(void); // 打印页表
 
 这个文件将系统调用编号映射到实际的内核处理函数。我们需要在这里将 `SYS_pgprint` 链接到 `sys_pgprint` 函数。
 
-打开 `kernel/syscall.c` 并进行两处修改：
+打开 [`kernel/syscall.c`](/source/xv6-riscv/kernel/syscall.c.md) 并进行两处修改：
 
 1.  在外部函数声明列表中，添加 `sys_pgprint` 的声明。
 2.  在 `syscalls` 数组中，添加 `SYS_pgprint` 的条目。
@@ -206,7 +206,7 @@ extern uint64 sys_pgprint(void);
 
 我们需要在 `vm.c` 中创建一个名为 `vmprint` 的函数来打印页表。在 `defs.h` 中添加它的函数原型，以便其他内核文件可以调用它。
 
-打开 `kernel/defs.h`，在 `// vm.c` 部分的末尾添加 `vmprint` 的原型。
+打开 [`kernel/defs.h`](/source/xv6-riscv/kernel/defs.h.md)，在 `// vm.c` 部分的末尾添加 `vmprint` 的原型。
 
 ```c
 // vm.c - 虚拟内存
@@ -220,7 +220,7 @@ void            vmprint(pagetable_t); // 打印页表
 
 这是实现页表打印逻辑的核心部分。我们将添加一个 `vmprint` 函数和一个递归的辅助函数 `vmprint_level`。
 
-将以下代码添加到 `kernel/vm.c` 的末尾：
+将以下代码添加到 [`kernel/vm.c`](/source/xv6-riscv/kernel/vm.c.md) 的末尾：
 
 ```c
 // 递归打印页表
@@ -266,7 +266,7 @@ void vmprint(pagetable_t pagetable) {
 
 最后，我们在 `sysproc.c` 中创建 `sys_pgprint` 函数。这个函数是系统调用的直接入口点，它会调用我们在 `vm.c` 中创建的 `vmprint` 函数。
 
-将以下代码添加到 `kernel/sysproc.c` 的末尾：
+将以下代码添加到 [`kernel/sysproc.c`](/source/xv6-riscv/kernel/sysproc.c.md) 的末尾：
 
 ```c
 // sys_pgprint 系统调用：打印当前进程的页表。
