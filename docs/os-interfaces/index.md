@@ -45,7 +45,7 @@ graph TD
 
 内核提供的系统调用集合是用户程序看到的接口。
 xv6内核提供了Unix内核传统上提供的一部分服务和系统调用。
-[图 1-1](./processes-and-memory.md#fig-api) 列出了xv6的所有系统调用。
+[图 1-1](/os-interfaces/processes-and-memory.md#fig-api) 列出了xv6的所有系统调用。
 
 本章的其余部分概述了xv6的服务——进程、内存、文件描述符、管道和文件系统——并通过代码片段和对**shell**（Unix的命令行用户界面）如何使用它们的讨论来说明它们。shell对系统调用的使用说明了它们是如何被精心设计的。
 

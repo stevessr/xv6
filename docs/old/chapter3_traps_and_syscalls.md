@@ -7,7 +7,7 @@
 1.  **理解从用户态到内核态控制权转移的完整过程**：清晰地描述为何需要模式切换，以及该过程中硬件和软件各自扮演的角色。
 2.  **掌握 RISC-V 的陷阱处理机制**：熟悉 `stvec`, `sepc`, `scause`, `sscratch` 等关键控制寄存器（CSRs）在陷阱处理中的功能和用途。
 3.  **分析跳板页（trampoline page）的关键作用**：解释 xv6 如何利用跳板页巧妙地解决了在切换页表时仍能继续执行代码的难题。
-4.  **追踪系统调用的生命周期**：能够完整地追踪一个系统调用（如 [`getpid`](../xv6-riscv/user/user.h)）从用户程序发起（`ecall`）、到内核处理、再到返回用户空间的完整生命周期。
+4.  **追踪系统调用的生命周期**：能够完整地追踪一个系统调用（如 [`getpid`](/source/xv6-riscv/user/user.h.md)）从用户程序发起（`ecall`）、到内核处理、再到返回用户空间的完整生命周期。
 
 ---
 
@@ -63,7 +63,7 @@ xv6 通过**跳板页 (Trampoline Page)** 解决了这个问题。
 
 这样，无论当前 `satp` 寄存器指向用户页表还是内核页表，`TRAMPOLINE` 这个虚拟地址总是有效的，CPU 总能在这里取到正确的指令。
 
-### 4.1 代码分析: [`kernel/trampoline.S`](source/xv6-riscv/kernel/trampoline.S.md)
+### 4.1 代码分析: [`kernel/trampoline.S`](/source/xv6-riscv/kernel/trampoline.S.md)
 
 #### 4.1.1 `uservec`: 进入内核
 
@@ -111,9 +111,9 @@ uservec:
 
 ## 5. C 语言陷阱处理
 
-在 `uservec` 完成底层设置后，控制权转移到 C 函数 [`usertrap()`](source/xv6-riscv/kernel/trap.c.md)。
+在 `uservec` 完成底层设置后，控制权转移到 C 函数 [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md)。
 
-### 5.1 代码分析: [`kernel/trap.c`](source/xv6-riscv/kernel/trap.c.md)
+### 5.1 代码分析: [`kernel/trap.c`](/source/xv6-riscv/kernel/trap.c.md)
 
 
 ```
@@ -161,13 +161,13 @@ usertrap(void)
 ```
 
 
-[`usertrap`](../xv6-riscv/kernel/trap.c) 扮演了**陷阱分发器**的角色。它根据 `scause` 寄存器的值，将控制流导向不同的处理路径：系统调用、设备中断或异常处理。
+[`usertrap`](/source/xv6-riscv/kernel/trap.c.md) 扮演了**陷阱分发器**的角色。它根据 `scause` 寄存器的值，将控制流导向不同的处理路径：系统调用、设备中断或异常处理。
 
 ### 5.2 系统调用分发
 
-如果陷阱是系统调用，[`usertrap`](../xv6-riscv/kernel/trap.c) 会调用 [`syscall()`](source/xv6-riscv/kernel/syscall.c.md)。
+如果陷阱是系统调用，[`usertrap`](/source/xv6-riscv/kernel/trap.c.md) 会调用 [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md)。
 
-#### 5.2.1 代码分析: [`kernel/syscall.c`](source/xv6-riscv/kernel/syscall.c.md) & [`kernel/syscall.h`](source/xv6-riscv/kernel/syscall.h.md)
+#### 5.2.1 代码分析: [`kernel/syscall.c`](/source/xv6-riscv/kernel/syscall.c.md) & [`kernel/syscall.h`](/source/xv6-riscv/kernel/syscall.h.md)
 
 `syscall()` 的实现非常直观：
 
@@ -196,7 +196,7 @@ syscall(void)
 ```
 
 
-它通过一个函数指针数组 `syscalls[]` 将系统调用号（如 `SYS_getpid`）映射到其实现函数（如 [`sys_getpid`](../xv6-riscv/kernel/sysproc.c)）。系统调用的参数通过 `arg*()` 系列函数从陷阱帧中保存的用户寄存器（`a0`-`a5`）中提取。返回值则被存入陷阱帧的 `a0` 字段，最终会恢复到用户的 `a0` 寄存器中。
+它通过一个函数指针数组 `syscalls[]` 将系统调用号（如 `SYS_getpid`）映射到其实现函数（如 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md)）。系统调用的参数通过 `arg*()` 系列函数从陷阱帧中保存的用户寄存器（`a0`-`a5`）中提取。返回值则被存入陷阱帧的 `a0` 字段，最终会恢复到用户的 `a0` 寄存器中。
 
 ---
 
@@ -217,17 +217,17 @@ syscall(void)
 
 3.  **跳板进入: `trampoline.S`**:
     *   `uservec` 保存所有用户寄存器到当前进程的 `trapframe`。
-    *   `uservec` 从 `trapframe` 加载内核栈指针、[`usertrap`](../xv6-riscv/kernel/trap.c) 函数地址和内核页表地址。
+    *   `uservec` 从 `trapframe` 加载内核栈指针、[`usertrap`](/source/xv6-riscv/kernel/trap.c.md) 函数地址和内核页表地址。
     *   `uservec` 将内核页表地址写入 `satp`，切换地址空间。
-    *   `uservec` 跳转到 [`usertrap`](../xv6-riscv/kernel/trap.c) 函数。
+    *   `uservec` 跳转到 [`usertrap`](/source/xv6-riscv/kernel/trap.c.md) 函数。
 
 4.  **内核 C 代码处理: `trap.c` -> `syscall.c` -> `sysproc.c`**:
     *   `usertrap()` 发现 `scause` 是 8，判定为系统调用。
     *   `usertrap()` 将 `epc` 加 4，然后调用 `syscall()`。
     *   `syscall()` 从陷阱帧的 `a7` 读出系统调用号 11。
-    *   `syscall()` 在 `syscalls` 数组中找到第 11 项，即 [`sys_getpid`](../xv6-riscv/kernel/sysproc.c) 函数，并调用它。
+    *   `syscall()` 在 `syscalls` 数组中找到第 11 项，即 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 函数，并调用它。
     *   `sys_getpid()` (位于 `sysproc.c`) 执行 `return myproc()->pid;`，返回当前进程的 PID。
-    *   `syscall()` 将 [`sys_getpid`](../xv6-riscv/kernel/sysproc.c) 的返回值（即 PID）存入 `p->trapframe->a0`。
+    *   `syscall()` 将 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 的返回值（即 PID）存入 `p->trapframe->a0`。
     *   `syscall()` 返回到 `usertrap()`。
     *   `usertrap()` 调用 `usertrapret()`。
 
@@ -239,7 +239,7 @@ syscall(void)
 
 6.  **跳板返回: `trampoline.S`**:
     *   `userret` 将用户页表地址写入 `satp`，切换回用户地址空间。
-    *   `userret` 从 `trapframe` 中恢复所有 32 个用户寄存器（此时，`a0` 中已经是 [`getpid`](../xv6-riscv/user/user.h) 的返回值）。
+    *   `userret` 从 `trapframe` 中恢复所有 32 个用户寄存器（此时，`a0` 中已经是 [`getpid`](/source/xv6-riscv/user/user.h.md) 的返回值）。
     *   `userret` 执行 `sret` 指令。
 
 7.  **硬件响应**:
@@ -260,7 +260,7 @@ syscall(void)
 
 **功能要求**:
 
-`trace` 系统调用接受一个参数：一个“掩码”（mask），用于指定要追踪哪些系统调用。例如，如果 [`fork`](../xv6-riscv/user/user.h) 的系统调用号是 1，[`wait`](../xv6-riscv/user/user.h) 的系统调用号是 3，当用户调用 `trace(1 << 1 | 1 << 3)` 后，每当该进程执行 [`fork`](../xv6-riscv/user/user.h) 或 [`wait`](../xv6-riscv/user/user.h) 系统调用时，内核都应在控制台打印一行调试信息。
+`trace` 系统调用接受一个参数：一个“掩码”（mask），用于指定要追踪哪些系统调用。例如，如果 [`fork`](/source/xv6-riscv/user/user.h.md) 的系统调用号是 1，[`wait`](/source/xv6-riscv/user/user.h.md) 的系统调用号是 3，当用户调用 `trace(1 << 1 | 1 << 3)` 后，每当该进程执行 [`fork`](/source/xv6-riscv/user/user.h.md) 或 [`wait`](/source/xv6-riscv/user/user.h.md) 系统调用时，内核都应在控制台打印一行调试信息。
 
 **打印格式**:
 
@@ -285,10 +285,10 @@ syscall(void)
 
 1.  在 `user/user.h` 中添加 `trace` 的用户空间声明。
 2.  在 `user/usys.pl` 中添加 `trace` 的入口。
-3.  在 [`kernel/syscall.h`](source/xv6-riscv/kernel/syscall.h.md) 中定义 `SYS_trace`。
-4.  在 [`kernel/syscall.c`](source/xv6-riscv/kernel/syscall.c.md) 的 `syscalls` 数组中添加 `sys_trace`。
+3.  在 [`kernel/syscall.h`](/source/xv6-riscv/kernel/syscall.h.md) 中定义 `SYS_trace`。
+4.  在 [`kernel/syscall.c`](/source/xv6-riscv/kernel/syscall.c.md) 的 `syscalls` 数组中添加 `sys_trace`。
 5.  在 `kernel/proc.h` 的 `struct proc` 中添加一个字段来保存追踪掩码 (e.g., `int tracemask`)。
 6.  在 `kernel/sysproc.c` 中实现 `sys_trace()` 函数。它应该获取整型参数并将其保存到当前进程的 `tracemask` 字段。
-7.  修改 [`syscall()`](source/xv6-riscv/kernel/syscall.c.md) 函数。在执行系统调用之后，检查当前进程的 `tracemask` 是否设置了对应系统调用号的位。如果设置了，就打印所需的追踪信息。
+7.  修改 [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md) 函数。在执行系统调用之后，检查当前进程的 `tracemask` 是否设置了对应系统调用号的位。如果设置了，就打印所需的追踪信息。
 
 (**注意**: 本文稿只提供实验要求和高级指引，不提供完整的代码实现。)

@@ -32,11 +32,11 @@ Xv6 **分时** 处理进程：它透明地在等待执行的进程集合中切�
 
 *Xv6系统调用。如无特别说明，这些调用成功时返回0，出错时返回-1。*
 
-一个进程可以使用 [`fork`](/source/xv6-riscv/user/user.h) 系统调用创建一个新进程。
-[`fork`](/source/xv6-riscv/user/user.h) 为新进程提供调用进程内存的精确副本：它将调用进程的指令、数据和栈复制到新进程的内存中。
-[`fork`](/source/xv6-riscv/user/user.h) 在原始进程和新进程中都会返回。
-在原始进程中，[`fork`](/source/xv6-riscv/user/user.h) 返回新进程的PID。
-在新进程中，[`fork`](/source/xv6-riscv/user/user.h) 返回零。
+一个进程可以使用 [`fork`](/source/xv6-riscv/user/user.h.md) 系统调用创建一个新进程。
+[`fork`](/source/xv6-riscv/user/user.h.md) 为新进程提供调用进程内存的精确副本：它将调用进程的指令、数据和栈复制到新进程的内存中。
+[`fork`](/source/xv6-riscv/user/user.h.md) 在原始进程和新进程中都会返回。
+在原始进程中，[`fork`](/source/xv6-riscv/user/user.h.md) 返回新进程的PID。
+在新进程中，[`fork`](/source/xv6-riscv/user/user.h.md) 返回零。
 原始进程和新进程通常被称为**父进程**和**子进程**。
 
 例如，考虑以下用C编程语言编写的程序片段：
@@ -59,11 +59,11 @@ if(pid > 0){
 ```
 
 
-[`exit`](/source/xv6-riscv/kernel/defs.h) 系统调用使调用进程停止执行并释放资源，如内存和打开的文件。
+[`exit`](/source/xv6-riscv/kernel/defs.h.md) 系统调用使调用进程停止执行并释放资源，如内存和打开的文件。
 Exit接受一个整数状态参数，通常0表示成功，1表示失败。
-[`wait`](/source/xv6-riscv/user/user.h) 系统调用返回当前进程的一个已退出（或被杀死）的子进程的PID，并将子进程的退出状态复制到传递给wait的地址；如果调用者的子进程都没有退出，[`wait`](/source/xv6-riscv/user/user.h) 会等待其中一个退出。
-如果调用者没有子进程，[`wait`](/source/xv6-riscv/user/user.h) 立即返回-1。
-如果父进程不关心子进程的退出状态，它可以向 [`wait`](/source/xv6-riscv/user/user.h) 传递一个0地址。
+[`wait`](/source/xv6-riscv/user/user.h.md) 系统调用返回当前进程的一个已退出（或被杀死）的子进程的PID，并将子进程的退出状态复制到传递给wait的地址；如果调用者的子进程都没有退出，[`wait`](/source/xv6-riscv/user/user.h.md) 会等待其中一个退出。
+如果调用者没有子进程，[`wait`](/source/xv6-riscv/user/user.h.md) 立即返回-1。
+如果父进程不关心子进程的退出状态，它可以向 [`wait`](/source/xv6-riscv/user/user.h.md) 传递一个0地址。
 
 在示例中，输出行
 
@@ -74,8 +74,8 @@ child: exiting
 
 ```
 
-可能会以任何顺序出现（甚至混合在一起），这取决于父进程或子进程哪个先到达其 [`printf`](/source/xv6-riscv/user/printf.c) 调用。
-子进程退出后，父进程的 [`wait`](/source/xv6-riscv/user/user.h) 返回，导致父进程打印
+可能会以任何顺序出现（甚至混合在一起），这取决于父进程或子进程哪个先到达其 [`printf`](/source/xv6-riscv/user/printf.c.md) 调用。
+子进程退出后，父进程的 [`wait`](/source/xv6-riscv/user/user.h.md) 返回，导致父进程打印
 
 ```
 
@@ -84,13 +84,13 @@ parent: child 1234 is done
 ```
 
 尽管子进程最初具有与父进程相同的内存内容，但父进程和子进程使用独立的内存和独立的寄存器执行：
-在一个进程中更改一个变量不会影响另一个进程。例如，当 [`wait`](/source/xv6-riscv/user/user.h) 的返回值存储到父进程的 `pid` 中时，它不会改变子进程中的变量 `pid`。子进程中的 `pid` 值仍将为零。
+在一个进程中更改一个变量不会影响另一个进程。例如，当 [`wait`](/source/xv6-riscv/user/user.h.md) 的返回值存储到父进程的 `pid` 中时，它不会改变子进程中的变量 `pid`。子进程中的 `pid` 值仍将为零。
 
-[`exec`](/source/xv6-riscv/user/user.h) 系统调用用从文件系统中加载的新内存映像替换调用进程的内存。
+[`exec`](/source/xv6-riscv/user/user.h.md) 系统调用用从文件系统中加载的新内存映像替换调用进程的内存。
 该文件必须具有特定的格式，该格式指定文件的哪一部分包含指令，哪一部分是数据，从哪个指令开始执行等。Xv6使用ELF格式，第3章将对此进行更详细的讨论。
 通常，该文件是编译程序源代码的结果。
-当 [`exec`](/source/xv6-riscv/user/user.h) 成功时，它不会返回到调用程序；相反，从文件加载的指令在ELF头中声明的入口点开始执行。
-[`exec`](/source/xv6-riscv/user/user.h) 接受两个参数：包含可执行文件的文件名和一个字符串参数数组。
+当 [`exec`](/source/xv6-riscv/user/user.h.md) 成功时，它不会返回到调用程序；相反，从文件加载的指令在ELF头中声明的入口点开始执行。
+[`exec`](/source/xv6-riscv/user/user.h.md) 接受两个参数：包含可执行文件的文件名和一个字符串参数数组。
 例如：
 
 ```
@@ -107,15 +107,15 @@ printf("exec error\n");
 该片段将调用程序替换为以参数列表 `echo hello` 运行的程序 `/bin/echo` 的实例。
 大多数程序忽略参数数组的第一个元素，该元素通常是程序的名称。
 
-xv6 shell使用上述调用代表用户运行程序。shell的主要结构很简单；请参见 [`main`](/source/xv6-riscv/user/zombie.c) ([user/sh.c:/main/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c))。
-主循环使用 [`getcmd`](/source/xv6-riscv/user/sh.c) 从用户读取一行输入。
-然后它调用 [`fork`](/source/xv6-riscv/user/user.h)，创建一个shell进程的副本。父进程调用 [`wait`](/source/xv6-riscv/user/user.h)，而子进程运行命令。例如，如果用户向shell键入 `echo hello`，[`runcmd`](/source/xv6-riscv/user/sh.c) 将被调用，参数为 `echo hello`。
-[`runcmd`](/source/xv6-riscv/user/sh.c) ([user/sh.c:/runcmd/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c)) 运行实际的命令。对于 `echo hello`，它会调用 [`exec`](/source/xv6-riscv/user/user.h) ([user/sh.c:/exec.ecmd/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c))。
-如果 [`exec`](/source/xv6-riscv/user/user.h) 成功，则子进程将执行来自 `echo` 的指令，而不是 [`runcmd`](/source/xv6-riscv/user/sh.c)。
-在某个时候 `echo` 会调用 [`exit`](/source/xv6-riscv/kernel/defs.h)，这将导致父进程从 [`main`](/source/xv6-riscv/user/zombie.c) ([user/sh.c:/main/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c))中的 [`wait`](/source/xv6-riscv/user/user.h) 返回。
+xv6 shell使用上述调用代表用户运行程序。shell的主要结构很简单；请参见 [`main`](/source/xv6-riscv/user/zombie.c.md) ([user/sh.c:/main/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c))。
+主循环使用 [`getcmd`](/source/xv6-riscv/user/sh.c.md) 从用户读取一行输入。
+然后它调用 [`fork`](/source/xv6-riscv/user/user.h.md)，创建一个shell进程的副本。父进程调用 [`wait`](/source/xv6-riscv/user/user.h.md)，而子进程运行命令。例如，如果用户向shell键入 `echo hello`，[`runcmd`](/source/xv6-riscv/user/sh.c.md) 将被调用，参数为 `echo hello`。
+[`runcmd`](/source/xv6-riscv/user/sh.c.md) ([user/sh.c:/runcmd/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c)) 运行实际的命令。对于 `echo hello`，它会调用 [`exec`](/source/xv6-riscv/user/user.h.md) ([user/sh.c:/exec.ecmd/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c))。
+如果 [`exec`](/source/xv6-riscv/user/user.h.md) 成功，则子进程将执行来自 `echo` 的指令，而不是 [`runcmd`](/source/xv6-riscv/user/sh.c.md)。
+在某个时候 `echo` 会调用 [`exit`](/source/xv6-riscv/kernel/defs.h.md)，这将导致父进程从 [`main`](/source/xv6-riscv/user/zombie.c.md) ([user/sh.c:/main/](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c))中的 [`wait`](/source/xv6-riscv/user/user.h.md) 返回。
 
-您可能想知道为什么 [`fork`](/source/xv6-riscv/user/user.h) 和 [`exec`](/source/xv6-riscv/user/user.h) 没有合并成一个调用；我们稍后会看到，shell在其I/O重定向的实现中利用了这种分离。
-为了避免创建重复进程然后立即替换它（使用 [`exec`](/source/xv6-riscv/user/user.h)）的浪费，操作系统内核通过使用虚拟内存技术（如写时复制（见第4.4节））来优化 [`fork`](/source/xv6-riscv/user/user.h) 在这种用例下的实现。
+您可能想知道为什么 [`fork`](/source/xv6-riscv/user/user.h.md) 和 [`exec`](/source/xv6-riscv/user/user.h.md) 没有合并成一个调用；我们稍后会看到，shell在其I/O重定向的实现中利用了这种分离。
+为了避免创建重复进程然后立即替换它（使用 [`exec`](/source/xv6-riscv/user/user.h.md)）的浪费，操作系统内核通过使用虚拟内存技术（如写时复制（见第4.4节））来优化 [`fork`](/source/xv6-riscv/user/user.h.md) 在这种用例下的实现。
 
-Xv6隐式地分配大多数用户空间内存：[`fork`](/source/xv6-riscv/user/user.h) 分配子进程复制父进程内存所需的内存，而 [`exec`](/source/xv6-riscv/user/user.h) 分配足以容纳可执行文件的内存。
-在运行时需要更多内存的进程（例如，对于 [`malloc`](/source/xv6-riscv/user/umalloc.c)）可以调用 `sbrk(n)` 来将其数据内存增长n个零字节；`sbrk` 返回新内存的位置。
+Xv6隐式地分配大多数用户空间内存：[`fork`](/source/xv6-riscv/user/user.h.md) 分配子进程复制父进程内存所需的内存，而 [`exec`](/source/xv6-riscv/user/user.h.md) 分配足以容纳可执行文件的内存。
+在运行时需要更多内存的进程（例如，对于 [`malloc`](/source/xv6-riscv/user/umalloc.c.md)）可以调用 `sbrk(n)` 来将其数据内存增长n个零字节；`sbrk` 返回新内存的位置。

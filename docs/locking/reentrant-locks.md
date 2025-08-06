@@ -42,4 +42,4 @@ h() {
 
 如果不允许可重入锁，那么 `h` 调用 `g` 会导致死锁，这也不是很好。但是，假设调用 `call_once` 两次是一个严重的错误，那么死锁是更可取的。内核开发人员会观察到死锁（内核 panic）并可以修复代码以避免它，而调用 `call_once` 两次可能会悄无声息地导致一个难以追踪的错误。
 
-因此，xv6 使用更容易理解的非可重入锁。然而，只要程序员牢记锁定规则，任何一种方法都可以工作。如果 xv6 要使用可重入锁，就需要修改 [`acquire`](/source/xv6-riscv/kernel/defs.h) 来注意锁当前正被调用线程持有。还需要在 struct spinlock 中添加一个嵌套获取的计数，风格类似于接下来讨论的 [`push_off`](/source/xv6-riscv/kernel/defs.h)。
+因此，xv6 使用更容易理解的非可重入锁。然而，只要程序员牢记锁定规则，任何一种方法都可以工作。如果 xv6 要使用可重入锁，就需要修改 [`acquire`](/source/xv6-riscv/kernel/defs.h.md) 来注意锁当前正被调用线程持有。还需要在 struct spinlock 中添加一个嵌套获取的计数，风格类似于接下来讨论的 [`push_off`](/source/xv6-riscv/kernel/defs.h.md)。

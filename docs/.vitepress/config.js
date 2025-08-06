@@ -9,7 +9,7 @@ export default defineConfig({
   title: "XV6 中文文档",
   description: "XV6 操作系统课程",
   base: "/",
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: false,
   themeConfig: {
     search: {
       provider: "local",

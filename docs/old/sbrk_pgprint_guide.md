@@ -6,7 +6,7 @@
 
 本指南将引导您完成以下步骤：
 
-1.  创建一个测试程序 [`user/sbrktest.c`](/source/xv6-riscv/user/sbrktest.c.md)。
+1.  创建一个测试程序 `user/sbrktest.c`。
 2.  修改 `Makefile` 以包含新的测试程序。
 3.  在用户空间和内核空间中添加新的系统调用 `pgprint`。
 4.  实现 `pgprint` 的核心逻辑，即打印页表。
@@ -18,7 +18,7 @@
 
 首先，我们需要创建一个用户程序，它将使用我们即将添加的新系统调用。
 
-在 `user/` 目录下创建一个名为 [`sbrktest.c`](/source/xv6-riscv/user/sbrktest.c.md) 的新文件，并将以下内容复制到其中：
+在 `user/` 目录下创建一个名为 `sbrktest.c` 的新文件，并将以下内容复制到其中：
 
 ```c
 #include "kernel/param.h"
@@ -128,7 +128,7 @@ UPROGS=\
 
 这个 Perl 脚本负责生成用户级系统调用存根。我们需要在这里添加 `pgprint`。
 
-打开 [`user/usys.pl`](/source/xv6-riscv/user/usys.pl.md) 并找到 `entry("freemem");` 这一行。在它下面添加新的一行 `entry("pgprint");`。
+打开 `user/usys.pl` 并找到 `entry("freemem");` 这一行。在它下面添加新的一行 `entry("pgprint");`。
 
 ```perl
 ...

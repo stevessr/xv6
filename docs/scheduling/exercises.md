@@ -1,7 +1,7 @@
 # 练习
 
-1.  在xv6中实现信号量，不使用[`sleep`](/source/xv6-riscv/user/user.h)和[`wakeup`](/source/xv6-riscv/kernel/defs.h)（但可以使用自旋锁）。选择xv6中几个使用sleep和wakeup的地方，并用信号量替换它们。评价结果。
-2.  修复上面提到的[`kill`](/source/xv6-riscv/user/user.h)和[`sleep`](/source/xv6-riscv/user/user.h)之间的竞争，以便在受害者的休眠循环检查`p->killed`之后但在调用[`sleep`](/source/xv6-riscv/user/user.h)之前发生的[`kill`](/source/xv6-riscv/user/user.h)会导致受害者放弃当前的系统调用。
+1.  在xv6中实现信号量，不使用[`sleep`](/source/xv6-riscv/user/user.h.md)和[`wakeup`](/source/xv6-riscv/kernel/defs.h.md)（但可以使用自旋锁）。选择xv6中几个使用sleep和wakeup的地方，并用信号量替换它们。评价结果。
+2.  修复上面提到的[`kill`](/source/xv6-riscv/user/user.h.md)和[`sleep`](/source/xv6-riscv/user/user.h.md)之间的竞争，以便在受害者的休眠循环检查`p->killed`之后但在调用[`sleep`](/source/xv6-riscv/user/user.h.md)之前发生的[`kill`](/source/xv6-riscv/user/user.h.md)会导致受害者放弃当前的系统调用。
 3.  设计一个计划，以便每个休眠循环都检查`p->killed`，这样，例如，在virtio驱动程序中的进程如果被另一个进程杀死，可以从while循环中快速返回。
-4.  修改xv6，在从一个进程的内核线程切换到另一个进程时只使用一次上下文切换，而不是通过调度器线程切换。让出的线程需要自己选择下一个线程并调用[`swtch`](/source/xv6-riscv/kernel/defs.h)。挑战将是防止多个CPU意外执行同一个线程；正确处理锁定；以及避免死锁。
-5.  修改xv6的[`scheduler`](/source/xv6-riscv/kernel/proc.c)，在没有可运行进程时使用RISC-V的`WFI`（等待中断）指令。尝试确保，在任何时候有可运行的进程等待运行时，没有CPU在`WFI`中暂停。
+4.  修改xv6，在从一个进程的内核线程切换到另一个进程时只使用一次上下文切换，而不是通过调度器线程切换。让出的线程需要自己选择下一个线程并调用[`swtch`](/source/xv6-riscv/kernel/defs.h.md)。挑战将是防止多个CPU意外执行同一个线程；正确处理锁定；以及避免死锁。
+5.  修改xv6的[`scheduler`](/source/xv6-riscv/kernel/proc.c.md)，在没有可运行进程时使用RISC-V的`WFI`（等待中断）指令。尝试确保，在任何时候有可运行的进程等待运行时，没有CPU在`WFI`中暂停。

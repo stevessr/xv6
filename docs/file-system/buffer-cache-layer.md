@@ -2,8 +2,8 @@
 
 缓冲区缓存有两个工作：（1）同步对磁盘块的访问，以确保内存中只有一个块的副本，并且一次只有一个内核线程使用该副本；（2）缓存常用块，这样就不需要从慢速磁盘重新读取它们。代码在 `bio.c` 中。
 
-缓冲区缓存导出的主要接口包括 [`bread`](/source/xv6-riscv/kernel/bio.c) 和 [`bwrite`](/source/xv6-riscv/kernel/defs.h)；前者获取一个 `buf`，其中包含一个可以在内存中读取或修改的块的副本，而后者将修改后的缓冲区写入磁盘上的相应块。内核线程在完成缓冲区操作后必须通过调用 [`brelse`](/source/xv6-riscv/kernel/defs.h) 来释放它。缓冲区缓存使用每个缓冲区的休眠锁来确保一次只有一个线程使用每个缓冲区（从而使用每个磁盘块）；[`bread`](/source/xv6-riscv/kernel/bio.c) 返回一个锁定的缓冲区，而 [`brelse`](/source/xv6-riscv/kernel/defs.h) 释放该锁。
+缓冲区缓存导出的主要接口包括 [`bread`](/source/xv6-riscv/kernel/bio.c.md) 和 [`bwrite`](/source/xv6-riscv/kernel/defs.h.md)；前者获取一个 `buf`，其中包含一个可以在内存中读取或修改的块的副本，而后者将修改后的缓冲区写入磁盘上的相应块。内核线程在完成缓冲区操作后必须通过调用 [`brelse`](/source/xv6-riscv/kernel/defs.h.md) 来释放它。缓冲区缓存使用每个缓冲区的休眠锁来确保一次只有一个线程使用每个缓冲区（从而使用每个磁盘块）；[`bread`](/source/xv6-riscv/kernel/bio.c.md) 返回一个锁定的缓冲区，而 [`brelse`](/source/xv6-riscv/kernel/defs.h.md) 释放该锁。
 
 让我们回到缓冲区缓存。缓冲区缓存具有固定数量的缓冲区来保存磁盘块，这意味着如果文件系统请求的块不在缓存中，缓冲区缓存必须回收当前保存其他块的缓冲区。缓冲区缓存回收最近最少使用的缓冲区用于新块。假设是最近最少使用的缓冲区是最近最可能再次使用的。
 
-<img src="/assets/images/fslayout.png" alt="fslayout" width="500"/>
+<img src="/assets/images/fslayout.svg" alt="fslayout" width="500"/>

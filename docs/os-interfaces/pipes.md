@@ -4,7 +4,7 @@
 向管道的一端写入数据，使得这些数据可以从管道的另一端读取。
 管道为进程间通信提供了一种方式。
 
-以下示例代码运行程序[`wc`](/source/xv6-riscv/user/wc.c)，其标准输入连接到管道的读取端。
+以下示例代码运行程序[`wc`](/source/xv6-riscv/user/wc.c.md)，其标准输入连接到管道的读取端。
 
 ```
 c
@@ -27,18 +27,18 @@ if(fork() == 0) {
 
 ```
 
-程序调用[`pipe`](/source/xv6-riscv/user/user.h)，它创建一个新管道，并将读写文件描述符记录在数组`p`中。
-[`fork`](/source/xv6-riscv/user/user.h)之后，父子进程都有引用该管道的文件描述符。
-子进程调用[`close`](/source/xv6-riscv/user/user.h)和[`dup`](/source/xv6-riscv/user/user.h)使文件描述符零引用管道的读取端，
-关闭`p`中的文件描述符，并调用[`exec`](/source/xv6-riscv/user/user.h)来运行[`wc`](/source/xv6-riscv/user/wc.c)。
-当[`wc`](/source/xv6-riscv/user/wc.c)从其标准输入读取时，它从管道中读取。
+程序调用[`pipe`](/source/xv6-riscv/user/user.h.md)，它创建一个新管道，并将读写文件描述符记录在数组`p`中。
+[`fork`](/source/xv6-riscv/user/user.h.md)之后，父子进程都有引用该管道的文件描述符。
+子进程调用[`close`](/source/xv6-riscv/user/user.h.md)和[`dup`](/source/xv6-riscv/user/user.h.md)使文件描述符零引用管道的读取端，
+关闭`p`中的文件描述符，并调用[`exec`](/source/xv6-riscv/user/user.h.md)来运行[`wc`](/source/xv6-riscv/user/wc.c.md)。
+当[`wc`](/source/xv6-riscv/user/wc.c.md)从其标准输入读取时，它从管道中读取。
 父进程关闭管道的读取端，向管道写入，然后关闭写入端。
 
-如果没有数据可用，对管道的[`read`](/source/xv6-riscv/user/user.h)会等待数据被写入或所有引用写入端的文件描述符被关闭；在后一种情况下，[`read`](/source/xv6-riscv/user/user.h)将返回0，就像到达数据文件的末尾一样。
-[`read`](/source/xv6-riscv/user/user.h)会阻塞直到不可能有新数据到达，这是为什么在上面的[`wc`](/source/xv6-riscv/user/wc.c)执行之前，子进程关闭管道的写入端很重要的原因之一：如果[`wc`](/source/xv6-riscv/user/wc.c)的一个文件描述符引用了管道的写入端，[`wc`](/source/xv6-riscv/user/wc.c)将永远看不到文件结束符。
+如果没有数据可用，对管道的[`read`](/source/xv6-riscv/user/user.h.md)会等待数据被写入或所有引用写入端的文件描述符被关闭；在后一种情况下，[`read`](/source/xv6-riscv/user/user.h.md)将返回0，就像到达数据文件的末尾一样。
+[`read`](/source/xv6-riscv/user/user.h.md)会阻塞直到不可能有新数据到达，这是为什么在上面的[`wc`](/source/xv6-riscv/user/wc.c.md)执行之前，子进程关闭管道的写入端很重要的原因之一：如果[`wc`](/source/xv6-riscv/user/wc.c.md)的一个文件描述符引用了管道的写入端，[`wc`](/source/xv6-riscv/user/wc.c.md)将永远看不到文件结束符。
 
 xv6 shell以类似于上述代码的方式实现诸如`grep fork sh.c | wc -l`之类的管道([`user/sh.c:108`](/source/xv6-riscv/user/sh.c.md#L108))。
-子进程创建一个管道以连接管道的左端和右端。然后它为管道的左端调用[`fork`](/source/xv6-riscv/user/user.h)和[`runcmd`](/source/xv6-riscv/user/sh.c)，为管道的右端调用[`fork`](/source/xv6-riscv/user/user.h)和[`runcmd`](/source/xv6-riscv/user/sh.c)，并等待两者完成。
+子进程创建一个管道以连接管道的左端和右端。然后它为管道的左端调用[`fork`](/source/xv6-riscv/user/user.h.md)和[`runcmd`](/source/xv6-riscv/user/sh.c.md)，为管道的右端调用[`fork`](/source/xv6-riscv/user/user.h.md)和[`runcmd`](/source/xv6-riscv/user/sh.c.md)，并等待两者完成。
 管道的右端可能是一个本身包含管道的命令（例如，`a | b | c`），它本身会派生两个新的子进程（一个用于`b`，一个用于`c`）。
 因此，shell可能会创建一个进程树。该树的叶子是命令，内部节点是等待左右子节点完成的进程。
 

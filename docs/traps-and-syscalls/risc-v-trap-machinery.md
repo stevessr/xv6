@@ -1,6 +1,6 @@
 # RISC-V 陷阱机制
 
-每个 RISC-V CPU 都有一组控制寄存器，内核通过写入这些寄存器来告诉 CPU 如何处理陷阱，内核也可以读取这些寄存器来了解已发生的陷阱。RISC-V 文档包含了完整的故事 [riscv:priv]。[`riscv.h`](/source/../xv6-riscv/kernel/riscv.h:1) 包含了 xv6 使用的定义。以下是最重要寄存器的纲要：
+每个 RISC-V CPU 都有一组控制寄存器，内核通过写入这些寄存器来告诉 CPU 如何处理陷阱，内核也可以读取这些寄存器来了解已发生的陷阱。RISC-V 文档包含了完整的故事 [riscv:priv]。[`riscv.h`](/source/xv6-riscv/kernel/riscv.h.md) 包含了 xv6 使用的定义。以下是最重要寄存器的纲要：
 
 *   `stvec`: 内核在此处写入其陷阱处理程序的地址；RISC-V 跳转到 `stvec` 中的地址来处理陷阱。
 *   `sepc`: 发生陷阱时，RISC-V 在此处保存程序计数器（因为 `pc` 随后会被 `stvec` 中的值覆盖）。`sret`（从陷阱返回）指令将 `sepc` 复制到 `pc`。内核可以写入 `sepc` 来控制 `sret` 的去向。

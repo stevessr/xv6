@@ -10,12 +10,12 @@ xv6 中的管道是一个相当好的并行性例子。
 同样，从空管道读取（或向满管道写入）也必须阻塞，但这并非由于锁方案。
 
 上下文切换是一个更复杂的例子。
-两个内核线程，每个都在自己的 CPU 上执行，可以同时调用 [`yield`](/source/xv6-riscv/kernel/defs.h)、[`sched`](/source/xv6-riscv/kernel/defs.h) 和 [`swtch`](/source/xv6-riscv/kernel/defs.h)，并且这些调用将并行执行。
+两个内核线程，每个都在自己的 CPU 上执行，可以同时调用 [`yield`](/source/xv6-riscv/kernel/defs.h.md)、[`sched`](/source/xv6-riscv/kernel/defs.h.md) 和 [`swtch`](/source/xv6-riscv/kernel/defs.h.md)，并且这些调用将并行执行。
 每个线程都持有一个锁，但它们是不同的锁，所以它们不必等待对方。
-然而，一旦进入 [`scheduler`](/source/xv6-riscv/kernel/proc.c)，两个 CPU 在搜索进程表中寻找一个 `RUNNABLE` 的进程时，可能会在锁上发生冲突。
+然而，一旦进入 [`scheduler`](/source/xv6-riscv/kernel/proc.c.md)，两个 CPU 在搜索进程表中寻找一个 `RUNNABLE` 的进程时，可能会在锁上发生冲突。
 也就是说，xv6 很可能在上下文切换期间从多个 CPU 中获得性能提升，但可能没有它所能达到的那么多。
 
-另一个例子是来自不同 CPU 上不同进程的并发 [`fork`](/source/xv6-riscv/user/user.h) 调用。
+另一个例子是来自不同 CPU 上不同进程的并发 [`fork`](/source/xv6-riscv/user/user.h.md) 调用。
 这些调用可能需要相互等待 `pid_lock` 和 `kmem.lock`，以及为了在进程表中搜索一个 `UNUSED` 进程所需的每个进程的锁。
 另一方面，两个分叉的进程可以完全并行地复制用户内存页和格式化页表页。
 

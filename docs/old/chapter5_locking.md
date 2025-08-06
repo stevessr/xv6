@@ -5,7 +5,7 @@
 1.  **理解并发与竞态条件**: 明白在多核或多进程并发执行的环境下，由于共享资源访问的时序不确定性，为什么会产生“竞态条件”（Race Condition）。
 2.  **掌握锁的核心概念**: 学习锁作为一种互斥（Mutual Exclusion）机制，如何保护临界区（Critical Section），确保共享数据在任何时刻只有一个执行单元可以修改。
 3.  **分析自旋锁 (Spinlock)**: 深入理解 xv6 中自旋锁的实现原理，包括其“忙等待”特性、原子操作（`amoswap`）的使用，以及与中断禁用的关系。
-4.  **分析睡眠锁 (Sleep-lock)**: 掌握睡眠锁与自旋锁的核心区别，理解它如何通过 [`sleep`](../xv6-riscv/user/user.h)/[`wakeup`](../xv6-riscv/kernel/defs.h) 机制避免 CPU 空转，以及其在长时任务中的应用。
+4.  **分析睡眠锁 (Sleep-lock)**: 掌握睡眠锁与自旋锁的核心区别，理解它如何通过 [`sleep`](/source/xv6-riscv/user/user.h.md)/[`wakeup`](/source/xv6-riscv/kernel/defs.h.md) 机制避免 CPU 空转，以及其在长时任务中的应用。
 
 ---
 
@@ -13,7 +13,7 @@
 
 在现代操作系统中，多个 CPU 核心可能同时执行内核代码，或者单个 CPU 上的多个进程通过上下文切换交替执行。当这些并发的执行流需要访问和修改共享数据时，就会出现问题。
 
-让我们以内核内存分配器 [`kernel/kalloc.c`](source/xv6-riscv/kernel/kalloc.c.md) 为例。它维护一个空闲内存页的链表 `kmem.freelist`。`kalloc()` 函数从链表头部取下一个空闲页并返回。
+让我们以内核内存分配器 [`kernel/kalloc.c`](/source/xv6-riscv/kernel/kalloc.c.md) 为例。它维护一个空闲内存页的链表 `kmem.freelist`。`kalloc()` 函数从链表头部取下一个空闲页并返回。
 
 
 ```
@@ -63,7 +63,7 @@ xv6 提供了两种主要的内核锁：自旋锁和睡眠锁。
 
 ### 5.3.1 自旋锁的实现
 
-自旋锁的实现在 [`kernel/spinlock.c`](source/xv6-riscv/kernel/spinlock.c.md) 中。
+自旋锁的实现在 [`kernel/spinlock.c`](/source/xv6-riscv/kernel/spinlock.c.md) 中。
 
 **数据结构**:
 
@@ -80,7 +80,7 @@ struct spinlock {
 
 
 **获取锁 `acquire()`**:
-[`acquire()`](source/xv6-riscv/kernel/spinlock.c.md) 函数的核心是原子地测试并设置 `lk->locked` 字段。
+[`acquire()`](/source/xv6-riscv/kernel/spinlock.c.md) 函数的核心是原子地测试并设置 `lk->locked` 字段。
 
 
 ```
@@ -106,12 +106,12 @@ acquire(struct spinlock *lk)
 ```
 
 关键点分析:
-1.  **`push_off()`**: 在尝试获取锁之前，必须**禁用中断**。这是为了防止死锁。想象一下：一个 CPU 持有锁 `L`，然后一个设备中断发生。中断处理程序也需要锁 `L`，它会开始自旋等待。但因为中断处理程序正在运行，原来的代码无法继续执行去释放锁 `L`，导致系统完全卡死。`push_off()`/`pop_off()` 机制支持锁的嵌套调用，只有最外层的 [`acquire`](../xv6-riscv/kernel/defs.h) 会真正禁用中断，最外层的 [`release`](../xv6-riscv/kernel/defs.h) 会恢复中断。
+1.  **`push_off()`**: 在尝试获取锁之前，必须**禁用中断**。这是为了防止死锁。想象一下：一个 CPU 持有锁 `L`，然后一个设备中断发生。中断处理程序也需要锁 `L`，它会开始自旋等待。但因为中断处理程序正在运行，原来的代码无法继续执行去释放锁 `L`，导致系统完全卡死。`push_off()`/`pop_off()` 机制支持锁的嵌套调用，只有最外层的 [`acquire`](/source/xv6-riscv/kernel/defs.h.md) 会真正禁用中断，最外层的 [`release`](/source/xv6-riscv/kernel/defs.h.md) 会恢复中断。
 2.  **`__sync_lock_test_and_set`**: 这是一个 GCC 内置函数，在 RISC-V 上被编译为 `amoswap` (atomic memory swap) 指令。这条指令可以**原子地**将一个新值写入内存地址，并返回该地址的旧值。`while` 循环会一直执行，直到 `amoswap` 返回 0，这意味着在原子操作之前 `lk->locked` 是 0 (未锁定)，而我们成功地将其设置为了 1 (已锁定)。
 3.  **`__sync_synchronize()`**: 这是一个内存屏障（memory barrier）。它确保在它之前的内存写操作（如锁的获取）对所有 CPU 都可见，并且在它之后的内存读/写操作不会被重排序到屏障之前。这对于保护临界区内的代码至关重要。
 
 **释放锁 `release()`**:
-[`release()`](source/xv6-riscv/kernel/spinlock.c.md) 的过程相对简单。
+[`release()`](/source/xv6-riscv/kernel/spinlock.c.md) 的过程相对简单。
 
 
 ```
@@ -138,10 +138,10 @@ release(struct spinlock *lk)
 
 关键点分析:
 1.  **`__sync_lock_release`**: 同样是一个原子操作，它将 `lk->locked` 的值安全地设置回 0。一个简单的 `lk->locked = 0;` 赋值操作在某些架构上可能不是原子的，因此必须使用特殊的原子指令。
-2.  **`pop_off()`**: 恢复之前的中断状态。如果这是最外层的 [`release`](../xv6-riscv/kernel/defs.h) 调用，并且在进入时中断是开启的，那么此时会重新启用中断。
+2.  **`pop_off()`**: 恢复之前的中断状态。如果这是最外层的 [`release`](/source/xv6-riscv/kernel/defs.h.md) 调用，并且在进入时中断是开启的，那么此时会重新启用中断。
 
 **使用场景**:
-自旋锁最典型的应用就是保护内核内存分配器，如 [`kernel/kalloc.c`](source/xv6-riscv/kernel/kalloc.c.md) 中的 `kmem.lock`。分配或释放一个内存页的操作非常快，因此使用自旋锁是高效的。
+自旋锁最典型的应用就是保护内核内存分配器，如 [`kernel/kalloc.c`](/source/xv6-riscv/kernel/kalloc.c.md) 中的 `kmem.lock`。分配或释放一个内存页的操作非常快，因此使用自旋锁是高效的。
 
 ---
 
@@ -153,7 +153,7 @@ release(struct spinlock *lk)
 
 ### 5.4.1 睡眠锁的实现
 
-睡眠锁的实现在 [`kernel/sleeplock.c`](source/xv6-riscv/kernel/sleeplock.c.md)，并且它依赖于 [`kernel/proc.c`](source/xv6-riscv/kernel/proc.c.md) 中的 [`sleep`](../xv6-riscv/user/user.h) 和 [`wakeup`](../xv6-riscv/kernel/defs.h) 机制。
+睡眠锁的实现在 [`kernel/sleeplock.c`](/source/xv6-riscv/kernel/sleeplock.c.md)，并且它依赖于 [`kernel/proc.c`](/source/xv6-riscv/kernel/proc.c.md) 中的 [`sleep`](/source/xv6-riscv/user/user.h.md) 和 [`wakeup`](/source/xv6-riscv/kernel/defs.h.md) 机制。
 
 **数据结构**:
 
@@ -173,7 +173,7 @@ struct sleeplock {
 注意，每个睡眠锁内部都包含一个**自旋锁**。这个自旋锁不用于保护用户的临界区，而是用于保护睡眠锁自身的数据结构（如 `locked` 和 `pid` 字段）在并发访问时不出错。
 
 **获取锁 `acquiresleep()`**:
-[`acquiresleep()`](source/xv6-riscv/kernel/sleeplock.c.md) 的逻辑体现了“检查-休眠-再检查”的模式。
+[`acquiresleep()`](/source/xv6-riscv/kernel/sleeplock.c.md) 的逻辑体现了“检查-休眠-再检查”的模式。
 
 
 ```
@@ -197,7 +197,7 @@ acquiresleep(struct sleeplock *lk)
 
 
 **释放锁 `releasesleep()`**:
-[`releasesleep()`](source/xv6-riscv/kernel/sleeplock.c.md) 的职责是释放锁并唤醒其他等待者。
+[`releasesleep()`](/source/xv6-riscv/kernel/sleeplock.c.md) 的职责是释放锁并唤醒其他等待者。
 
 
 ```
@@ -216,18 +216,18 @@ releasesleep(struct sleeplock *lk)
 ```
 
 
-### 5.4.2 [`sleep`](../xv6-riscv/user/user.h) 和 [`wakeup`](../xv6-riscv/kernel/defs.h) 机制
+### 5.4.2 [`sleep`](/source/xv6-riscv/user/user.h.md) 和 [`wakeup`](/source/xv6-riscv/kernel/defs.h.md) 机制
 
-睡眠锁的核心是 [`sleep`](../xv6-riscv/user/user.h) 和 [`wakeup`](../xv6-riscv/kernel/defs.h) 这对函数。
+睡眠锁的核心是 [`sleep`](/source/xv6-riscv/user/user.h.md) 和 [`wakeup`](/source/xv6-riscv/kernel/defs.h.md) 这对函数。
 
 *   **`sleep(void *chan, struct spinlock *lk)`**:
     这个函数让当前进程在某个“通道” (`chan`) 上休眠。`chan` 可以是任何用作唯一标识符的内核地址，对于睡眠锁来说，就是锁自身的地址 `lk`。
 
-    [`sleep`](../xv6-riscv/user/user.h) 的一个至关重要的特性是它的**原子性**。它必须原子地完成以下两件事：
+    [`sleep`](/source/xv6-riscv/user/user.h.md) 的一个至关重要的特性是它的**原子性**。它必须原子地完成以下两件事：
     1.  释放传入的自旋锁 `lk`。
     2.  将当前进程的状态设置为 `SLEEPING`。
 
-    这个原子性操作避免了“丢失的唤醒” (Lost Wakeup) 问题。如果这两步不是原子的，可能会发生以下情况：一个进程检查完 `lk->locked` (为 1)，正准备调用 [`sleep`](../xv6-riscv/user/user.h)，但在调用前释放了内部自旋锁。此时，另一个进程恰好 [`release`](../xv6-riscv/kernel/defs.h) 了睡眠锁并调用了 [`wakeup`](../xv6-riscv/kernel/defs.h)。这个 [`wakeup`](../xv6-riscv/kernel/defs.h) 信号就丢失了，因为第一个进程还没来得及睡着。之后，第一个进程再进入休眠，就可能永远也醒不过来。[`sleep`](../xv6-riscv/user/user.h) 函数通过在内部持有进程自身的锁来保证操作的原子性。
+    这个原子性操作避免了“丢失的唤醒” (Lost Wakeup) 问题。如果这两步不是原子的，可能会发生以下情况：一个进程检查完 `lk->locked` (为 1)，正准备调用 [`sleep`](/source/xv6-riscv/user/user.h.md)，但在调用前释放了内部自旋锁。此时，另一个进程恰好 [`release`](/source/xv6-riscv/kernel/defs.h.md) 了睡眠锁并调用了 [`wakeup`](/source/xv6-riscv/kernel/defs.h.md)。这个 [`wakeup`](/source/xv6-riscv/kernel/defs.h.md) 信号就丢失了，因为第一个进程还没来得及睡着。之后，第一个进程再进入休眠，就可能永远也醒不过来。[`sleep`](/source/xv6-riscv/user/user.h.md) 函数通过在内部持有进程自身的锁来保证操作的原子性。
 
 *   **`wakeup(void *chan)`**:
     这个函数会遍历整个进程表，将所有正在 `chan` 通道上休眠的进程的状态从 `SLEEPING` 改为 `RUNNABLE`。这些进程将在下一次调度器运行时有机会再次尝试获取锁。
@@ -262,5 +262,5 @@ releasesleep(struct sleeplock *lk)
 
 **提示**:
 *   核心挑战在于如何实现原子的 `test-and-set` 以及高效的等待策略。
-*   研究 [`kernel/riscv.h`](source/xv6-riscv/kernel/riscv.h.md) 中的内联汇编，了解如何在 C 代码中使用 `amoswap`。
+*   研究 [`kernel/riscv.h`](/source/xv6-riscv/kernel/riscv.h.md) 中的内联汇编，了解如何在 C 代码中使用 `amoswap`。
 *   本实验的重点是锁的逻辑和原子性保证，初版可以先用 `yield()` 实现简单的等待。

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "node ../scripts/prepare-source-docs.js && node ../scripts/fix_dead_links.js && vitepress dev .",
-    "docs:build": "node ../scripts/prepare-source-docs.js && node ../scripts/fix_dead_links.js && vitepress build .",
+    "docs:build": "node ../scripts/prepare-source-docs.js && vitepress build .",
     "docs:preview": "vitepress preview d"
   },
   "keywords": [],
