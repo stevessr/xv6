@@ -16,8 +16,14 @@ export default defineConfig({
     },
     nav: [
       { text: "主页", link: "/" },
-      { text: "课程内容", link: "/course-introduction" },
-      { text: "xv6-riscv 源码", link: "/source/xv6-riscv/" },
+      {
+        text: "课程内容",
+        items: courseSidebarItems,
+      },
+      {
+        text: "xv6-riscv 源码",
+        items: sourceSidebarItems,
+      },
     ],
     sidebar: {
       "/source/": [
@@ -36,6 +42,10 @@ export default defineConfig({
     },
   },
   markdown: {
+    theme: {
+      light: "vitesse-light",
+      dark: "vitesse-dark",
+    },
     config(md) {
       md.use(MermaidMarkdown);
       md.use(footnote);

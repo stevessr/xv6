@@ -37,8 +37,7 @@ CPU 如何与设备硬件通信？一种主流的方法是**内存映射 I/O**�
 在 xv6 中，所有硬件设备的物理地址都在 [`kernel/memlayout.h`](/source/xv6-riscv/kernel/memlayout.h.md) 中定义。例如，UART (串口) 设备的基地址是 `0x10000000L`。
 
 
-```
-c
+```c
 // From kernel/memlayout.h
 #define UART0 0x10000000L
 
@@ -63,8 +62,7 @@ c
 [`uartinit()`](/source/xv6-riscv/kernel/uart.c.md) 会配置 UART 的波特率、数据位等参数，并最关键地，**开启接收中断**：
 
 
-```
-c
+```c
 // From kernel/uart.c
 void uartinit(void) {
   // 此处进行波特率、数据位等硬件配置
@@ -90,8 +88,7 @@ void uartinit(void) {
     *   **递交上层**：将读到的字符传递给上层控制台驱动的中断处理函数 [`consoleintr()`](/source/xv6-riscv/kernel/console.c.md)。
 
     
-```
-c
+```c
     // From kernel/uart.c
     void uartintr(void) {
       while(1){
@@ -109,8 +106,7 @@ c
 5.  **上层驱动处理 (console.c)**：[`consoleintr()`](/source/xv6-riscv/kernel/console.c.md) 实现了行缓冲逻辑。它将接收到的字符 `c` 存入一个环形缓冲区 `cons.buf`，并处理特殊字符。当用户输入换行符 `\n` 时，表示一行输入结束。
 
     
-```
-c
+```c
     // From kernel/console.c
     void consoleintr(int c) {
       // 处理退格、删除行等特殊控制字符
@@ -134,8 +130,7 @@ c
 2.  **等待数据**：[`consoleread()`](/source/xv6-riscv/kernel/console.c.md) 检查环形缓冲区。如果读指针 `cons.r` 和写指针 `cons.w` 相等，说明没有完整的行可供读取。此时，进程会调用 `sleep(&cons.r, &cons.lock)`，进入休眠状态并释放锁，等待被唤醒。
 
     
-```
-c
+```c
     // From kernel/console.c
     int consoleread(...) {
       acquire(&cons.lock);
@@ -171,8 +166,7 @@ RISC-V 架构为每个 CPU 核心配备了时钟硬件（在 xv6 的 QEMU 环境
 时钟中断的处理流程与设备中断类似，最终会调用到 [`clockintr()`](/source/xv6-riscv/kernel/trap.c.md)。
 
 
-```
-c
+```c
 // From kernel/trap.c
 void clockintr()
 {
@@ -193,8 +187,7 @@ void clockintr()
 时钟中断是实现**抢占式调度**的关键。当一个进程在用户空间执行时，如果发生时钟中断，[`usertrap`](/source/xv6-riscv/kernel/trap.c.md) 中的 [`devintr()`](/source/xv6-riscv/kernel/trap.c.md) 会检测到它并返回 2。
 
 
-```
-c
+```c
 // From kernel/trap.c
 void usertrap(void) {
   int which_dev = 0;

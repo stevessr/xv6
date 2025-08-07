@@ -2,8 +2,7 @@
 
 在系统调用中典型使用日志的方式如下：
 
-```
-c
+```c
   begin_op();
   ...
   bp = bread(...);
@@ -25,8 +24,7 @@ c
 
 [`filewrite`](/source/xv6-riscv/kernel/defs.h.md) 中出现了一个使用日志的例子。事务看起来像这样：
 
-```
-c
+```c
       begin_op();
       ilock(f->ip);
       r = writei(f->ip, ...);

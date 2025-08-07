@@ -116,8 +116,7 @@ uservec:
 ### 5.1 代码分析: [`kernel/trap.c`](/source/xv6-riscv/kernel/trap.c.md)
 
 
-```
-c
+```c
 void
 usertrap(void)
 {
@@ -172,8 +171,7 @@ usertrap(void)
 `syscall()` 的实现非常直观：
 
 
-```
-c
+```c
 void
 syscall(void)
 {

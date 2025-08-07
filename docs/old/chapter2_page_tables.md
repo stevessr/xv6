@@ -64,8 +64,7 @@ xv6 运行在 RISC-V 的 Sv39 分页模式下。这意味着在 64 位的虚拟�
 每个 PTE 是一个 64 位的值，其结构定义在 [`kernel/riscv.h`](/source/xv6-riscv/kernel/riscv.h.md)。
 
 
-```
-c
+```c
 // 定义在 kernel/riscv.h
 #define PTE_V (1L << 0) // Valid
 #define PTE_R (1L << 1) // Readable
@@ -125,8 +124,7 @@ xv6 为内核和每个进程都维护了独立的页表。其地址空间布局�
 [[`walk`](/source/xv6-riscv/kernel/vm.c.md)](source/xv6-riscv/kernel/vm.c.md) 函数是页表操作的核心，它模拟硬件的地址翻译过程，在三级页表中查找一个给定虚拟地址 `va` 对应的最底层 PTE 的地址。
 
 
-```
-c
+```c
 // kernel/vm.c
 pte_t *
 walk(pagetable_t pagetable, uint64 va, int alloc)
@@ -169,8 +167,7 @@ walk(pagetable_t pagetable, uint64 va, int alloc)
 [[`mappages`](/source/xv6-riscv/kernel/defs.h.md)](source/xv6-riscv/kernel/vm.c.md) 函数用于在页表中建立一段虚拟地址到物理地址的映射。
 
 
-```
-c
+```c
 // kernel/vm.c
 int
 mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)
@@ -213,8 +210,7 @@ mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa, int perm)
 系统启动时，[[`kvmmake`](/source/xv6-riscv/kernel/vm.c.md)](source/xv6-riscv/kernel/vm.c.md) 函数负责创建内核页表。
 
 
-```
-c
+```c
 // kernel/vm.c
 pagetable_t
 kvmmake(void)

@@ -23,8 +23,7 @@
 
 以下程序片段（构成程序[`cat`](/source/xv6-riscv/user/cat.c.md)的精髓）将其标准输入的数据复制到其标准输出。如果发生错误，它会向标准错误写入一条消息。
 
-```
-c
+```c
 char buf[512];
 int n;
 for(;;){
@@ -56,8 +55,7 @@ for(;;){
 这种行为允许shell通过forking，在子进程中重新打开选定的文件描述符，然后调用[`exec`](/source/xv6-riscv/user/user.h.md)来运行新程序，从而实现**I/O重定向**。
 这是一个shell为命令`cat < input.txt`运行的代码的简化版本：
 
-```
-c
+```c
 char *argv[2];
 argv[0] = "cat";
 argv[1] = 0;
@@ -91,8 +89,7 @@ shell可以在调用`forkexec`之前修改自己的I/O设置（然后撤消这�
 尽管[`fork`](/source/xv6-riscv/user/user.h.md)复制了文件描述符表，但每个底层的文件偏移量在父子进程之间是共享的。
 考虑这个例子：
 
-```
-c
+```c
 if(fork() == 0) {
   write(1, "hello ", 6);
   exit(0);
@@ -111,8 +108,7 @@ if(fork() == 0) {
 两个文件描述符共享一个偏移量，就像[`fork`](/source/xv6-riscv/user/user.h.md)复制的文件描述符一样。
 这是另一种将`hello world`写入文件的方式：
 
-```
-c
+```c
 fd = dup(1);
 write(1, "hello ", 6);
 write(fd, "world\n", 6);

@@ -5,8 +5,7 @@
 作为一个可能出错的例子，在 `push` 的这段代码中，如果编译器或 CPU 将对应于第 (2) 行的存储移动到第 (3) 行的 [`release`](/source/xv6-riscv/kernel/defs.h.md) 之后，那将是一场灾难：
 
 
-```
-c
+```c
       l = malloc(sizeof *l);
       l->data = data;
       acquire(&listlock);

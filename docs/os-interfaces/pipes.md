@@ -6,8 +6,7 @@
 
 以下示例代码运行程序[`wc`](/source/xv6-riscv/user/wc.c.md)，其标准输入连接到管道的读取端。
 
-```
-c
+```c
 int p[2];
 char *argv[2];
 argv[0] = "wc";

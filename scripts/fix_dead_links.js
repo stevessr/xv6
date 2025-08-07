@@ -49,30 +49,42 @@ function processFile(filePath) {
         return match;
     }
 
-    // Strip any existing .md extensions, which seem to be the source of the problem.
+    // Handle source code links, which are generated with a .md extension
+    if (linkPath.startsWith('/source/xv6-riscv/')) {
+        let finalLink = linkPath;
+        if (!finalLink.endsWith('.md')) {
+            finalLink += '.md';
+        }
+        finalLink += fragment;
+
+        const newLink = `[${text}](${finalLink})`;
+        if (match !== newLink) {
+            // console.log(`Fixing source link in ${path.relative(docsDir, filePath)}: "${url}" -> "${finalLink}"`);
+        }
+        return newLink;
+    }
+    
+    // Strip any existing .md extensions for other links
     let cleanLinkPath = linkPath.replace(/(\.md)+$/, '');
 
     let absoluteLinkPath;
-    // In vitepress, links starting with / are relative to the docs root.
     if (cleanLinkPath.startsWith('/')) {
         absoluteLinkPath = path.join(docsDir, cleanLinkPath);
     } else {
-        // Link is relative to the current file
         const currentDir = path.dirname(filePath);
         absoluteLinkPath = path.resolve(currentDir, cleanLinkPath);
     }
 
-    // Make the link a root-relative path for vitepress
     let vitepressPath = '/' + path.relative(docsDir, absoluteLinkPath);
-    vitepressPath = vitepressPath.replace(/\\/g, '/'); // for Windows paths
+    vitepressPath = vitepressPath.replace(/\\/g, '/');
 
-    // Now, ensure it ends with .md
+    // Ensure it ends with .md for non-source links
     let finalLink = `${vitepressPath}.md${fragment}`;
     
     const newLink = `[${text}](${finalLink})`;
 
     if (match !== newLink) {
-        console.log(`Fixing link in ${path.relative(docsDir, filePath)}: "${url}" -> "${finalLink}"`);
+        // console.log(`Fixing link in ${path.relative(docsDir, filePath)}: "${url}" -> "${finalLink}"`);
     }
     
     return newLink;

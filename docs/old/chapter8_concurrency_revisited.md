@@ -22,8 +22,7 @@
 xv6 的块缓存（[`kernel/bio.c`](/source/xv6-riscv/kernel/bio.c.md)）是一个很好的例子。它维护了一个磁盘块的内存缓存，供文件系统代码使用。`bcache` 结构体包含一个全局锁 `bcache.lock` 和一个由 `NBUF` 个缓冲区组成的数组 `bcache.buf`。
 
 
-```
-c
+```c
 // kernel/bio.c
 
 struct {
@@ -44,8 +43,7 @@ struct {
 然而，仅仅一个全局锁是不够的。如果两个进程同时获得了同一个缓冲区的引用，并试图对其进行读写，就会产生数据竞争。因此，每个 `buf` 结构体都包含一个自己的 `sleeplock`，用于保护该缓冲区的内容。
 
 
-```
-c
+```c
 // kernel/buf.h
 
 struct buf {
@@ -89,8 +87,7 @@ xv6 在多个地方使用了引用计数。例如，`struct inode`（[`kernel/fs
 [`kernel/file.c`](/source/xv6-riscv/kernel/file.c.md) 中的 [`filealloc`](/source/xv6-riscv/kernel/file.c.md)、[`filedup`](/source/xv6-riscv/kernel/file.c.md) 和 [`fileclose`](/source/xv6-riscv/kernel/defs.h.md) 函数共同管理着 `struct file` 的引用计数。
 
 
-```
-c
+```c
 // kernel/file.c
 
 // Increment ref count for file f.

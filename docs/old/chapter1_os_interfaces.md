@@ -17,8 +17,7 @@
 整个流程的核心在 [[`main`](/source/xv6-riscv/user/zombie.c.md)](source/xv6-riscv/user/sh.c.md) 函数和 [[`runcmd`](/source/xv6-riscv/user/sh.c.md)](source/xv6-riscv/user/sh.c.md) 函数中。[[`main`](/source/xv6-riscv/user/zombie.c.md)](source/xv6-riscv/user/sh.c.md) 函数循环调用 [[`getcmd`](/source/xv6-riscv/user/sh.c.md)](source/xv6-riscv/user/sh.c.md) 来获取用户输入，然后调用 [`fork`](/source/xv6-riscv/user/user.h.md) 创建一个子进程，子进程再调用 [[`runcmd`](/source/xv6-riscv/user/sh.c.md)](source/xv6-riscv/user/sh.c.md) 来解析并执行命令。
 
 
-```
-c
+```c
 // user/sh.c: main 函数的核心循环
 while(getcmd(buf, sizeof(buf)) >= 0){
   if(buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' '){
@@ -96,8 +95,7 @@ Shell 的一个强大功能是 I/O 重定向，例如 `echo hello > output.txt`�
     3.  之后调用 [`exec`](/source/xv6-riscv/user/user.h.md) 执行 `echo` 命令。此时，`echo` 对标准输出的所有写入都会被重定向到 `output.txt` 文件中。
 
 
-```
-c
+```c
 // user/sh.c: runcmd 中处理重定向的部分
 case REDIR:
   rcmd = (struct redircmd*)cmd;

@@ -16,8 +16,7 @@
 让我们以内核内存分配器 [`kernel/kalloc.c`](/source/xv6-riscv/kernel/kalloc.c.md) 为例。它维护一个空闲内存页的链表 `kmem.freelist`。`kalloc()` 函数从链表头部取下一个空闲页并返回。
 
 
-```
-c
+```c
 // kernel/kalloc.c
 void *
 kalloc(void)
@@ -67,8 +66,7 @@ xv6 提供了两种主要的内核锁：自旋锁和睡眠锁。
 
 **数据结构**:
 
-```
-c
+```c
 // kernel/spinlock.h
 struct spinlock {
   uint locked;       // 0 表示未锁定, 1 表示锁定
@@ -83,8 +81,7 @@ struct spinlock {
 [`acquire()`](/source/xv6-riscv/kernel/spinlock.c.md) 函数的核心是原子地测试并设置 `lk->locked` 字段。
 
 
-```
-c
+```c
 // kernel/spinlock.c
 void
 acquire(struct spinlock *lk)
@@ -114,8 +111,7 @@ acquire(struct spinlock *lk)
 [`release()`](/source/xv6-riscv/kernel/spinlock.c.md) 的过程相对简单。
 
 
-```
-c
+```c
 // kernel/spinlock.c
 void
 release(struct spinlock *lk)
@@ -157,8 +153,7 @@ release(struct spinlock *lk)
 
 **数据结构**:
 
-```
-c
+```c
 // kernel/sleeplock.h
 struct sleeplock {
   uint locked;            // 0 表示未锁定, 1 表示锁定
@@ -176,8 +171,7 @@ struct sleeplock {
 [`acquiresleep()`](/source/xv6-riscv/kernel/sleeplock.c.md) 的逻辑体现了“检查-休眠-再检查”的模式。
 
 
-```
-c
+```c
 // kernel/sleeplock.c
 void
 acquiresleep(struct sleeplock *lk)
@@ -200,8 +194,7 @@ acquiresleep(struct sleeplock *lk)
 [`releasesleep()`](/source/xv6-riscv/kernel/sleeplock.c.md) 的职责是释放锁并唤醒其他等待者。
 
 
-```
-c
+```c
 // kernel/sleeplock.c
 void
 releasesleep(struct sleeplock *lk)

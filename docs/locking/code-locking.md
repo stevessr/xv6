@@ -3,8 +3,7 @@
 Xv6 有两种类型的锁：自旋锁和睡眠锁。我们从自旋锁开始。Xv6 将自旋锁表示为 `struct spinlock`。结构中重要的字段是 `locked`，这是一个字，当锁可用时为零，当锁被持有时为非零。逻辑上，xv6 应该通过执行类似以下代码来获取锁：
 
 
-```
-c
+```c
 void
 acquire(struct spinlock *lk) // 无法工作！
 {

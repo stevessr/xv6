@@ -26,8 +26,7 @@
 在 xv6 中，每个进程在其生命周期内都会经历一系列状态。这些状态定义在 [`kernel/proc.h`](/source/xv6-riscv/kernel/proc.h.md) 的 `enum procstate` 中。
 
 
-```
-c
+```c
 // kernel/proc.h
 
 enum procstate {
@@ -78,8 +77,7 @@ graph TD
 一个线程的内核上下文被保存在 `struct context` 结构体中（定义于 [`kernel/proc.h`](/source/xv6-riscv/kernel/proc.h.md)）。它只包含**被调用者保存 (callee-saved)** 的寄存器。这是因为调用 [`swtch`](/source/xv6-riscv/kernel/defs.h.md) 的 C 代码会负责保存**调用者保存 (caller-saved)** 的寄存器。
 
 
-```
-c
+```c
 // kernel/proc.h
 
 struct context {
@@ -145,8 +143,7 @@ xv6 的调度器非常简单，采用 **轮询 (Round-Robin)** 策略。每个 C
 [`scheduler`](/source/xv6-riscv/kernel/proc.c.md) 的核心逻辑如下：
 
 
-```
-c
+```c
 // kernel/proc.c
 
 void

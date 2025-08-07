@@ -41,8 +41,7 @@
 缓冲区缓存由一个全局的 `bcache` 结构管理，它包含一个 `buf` 数组和一个双向循环链表 `head`。
 
 
-```
-c
+```c
 // kernel/bio.c
 
 struct {
