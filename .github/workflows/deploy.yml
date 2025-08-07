@@ -41,7 +41,7 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'docs/pnpm-lock.yaml'
       - name: Run build
-        run: pnpm install && cd docs && pnpm install && pnpm docs:build && cd ..
+        run: pnpm install && cd docs && pnpm install --no-frozen-lockfile && pnpm docs:build && cd ..
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
