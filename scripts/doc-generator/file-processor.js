@@ -4,6 +4,27 @@ const { sourceDir, targetDir } = require('./config');
 const { getLanguage } = require('./function-extractor');
 const { escapeHtml, renderMarkdown } = require('./utils');
 
+/**
+ * Transforms C-style comments into VitePress tip containers.
+ * @param {string} content - The source code.
+ * @returns {string} - The transformed code.
+ */
+function transformComments(content) {
+    // Process multi-line comments: /* ... */
+    content = content.replace(/\/\*([\s\S]*?)\*\//g, (match, commentBody) => {
+        const tipContent = commentBody.replace(/^\s*\**/gm, '').trim();
+        return `:::tip\n${tipContent}\n:::`;
+    });
+
+    // Process single-line comments: // ...
+    content = content.replace(/\/\/(.*)/g, (match, commentBody) => {
+        return `:::tip\n${commentBody.trim()}\n:::`;
+    });
+
+    return content;
+}
+
+
 function createTransformer(functionDefinitions, currentFilePath) {
     let lineNum = 0;
 
@@ -51,7 +72,7 @@ function createTransformer(functionDefinitions, currentFilePath) {
                 // that might have been mistakenly added to functionDefinitions.
                 if (node.properties.style) {
                     const defs = functionDefinitions.get(tokenContent);
-                    const def = defs[0]; 
+                    const def = defs[0];
                     
                     if (def.filePath !== currentFilePath) {
                         node.properties.class = (node.properties.class || '') + ' function-call';
@@ -83,8 +104,12 @@ async function processFile(filePath, highlighter, functionDefinitions) {
         fs.mkdirSync(targetFileDir, { recursive: true });
     }
 
-    const content = fs.readFileSync(filePath, 'utf-8');
+    let content = fs.readFileSync(filePath, 'utf-8');
     const filename = path.basename(filePath);
+
+    if (language === 'c' || language === 'asm') {
+        content = transformComments(content);
+    }
 
     const transformer = createTransformer(functionDefinitions, filePath);
     
