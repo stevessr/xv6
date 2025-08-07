@@ -1,94 +1,60 @@
-function createDebugOverlay() {
-    let overlay = document.getElementById('debug-overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = 'debug-overlay';
-        document.body.appendChild(overlay);
+
+export function initTooltips() {
+    let tooltip = document.getElementById('floating-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'floating-tooltip';
+        document.body.appendChild(tooltip);
     }
-    return overlay;
-}
 
-function logToOverlay(message) {
-    const overlay = createDebugOverlay();
-    const line = document.createElement('p');
-    line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-    overlay.appendChild(line);
-    overlay.scrollTop = overlay.scrollHeight; // Auto-scroll to bottom
-    console.log(message);
-}
+    let currentTarget = null;
+    let hideTimeout;
 
-function updateFloatingComments() {
-    logToOverlay('Updating...');
-    const containers = document.querySelectorAll('div[class*="language-"]');
-    logToOverlay(`Found ${containers.length} code containers.`);
-    
-    containers.forEach(container => {
-        let floatingContainer = container.querySelector('.floating-comment-container');
-        if (!floatingContainer) {
-            floatingContainer = document.createElement('div');
-            floatingContainer.className = 'floating-comment-container';
-            container.appendChild(floatingContainer);
-        }
-        floatingContainer.innerHTML = '';
-
-        const codeLines = container.querySelectorAll('.line');
+    const showTooltip = (target) => {
+        clearTimeout(hideTimeout);
+        if (currentTarget === target) return;
         
-        codeLines.forEach((line, index) => {
-            const commentMarkers = line.querySelectorAll('.floating-comment-marker');
-            if (commentMarkers.length > 0) {
-                 logToOverlay(`Found ${commentMarkers.length} markers on line ${index + 1}`);
-            }
+        currentTarget = target;
+        const comment = target.dataset.comment;
+        
+        if (comment) {
+            tooltip.innerHTML = comment;
+            tooltip.classList.add('active');
+
+            const rect = target.getBoundingClientRect();
             
-            const commentsForThisLine = [];
+            // Position tooltip
+            tooltip.style.left = `${rect.left}px`;
+            tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
+        }
+    };
 
-            commentMarkers.forEach(marker => {
-                const commentText = marker.dataset.comment;
-                if (!commentText) return;
+    const hideTooltip = () => {
+        hideTimeout = setTimeout(() => {
+            tooltip.classList.remove('active');
+            currentTarget = null;
+        }, 100);
+    };
 
-                const floatingComment = document.createElement('div');
-                floatingComment.className = 'floating-comment';
-                floatingComment.textContent = commentText;
-                
-                const lineTop = line.offsetTop;
-                floatingComment.style.top = `${lineTop}px`;
-
-                floatingContainer.appendChild(floatingComment);
-                commentsForThisLine.push(floatingComment);
-            });
-
-            if (commentsForThisLine.length > 0) {
-                line.addEventListener('mouseover', () => {
-                    commentsForThisLine.forEach(comment => comment.classList.add('visible'));
-                });
-                line.addEventListener('mouseout', () => {
-                    commentsForThisLine.forEach(comment => comment.classList.remove('visible'));
-                });
-            }
-        });
+    document.body.addEventListener('mouseover', (e) => {
+        const target = e.target.closest('.with-tooltip');
+        if (target) {
+            showTooltip(target);
+        }
     });
-}
 
-if (typeof window !== 'undefined') {
-    window.addEventListener('load', () => {
-        logToOverlay('Script loaded. Window loaded.');
-        updateFloatingComments();
-        
-        const observer = new MutationObserver((mutationsList) => {
-            for(let mutation of mutationsList) {
-                if (mutation.type === 'childList' || mutation.type === 'attributes') {
-                    // Reduce frequency of updates by debouncing
-                    clearTimeout(window._floatingCommentsTimeout);
-                    window._floatingCommentsTimeout = setTimeout(updateFloatingComments, 100);
-                    break;
-                }
-            }
-        });
+    document.body.addEventListener('mouseout', (e) => {
+        const target = e.target.closest('.with-tooltip');
+        if (target) {
+            hideTooltip();
+        }
+    });
 
-        observer.observe(document.body, { 
-            childList: true, 
-            subtree: true,
-            attributes: true,
-            attributeFilter: ['class']
-        });
+    tooltip.addEventListener('mouseover', () => {
+        clearTimeout(hideTimeout);
+    });
+
+    tooltip.addEventListener('mouseout', () => {
+        hideTooltip();
     });
 }

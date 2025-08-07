@@ -1,5 +1,13 @@
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
-import './floating-comments.js'
+import { onMounted } from 'vue'
+import { initTooltips } from './floating-comments.js'
 
-export default DefaultTheme
+export default {
+  ...DefaultTheme,
+  setup() {
+    onMounted(() => {
+      initTooltips()
+    })
+  }
+}

@@ -45,36 +45,28 @@ function extractFunctionDefinitions(filePath, content) {
         return;
     }
 
+    const functionRegex = /^(?:static\s|inline\s)?([\w\s\*]+)\s+(\w+)\s*\(([^)]*)\)\s*(?:\{?|(?:\n\{))/;
     for (let i = 0; i < lines.length; i++) {
-        let line = lines[i];
-        let definitionLineIndex = i;
+        const potentialMatchLines = lines.slice(i, i + 5).join('\n');
+        const match = potentialMatchLines.match(functionRegex);
 
-        if (i > 0 &&
-            lines[i - 1].match(/^\s*(?:static\s|inline\s)?(?:[\w\s\*]+)\s*$/) &&
-            line.match(/^\s*\w+\s*\(/) &&
-            !lines[i - 1].includes(';') && !line.includes(';')) {
+        if (match && !potentialMatchLines.split('\n')[0].includes(';')) {
+            const functionName = match[2];
             
-            line = lines[i - 1].trim() + " " + line.trim();
-            definitionLineIndex = i - 1;
-        }
-
-        const definitionRegex = /^(?:static\s|inline\s)*(?:[\w\s\*]+)\s+(\w+)\s*\([^)]*\)\s*/;
-        const match = line.match(definitionRegex);
-
-        let bodyStartIndex = -1;
-        if(match) {
-            if (lines[definitionLineIndex].includes('{')) {
-                bodyStartIndex = definitionLineIndex;
-            } else if (definitionLineIndex + 1 < lines.length && lines[definitionLineIndex + 1].trim() === '{') {
-                bodyStartIndex = definitionLineIndex + 1;
+            let bodyStartIndex = -1;
+            // Search for the opening brace within the matched lines + a little more
+            for (let j = 0; j < 5 && (i + j) < lines.length; j++) {
+                if (lines[i + j].includes('{')) {
+                    bodyStartIndex = i + j;
+                    break;
+                }
             }
-        }
+            if (bodyStartIndex === -1) continue;
 
-        if (match && bodyStartIndex !== -1 && !line.includes(';')) {
-            const functionName = match[1];
             const endLineIndex = findMatchingBrace(lines, bodyStartIndex);
-            
+
             if (endLineIndex !== -1) {
+                const definitionLineIndex = i;
                 const docCommentLines = [];
                 let docCommentStartLine = -1;
                 

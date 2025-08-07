@@ -8,7 +8,7 @@ const sidebarGenerator = require('./sidebar');
 async function traverseDir(dir, highlighter, functionDefinitions) {
     try {
         const entries = fs.readdirSync(dir, { withFileTypes: true });
-        await Promise.all(entries.map(async (entry) => {
+        for (const entry of entries) {
             const fullPath = path.join(dir, entry.name);
             if (entry.isDirectory()) {
                 if (entry.name !== '.git') {
@@ -17,10 +17,10 @@ async function traverseDir(dir, highlighter, functionDefinitions) {
             } else if (entry.isFile()) {
                 const ext = path.extname(entry.name);
                 if (allowedExtensions.includes(ext) || allowedFilenames.includes(entry.name)) {
-                    processFile(fullPath, highlighter, functionDefinitions);
+                    await processFile(fullPath, highlighter, functionDefinitions);
                 }
             }
-        }));
+        }
     } catch (error) {
         console.error(`Error reading directory ${dir}: ${error.message}`);
         throw error;

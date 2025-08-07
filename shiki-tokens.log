@@ -1,0 +1,84 @@
+Starting source documentation generation...
+Building function definition map...
+✅ Found 360 function definitions.
+Source directory: /home/steve/xv6/xv6-riscv
+Target directory: /home/steve/xv6/docs/source/xv6-riscv
+Cleaning up target directory...
+✅ Source sidebar generated at /home/steve/xv6/docs/.vitepress/sidebar-source.js
+✅ index.md with full project tree generated.
+[+] Processing: Makefile
+[+] Processing: kernel/bio.c
+[+] Processing: kernel/buf.h
+[+] Processing: kernel/console.c
+[+] Processing: kernel/defs.h
+[+] Processing: kernel/elf.h
+[+] Processing: kernel/entry.S
+[+] Processing: kernel/exec.c
+[+] Processing: kernel/fcntl.h
+[+] Processing: kernel/file.c
+[+] Processing: kernel/file.h
+[+] Processing: kernel/fs.c
+[+] Processing: kernel/fs.h
+[+] Processing: kernel/kalloc.c
+[+] Processing: kernel/kernel.ld
+[+] Processing: kernel/kernelvec.S
+[+] Processing: kernel/log.c
+[+] Processing: kernel/main.c
+[+] Processing: kernel/memlayout.h
+[+] Processing: kernel/param.h
+[+] Processing: kernel/pipe.c
+[+] Processing: kernel/plic.c
+[+] Processing: kernel/power.c
+[+] Processing: kernel/printf.c
+[+] Processing: kernel/proc.c
+[+] Processing: kernel/proc.h
+[+] Processing: kernel/riscv.h
+[+] Processing: kernel/sleeplock.c
+[+] Processing: kernel/sleeplock.h
+[+] Processing: kernel/spinlock.c
+[+] Processing: kernel/spinlock.h
+[+] Processing: kernel/start.c
+[+] Processing: kernel/stat.h
+[+] Processing: kernel/string.c
+[+] Processing: kernel/swtch.S
+[+] Processing: kernel/syscall.c
+[+] Processing: kernel/syscall.h
+[+] Processing: kernel/sysfile.c
+[+] Processing: kernel/sysproc.c
+[+] Processing: kernel/trampoline.S
+[+] Processing: kernel/trap.c
+[+] Processing: kernel/types.h
+[+] Processing: kernel/uart.c
+[+] Processing: kernel/version.c
+[+] Processing: kernel/virtio.h
+[+] Processing: kernel/virtio_disk.c
+[+] Processing: kernel/vm.c
+[+] Processing: mkfs/mkfs.c
+[+] Processing: user/cat.c
+[+] Processing: user/clear.c
+[+] Processing: user/echo.c
+[+] Processing: user/forktest.c
+[+] Processing: user/grep.c
+[+] Processing: user/grind.c
+[+] Processing: user/init.c
+[+] Processing: user/initcode.S
+[+] Processing: user/kill.c
+[+] Processing: user/ln.c
+[+] Processing: user/ls.c
+[+] Processing: user/mkdir.c
+[+] Processing: user/printf.c
+[+] Processing: user/reboot.c
+[+] Processing: user/rm.c
+[+] Processing: user/sh.c
+[+] Processing: user/shutdown.c
+[+] Processing: user/sleep.c
+[+] Processing: user/stressfs.c
+[+] Processing: user/ulib.c
+[+] Processing: user/umalloc.c
+[+] Processing: user/user.h
+[+] Processing: user/user.ld
+[+] Processing: user/usertests.c
+[+] Processing: user/usys.S
+[+] Processing: user/wc.c
+[+] Processing: user/zombie.c
+✅ Source documentation generation complete.

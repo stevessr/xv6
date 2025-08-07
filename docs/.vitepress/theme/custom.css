@@ -7,9 +7,6 @@
   It forces the background and text colors to the correct values when the dark theme is active.
 */
 
-.floating-comment-marker {
-  display: none;
-}
 
 html.dark .shiki,
 html.dark .shiki span {
@@ -17,34 +14,22 @@ html.dark .shiki span {
   color: var(--shiki-dark, #dbd7ca) !important;
 }
 
-.floating-comment-container {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 300px;
-  padding-left: 20px;
-  z-index: 10;
+.custom-comment-tip {
+  padding: 0.1rem 1.5rem;
+  border-radius: 8px;
+  border-left: 5px solid #42b883;
+  background-color: #f3f5f7;
+  margin: 1rem 0;
+  color: #606266;
 }
 
-.floating-comment {
-  position: absolute;
-  background-color: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  padding: 8px 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  white-space: pre-wrap;
-  font-family: var(--vp-font-family-base);
-  font-size: 14px;
-  line-height: 1.6;
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
+html.dark .custom-comment-tip {
+    background-color: #2e2e2e;
+    color: #c7c7c7;
+    border-left-color: #33a373;
 }
- 
-.floating-comment.visible {
-  opacity: 1;
-}
+
+
 
 div[class*="language-"] {
   position: relative;
@@ -54,23 +39,30 @@ div[class*="language-"] {
     position: relative;
 }
 
-#debug-overlay {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    padding: 10px;
-    font-family: monospace;
-    font-size: 12px;
-    z-index: 1000;
+
+#floating-tooltip {
+    position: absolute;
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-border);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1001;
+    max-width: 400px;
+    display: none;
+    pointer-events: none;
+    transition: opacity 0.2s;
 }
 
-#debug-overlay p {
-    margin: 0;
-    padding: 2px 0;
-    border-bottom: 1px solid #444;
+#floating-tooltip.active {
+    display: block;
+    pointer-events: all;
+    opacity: 1;
 }
+
+
+.function-call {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
