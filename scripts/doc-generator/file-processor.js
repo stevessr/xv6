@@ -5,24 +5,41 @@ const { getLanguage } = require('./function-extractor');
 const { escapeHtml, renderMarkdown } = require('./utils');
 
 function createTransformer(functionDefinitions, currentFilePath) {
+    let lineNum = 0;
+
     return {
         name: 'xv6-docs-transformer',
-        preprocess(code) {
-            let lineCounter = 0;
-            const lines = code.split('\n');
-            const newLines = [];
+        line(node) {
+            lineNum++; // 1-based line number
 
-            for (const line of lines) {
-                lineCounter++;
-                for (const [funcName, defs] of functionDefinitions.entries()) {
-                    const def = defs.find(d => d.filePath === currentFilePath && d.startLine === lineCounter);
-                    if (def) {
-                        newLines.push(`<div id="${def.anchor}"></div>`);
-                    }
+            let hasDocComment = false;
+
+            for (const [, defs] of functionDefinitions.entries()) {
+                const anchorDef = defs.find(d => d.filePath === currentFilePath && d.startLine === lineNum);
+                if (anchorDef) {
+                    node.properties.id = anchorDef.anchor;
                 }
-                newLines.push(line);
+
+                const commentDef = defs.find(d => d.filePath === currentFilePath && d.docCommentStartLine === lineNum);
+                if (commentDef && commentDef.docComment) {
+                    hasDocComment = true;
+                    const renderedComment = renderMarkdown(commentDef.docComment);
+                    const finalComment = escapeHtml(renderedComment);
+                    node.properties.class = `${node.properties.class || ''} with-tooltip`.trim();
+                    node.properties['data-comment'] = finalComment;
+                }
             }
-            return newLines.join('\n');
+
+            if (hasDocComment) {
+                // Remove comment tokens from this line, so they only appear in the tooltip
+                node.children = node.children.filter(child => {
+                    if (child.type === 'element' && child.tagName === 'span') {
+                        // A token is a comment if shiki gave it the 'comment' class.
+                        return !child.properties.class?.includes('comment');
+                    }
+                    return true;
+                });
+            }
         },
         span(node) {
             const tokenContent = node.children[0]?.value?.trim();
@@ -39,7 +56,7 @@ function createTransformer(functionDefinitions, currentFilePath) {
                     if (def.filePath !== currentFilePath) {
                         node.properties.class = (node.properties.class || '') + ' function-call';
                         node.properties['data-function-name'] = tokenContent;
-                        node.properties.href = `${def.file}.md#${def.anchor}`;
+                        node.properties.href = `${def.file}#${def.anchor}`;
                         node.tagName = 'a';
                     }
                 }
@@ -51,35 +68,6 @@ function createTransformer(functionDefinitions, currentFilePath) {
 
             return node;
         },
-        postprocess(html) {
-            const lines = html.split('\n');
-            const newLines = [];
-            let lineNum = 1;
-            
-            for (const line of lines) {
-                if (line.includes('class="line"')) {
-                    let modifiedLine = line;
-                    let docCommentContent = '';
-
-                    for (const [funcName, defs] of functionDefinitions.entries()) {
-                        const def = defs.find(d => d.filePath === currentFilePath && d.docCommentStartLine === lineNum);
-                        if (def && def.docComment) {
-                           docCommentContent += def.docComment;
-                        }
-                    }
-
-                    if (docCommentContent) {
-                        const renderedComment = renderMarkdown(docCommentContent);
-                        modifiedLine = line.replace('class="line"', `class="line with-tooltip" data-comment="${escapeHtml(renderedComment)}"`);
-                    }
-                    newLines.push(modifiedLine);
-                    lineNum++;
-                } else {
-                    newLines.push(line);
-                }
-            }
-            return newLines.join('\n');
-        }
     };
 }
 

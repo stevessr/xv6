@@ -1,21 +1,33 @@
 const markdownit = require('markdown-it')();
 
 function escapeHtml(text) {
+    if (typeof text !== 'string') {
+        return '';
+    }
     return text
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+         .replace(/&/g, '&')
+         .replace(/</g, '<')
+         .replace(/>/g, '>')
+         .replace(/"/g, '"')
+         .replace(/'/g, '&#039;')
+         .replace(/\n/g, '&#10;');
 }
 
 function renderMarkdown(text) {
-    // Remove comment markers like `//`, `/*`, `*/`, and `*` from the beginning of each line
-    const cleanedText = text.split('\n').map(line => {
-        return line.trim().replace(/^(?:\/\/\s?|\/\*\*?\s?|\*\s?\/?|\*?\*\/)/, '');
-    }).join('\n');
+    const cleaned = text
+        .replace(/^\s*\/\*\*?/, '') 
+        .replace(/\s*\*\/$/, '')     
+        .split('\n')
+        .map(line => line.replace(/^\s*\*\s?/, ''))
+        .map(line => line.replace(/^\s*\/\/\s?/, ''))
+        .join('\n')
+        .trim();
     
-    return markdownit.render(cleanedText);
+    if (!cleaned) {
+        return '';
+    }
+    
+    return markdownit.render(cleaned);
 }
 
 module.exports = {
