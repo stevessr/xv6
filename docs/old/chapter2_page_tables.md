@@ -111,7 +111,7 @@ xv6 为内核和每个进程都维护了独立的页表。其地址空间布局�
 
 每个用户进程的地址空间从虚拟地址 0 开始，主要包含：
 *   **代码 (Text)**: 权限为 `R-X`。
-*   **数据 (Data)、BSS、堆 (Heap)**: 权限为 `RW-`。堆通过 `sbrk` 系统调用向上增长。
+*   **数据 (Data)、BSS、堆 (Heap)**: 权限为 `RW-`。堆通过 [`sbrk`](/source/xv6-riscv/user/usertests.c.md#sbrk-user-usertests-c) 系统调用向上增长。
 *   **用户栈 (Stack)**: 一个单独的页，权限为 `RW-`。其下方同样有一个保护页。
 *   **TRAPFRAME**: 位于 `TRAMPOLINE` 之下，用于保存从用户态陷入内核时进程的上下文（寄存器状态）。
 
@@ -248,12 +248,12 @@ kvmmake(void)
 
 物理内存页的分配和释放由 [`kernel/kalloc.c`](/source/xv6-riscv/kernel/kalloc.c.md) 中的代码负责。它维护一个空闲物理页的 **空闲链表 (freelist)**。
 *   **`kinit()`**: 在系统启动时被调用，将从内核末尾 (`end`) 到 `PHYSTOP` 之间的所有物理内存逐页加入空闲链表。
-*   **`kalloc()`**: 从空闲链表的头部取下一个空闲页并返回其地址。
+*   **[`kalloc()`](/source/xv6-riscv/kernel/kalloc.c.md#kalloc-kernel-kalloc-c)**: 从空闲链表的头部取下一个空闲页并返回其地址。
 *   **`kfree()`**: 将一个释放的物理页重新加入到空闲链表的头部。
 
 由于空闲页不存储任何有效数据，分配器巧妙地利用页本身的内存来存储指向下一个空闲页的指针 (`struct run`)，从而构成了链表。
 
-## 7. 实验要求：实现简化版 `sbrk`
+## 7. 实验要求：实现简化版 [`sbrk`](/source/xv6-riscv/user/usertests.c.md#sbrk-user-usertests-c)
 
 为了巩固本章所学知识，请完成以下实验任务：
 
@@ -268,4 +268,4 @@ kvmmake(void)
 
 **提示：**
 *   你可以使用 `sbrk(0)` 来获取当前的程序大小。
-*   本实验的目的是观察 `sbrk` 系统调用如何影响进程的内存大小，你无需修改内核代码，只需编写用户程序即可。
+*   本实验的目的是观察 [`sbrk`](/source/xv6-riscv/user/usertests.c.md#sbrk-user-usertests-c) 系统调用如何影响进程的内存大小，你无需修改内核代码，只需编写用户程序即可。

@@ -104,7 +104,7 @@ assembly
     *   通过将 `satp` 寄存器置零，暂时禁用 S-mode 下的虚拟地址转换。
     *   将所有中断和异常委托给 S-mode 处理。
     *   配置物理内存保护（PMP），允许 S-mode 访问所有物理内存。
-    *   调用 `timerinit()` 初始化时钟中断。
+    *   调用 [`timerinit()`](/source/xv6-riscv/kernel/start.c.md#timerinit-kernel-start-c) 初始化时钟中断。
     *   最后，执行 `mret` 指令。CPU 的特权级别降为监管者模式，并跳转到 `mepc` 中保存的地址——[`main`](/source/xv6-riscv/user/zombie.c.md) 函数。
 
 ### 阶段二：内核初始化 (main.c)
@@ -121,15 +121,15 @@ assembly
     *   **[`userinit()`](/source/xv6-riscv/kernel/proc.c.md): 创建第一个用户进程！**
     *   最后，设置 `started` 标志为 1，通知其他 CPU 初始化已完成。
 2.  **其他 CPU 等待**: 其他 hart 会在一个 `while` 循环中自旋，等待 `started` 标志变为 1。之后，它们会各自完成自己的 `kvminithart()` 和 `trapinithart()` 等初始化，然后和主 CPU 一样，进入调度器循环。
-3.  **进入调度器**: 所有 CPU 在完成初始化后，都会调用 `scheduler()`，开始永不返回的进程调度循环。
+3.  **进入调度器**: 所有 CPU 在完成初始化后，都会调用 [`scheduler()`](/source/xv6-riscv/kernel/proc.c.md#scheduler-kernel-proc-c)，开始永不返回的进程调度循环。
 
 ### 阶段三：创建第一个进程 (proc.c -> initcode.S -> init.c)
 
 这是整个启动流程的高潮部分。
 
 1.  **`userinit()` 创建进程**: [`main()`](/source/xv6-riscv/kernel/main.c.md) 调用的 [`userinit()`](/source/xv6-riscv/kernel/proc.c.md) 函数负责创建第一个进程，通常称为 `init` 进程。
-    *   调用 `allocproc()` 分配一个 `proc` 结构体。
-    *   调用 `uvmfirst()` 分配一页内存，并将一小段硬编码的二进制程序 `initcode` 复制进去。这段代码来自 [`user/initcode.S`](/source/xv6-riscv/user/initcode.S.md)。
+    *   调用 [`allocproc()`](/source/xv6-riscv/kernel/proc.c.md#allocproc-kernel-proc-c) 分配一个 `proc` 结构体。
+    *   调用 [`uvmfirst()`](/source/xv6-riscv/kernel/vm.c.md#uvmfirst-kernel-vm-c) 分配一页内存，并将一小段硬编码的二进制程序 `initcode` 复制进去。这段代码来自 [`user/initcode.S`](/source/xv6-riscv/user/initcode.S.md)。
     *   设置进程的陷阱帧（`trapframe`），使得当进程从内核态“返回”到用户态时，程序计数器 `epc` 指向地址 0，栈指针 `sp` 指向该页的最高地址。
     *   将进程状态设置为 `RUNNABLE`，表示它已经准备好被调度器执行了。
 
@@ -154,7 +154,7 @@ assembly
     *   确保控制台文件描述符被正确设置。
     *   在一个无限循环中，[`fork`](/source/xv6-riscv/user/user.h.md) 一个子进程。
     *   在子进程中，`exec("sh", ...)` 启动一个 shell。
-    *   父进程（`init`）则调用 `wait()` 等待 shell 退出。如果 shell 意外退出，`init` 会再次循环，重新启动一个新的 shell，从而确保用户总能与系统交互。
+    *   父进程（`init`）则调用 [`wait()`](/source/xv6-riscv/kernel/sysproc.c.md#wait-kernel-sysproc-c) 等待 shell 退出。如果 shell 意外退出，`init` 会再次循环，重新启动一个新的 shell，从而确保用户总能与系统交互。
 
 至此，系统完全启动，第一个真正的用户交互程序——shell——已经运行起来，等待用户的输入。
 

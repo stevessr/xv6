@@ -1,4 +1,4 @@
-# xv6 实验：实现 `pgprint` 系统调用以观察 `sbrk`
+# xv6 实验：实现 `pgprint` 系统调用以观察 [`sbrk`](/source/xv6-riscv/user/usertests.c.md#sbrk-user-usertests-c)
 
 ## 简介
 

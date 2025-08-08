@@ -63,8 +63,8 @@ graph TD
 *   **`USED`**: 进程刚刚被 [`allocproc`](/source/xv6-riscv/kernel/proc.c.md) 分配，正在进行初始化，还不能被调度。
 *   **`RUNNABLE`**: 进程已万事俱备，只欠 CPU。它位于可运行队列中，等待调度器选择它。
 *   **`RUNNING`**: 进程正在某个 CPU 上执行代码。
-*   **`SLEEPING`**: 进程正在等待一个外部事件，例如磁盘读取完成或 `sleep()` 系统调用结束。它不会被调度，直到被 `wakeup()` 唤醒。
-*   **`ZOMBIE`**: 进程已经执行完毕（通过 `exit()`），但其父进程还没有调用 `wait()` 来回收其资源（如进程描述符和退出状态）。僵尸进程不消耗 CPU，只占用进程表中的一个条目。
+*   **`SLEEPING`**: 进程正在等待一个外部事件，例如磁盘读取完成或 [`sleep()`](/source/xv6-riscv/user/usertests.c.md#sleep-user-usertests-c) 系统调用结束。它不会被调度，直到被 [`wakeup()`](/source/xv6-riscv/kernel/proc.c.md#wakeup-kernel-proc-c) 唤醒。
+*   **`ZOMBIE`**: 进程已经执行完毕（通过 [`exit()`](/source/xv6-riscv/user/usertests.c.md#exit-user-usertests-c)），但其父进程还没有调用 [`wait()`](/source/xv6-riscv/kernel/sysproc.c.md#wait-kernel-sysproc-c) 来回收其资源（如进程描述符和退出状态）。僵尸进程不消耗 CPU，只占用进程表中的一个条目。
 
 ---
 
@@ -187,18 +187,18 @@ scheduler(void)
 
 这三个函数是进程与调度器交互的主要方式。
 
-*   **`yield()`**: 主动放弃 CPU。
+*   **[`yield()`](/source/xv6-riscv/kernel/proc.c.md#yield-kernel-proc-c)**: 主动放弃 CPU。
     1.  获取当前进程的锁。
     2.  将自己的状态设置为 `RUNNABLE`。
-    3.  调用 `sched()`，[`sched`](/source/xv6-riscv/kernel/defs.h.md) 内部会调用 [`swtch`](/source/xv6-riscv/kernel/defs.h.md) 切换到调度器。
+    3.  调用 [`sched()`](/source/xv6-riscv/kernel/proc.c.md#sched-kernel-proc-c)，[`sched`](/source/xv6-riscv/kernel/defs.h.md) 内部会调用 [`swtch`](/source/xv6-riscv/kernel/defs.h.md) 切换到调度器。
     4.  释放锁。
 
 *   **`sleep(void *chan, struct spinlock *lk)`**: 因等待某个事件而休眠。
     1.  获取进程锁 `p->lock`。
     2.  释放传入的条件锁 `lk` (这是一个原子操作，防止“丢失唤醒”问题)。
     3.  设置进程状态为 `SLEEPING`，并记录等待的通道 `chan`。
-    4.  调用 `sched()` 切换到调度器。
-    5.  当被唤醒后，它会从 `sched()` 返回，清空 `chan`，释放进程锁，并重新获取条件锁 `lk`。
+    4.  调用 [`sched()`](/source/xv6-riscv/kernel/proc.c.md#sched-kernel-proc-c) 切换到调度器。
+    5.  当被唤醒后，它会从 [`sched()`](/source/xv6-riscv/kernel/proc.c.md#sched-kernel-proc-c) 返回，清空 `chan`，释放进程锁，并重新获取条件锁 `lk`。
 
 *   **`wakeup(void *chan)`**: 唤醒在 `chan` 上休眠的所有进程。
     1.  遍历进程表。
@@ -225,7 +225,7 @@ scheduler(void)
 **修改提示**：
 *   在 `struct proc` 中增加一个字段来存储每个进程的彩票数（例如，`int tickets`）。可以默认为一个固定值，如 100。
 *   提供一个新的系统调用，允许用户进程修改自己的彩票数。
-*   修改 `scheduler()` 函数的逻辑：
+*   修改 [`scheduler()`](/source/xv6-riscv/kernel/proc.c.md#scheduler-kernel-proc-c) 函数的逻辑：
     *   首先，计算所有 `RUNNABLE` 进程的彩票总数。
     *   然后，生成一个介于 0 和彩票总数之间的随机数。
     *   最后，遍历 `RUNNABLE` 进程，通过累减彩票数的方式找到那个“中奖”的进程，并切换到它。

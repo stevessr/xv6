@@ -64,5 +64,74 @@ div[class*="language-"] {
 .function-call {
     cursor: pointer;
     text-decoration: underline;
+    color: #0066cc !important;
+    transition: color 0.2s;
 }
 
+.function-call:hover {
+    color: #004499 !important;
+    text-decoration: underline;
+}
+
+html.dark .function-call {
+    color: #4da6ff !important;
+}
+
+html.dark .function-call:hover {
+    color: #66b3ff !important;
+}
+
+
+/* 同行注释样式 */
+.with-inline-comment {
+    position: relative;
+    cursor: help;
+}
+
+.with-inline-comment::after {
+    content: " 💬";
+    opacity: 0.6;
+    font-size: 0.8em;
+    color: #666;
+    margin-left: 4px;
+}
+
+html.dark .with-inline-comment::after {
+    color: #999;
+}
+
+.with-inline-comment:hover::after {
+    opacity: 1;
+}
+
+/* 行注释tooltip */
+#inline-comment-tooltip {
+    position: absolute;
+    background: var(--vp-c-bg-soft);
+    border: 1px solid var(--vp-c-border);
+    padding: 8px 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1002;
+    max-width: 300px;
+    display: none;
+    pointer-events: none;
+    font-size: 0.9em;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+#inline-comment-tooltip.active {
+    display: block;
+    opacity: 1;
+}
+
+/* 去除旧的代码注释容器样式 */
+.code-comment-container {
+    display: none;
+}
+
+pre, code {
+  white-space: pre-wrap !important;
+  overflow-wrap: break-word !important;
+}

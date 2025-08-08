@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs:dev": "node ../scripts/prepare-source-docs.js && node ../scripts/fix_dead_links.js && vitepress dev .",
-    "docs:build": "node ../scripts/prepare-source-docs.js && node ../scripts/fix_dead_links.js && vitepress build .",
+    "docs:prepare": "node scripts/prepare-source-docs.cjs && node scripts/add_function_links.cjs && node scripts/fix_dead_links.cjs",
+    "docs:dev": "pnpm docs:prepare && vitepress dev .",
+    "docs:build": "pnpm docs:prepare && vitepress build .",
     "docs:preview": "vitepress preview d"
   },
   "keywords": [],
@@ -30,6 +31,7 @@
     }
   },
   "dependencies": {
+    "markdown-it": "^14.1.0",
     "markdown-it-footnote": "^4.0.0",
     "shiki": "^3.9.2"
   }

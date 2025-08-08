@@ -168,7 +168,7 @@ usertrap(void)
 
 #### 5.2.1 代码分析: [`kernel/syscall.c`](/source/xv6-riscv/kernel/syscall.c.md) & [`kernel/syscall.h`](/source/xv6-riscv/kernel/syscall.h.md)
 
-`syscall()` 的实现非常直观：
+[`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 的实现非常直观：
 
 
 ```c
@@ -198,12 +198,12 @@ syscall(void)
 
 ---
 
-## 6. 完整追踪: `getpid()` 系统调用
+## 6. 完整追踪: [`getpid()`](/source/xv6-riscv/kernel/sysproc.c.md#getpid-kernel-sysproc-c) 系统调用
 
-让我们完整地追踪一次 `getpid()` 系统调用的生命周期：
+让我们完整地追踪一次 [`getpid()`](/source/xv6-riscv/kernel/sysproc.c.md#getpid-kernel-sysproc-c) 系统调用的生命周期：
 
 1.  **用户空间**:
-    *   C 库中的 `getpid()` 函数被调用。
+    *   C 库中的 [`getpid()`](/source/xv6-riscv/kernel/sysproc.c.md#getpid-kernel-sysproc-c) 函数被调用。
     *   该函数将系统调用号 `SYS_getpid` (值为 11) 放入 `a7` 寄存器。
     *   执行 `ecall` 指令，触发陷阱。
 
@@ -220,17 +220,17 @@ syscall(void)
     *   `uservec` 跳转到 [`usertrap`](/source/xv6-riscv/kernel/trap.c.md) 函数。
 
 4.  **内核 C 代码处理: `trap.c` -> `syscall.c` -> `sysproc.c`**:
-    *   `usertrap()` 发现 `scause` 是 8，判定为系统调用。
-    *   `usertrap()` 将 `epc` 加 4，然后调用 `syscall()`。
-    *   `syscall()` 从陷阱帧的 `a7` 读出系统调用号 11。
-    *   `syscall()` 在 `syscalls` 数组中找到第 11 项，即 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 函数，并调用它。
+    *   [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md#usertrap-kernel-trap-c) 发现 `scause` 是 8，判定为系统调用。
+    *   [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md#usertrap-kernel-trap-c) 将 `epc` 加 4，然后调用 [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c)。
+    *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 从陷阱帧的 `a7` 读出系统调用号 11。
+    *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 在 `syscalls` 数组中找到第 11 项，即 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 函数，并调用它。
     *   `sys_getpid()` (位于 `sysproc.c`) 执行 `return myproc()->pid;`，返回当前进程的 PID。
-    *   `syscall()` 将 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 的返回值（即 PID）存入 `p->trapframe->a0`。
-    *   `syscall()` 返回到 `usertrap()`。
-    *   `usertrap()` 调用 `usertrapret()`。
+    *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 将 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 的返回值（即 PID）存入 `p->trapframe->a0`。
+    *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 返回到 [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md#usertrap-kernel-trap-c)。
+    *   [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md#usertrap-kernel-trap-c) 调用 [`usertrapret()`](/source/xv6-riscv/kernel/trap.c.md#usertrapret-kernel-trap-c)。
 
 5.  **准备返回: `trap.c`**:
-    *   `usertrapret()` 设置 `stvec` 重新指向 `uservec`，为下一次用户陷阱做准备。
+    *   [`usertrapret()`](/source/xv6-riscv/kernel/trap.c.md#usertrapret-kernel-trap-c) 设置 `stvec` 重新指向 `uservec`，为下一次用户陷阱做准备。
     *   它配置好 `sstatus` 寄存器，以便 `sret` 后能返回用户模式并开启中断。
     *   它将 `p->trapframe->epc` 的值写入 `sepc` 寄存器。
     *   最后，它调用 `trampoline.S` 中的 `userret` 函数，并将用户页表的地址作为参数传入。
@@ -246,7 +246,7 @@ syscall(void)
 
 8.  **用户空间**:
     *   程序从 `ecall` 的下一条指令继续执行。
-    *   `getpid()` 的 C 库函数从 `a0` 寄存器中读取返回值并返回给调用者。
+    *   [`getpid()`](/source/xv6-riscv/kernel/sysproc.c.md#getpid-kernel-sysproc-c) 的 C 库函数从 `a0` 寄存器中读取返回值并返回给调用者。
 
 至此，一次完整的系统调用结束。
 

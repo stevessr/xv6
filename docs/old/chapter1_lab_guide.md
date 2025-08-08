@@ -5,16 +5,16 @@
 本实验旨在帮助你理解操作系统的核心接口和基本概念。通过分析 xv6-riscv 的源码和 shell 的实现，你将学会：
 
 *   理解进程、内存、文件描述符、管道和文件系统的基本概念。
-*   分析 `fork()`, `exec()`, `pipe()` 等关键系统调用如何协同工作。
+*   分析 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c), [`exec()`](/source/xv6-riscv/user/usertests.c.md#exec-user-usertests-c), `pipe()` 等关键系统调用如何协同工作。
 *   探索 `shell` 如何利用这些系统调用来实现 I/O 重定向和管道等核心功能。
 
 ## 2. 核心概念概述
 
 操作系统接口提供了一组基本但功能强大的机制。第一章介绍了以下核心概念：
 
-*   **进程 (Process)**: 一个正在执行的程序，拥有独立的内存空间和内核状态。xv6 使用 `fork()` 系统调用来创建一个新进程，新进程是父进程的副本。
-*   **内存 (Memory)**: 每个进程都有自己的用户空间内存，包括指令、数据和栈。`exec()` 系统调用会用新的程序内容替换当前进程的内存空间。
-*   **文件描述符 (File Descriptors)**: 一个小的非负整数，用于代表一个内核管理的对象（如文件、控制台、管道）。进程通过 `read()` 和 `write()` 与文件描述符交互。按照惯例，`0` 是标准输入，`1` 是标准输出，`2` 是标准错误。
+*   **进程 (Process)**: 一个正在执行的程序，拥有独立的内存空间和内核状态。xv6 使用 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 系统调用来创建一个新进程，新进程是父进程的副本。
+*   **内存 (Memory)**: 每个进程都有自己的用户空间内存，包括指令、数据和栈。[`exec()`](/source/xv6-riscv/user/usertests.c.md#exec-user-usertests-c) 系统调用会用新的程序内容替换当前进程的内存空间。
+*   **文件描述符 (File Descriptors)**: 一个小的非负整数，用于代表一个内核管理的对象（如文件、控制台、管道）。进程通过 `read()` 和 [`write()`](/source/xv6-riscv/user/usertests.c.md#write-user-usertests-c) 与文件描述符交互。按照惯例，[`0`](/source/xv6-riscv/kernel/kalloc.c.md#0-kernel-kalloc-c) 是标准输入，`1` 是标准输出，`2` 是标准错误。
 *   **管道 (Pipes)**: 一种简单的进程间通信机制，表现为一对文件描述符（一个读端，一个写端）。写入一端的数据可以从另一端读出。
 *   **文件系统 (File System)**: 将数据组织成目录和文件。目录是包含文件和其他目录引用的树状结构。
 
@@ -35,11 +35,11 @@
 
 请在阅读代码和教材的基础上，思考以下问题。这些问题旨在引导你探索系统调用的组合方式，而不是寻找唯一的“正确答案”。
 
-1.  **`fork()` 和 `exec()` 的分离**: 为什么 xv6（以及所有 Unix 系统）将创建进程 (`fork()`) 和加载程序 (`exec()`) 分为两个独立的系统调用？如果只有一个 `forkexec()` 调用，shell 实现 I/O 重定向 (`echo hello > output.txt`) 会变得更简单还是更复杂？请阐述你的理由。
+1.  **[`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 和 [`exec()`](/source/xv6-riscv/user/usertests.c.md#exec-user-usertests-c) 的分离**: 为什么 xv6（以及所有 Unix 系统）将创建进程 ([`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c)) 和加载程序 ([`exec()`](/source/xv6-riscv/user/usertests.c.md#exec-user-usertests-c)) 分为两个独立的系统调用？如果只有一个 `forkexec()` 调用，shell 实现 I/O 重定向 (`echo hello > output.txt`) 会变得更简单还是更复杂？请阐述你的理由。
 
-2.  **Shell 的管道实现**: 当 shell 执行一个管道命令，例如 `grep fork sh.c | wc -l` 时，它创建了多少个进程？这些进程之间是如何通过 `pipe()`、`dup()`、`fork()` 和 `close()` 系统调用连接起来的？尝试画出进程树和文件描述符的变化图。
+2.  **Shell 的管道实现**: 当 shell 执行一个管道命令，例如 `grep fork sh.c | wc -l` 时，它创建了多少个进程？这些进程之间是如何通过 `pipe()`、`dup()`、[`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 和 `close()` 系统调用连接起来的？尝试画出进程树和文件描述符的变化图。
 
-3.  **文件描述符的抽象能力**: [`cat`](/source/xv6-riscv/user/cat.c.md) 程序不知道它的输入是来自键盘（控制台）还是一个文件。这种抽象是如何通过文件描述符实现的？当子进程通过 `fork()` 继承父进程的文件描述符时，文件偏移量是共享的还是独立的？这对于 `(echo hello; echo world) > output.txt` 这样的命令序列有什么影响？
+3.  **文件描述符的抽象能力**: [`cat`](/source/xv6-riscv/user/cat.c.md) 程序不知道它的输入是来自键盘（控制台）还是一个文件。这种抽象是如何通过文件描述符实现的？当子进程通过 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 继承父进程的文件描述符时，文件偏移量是共享的还是独立的？这对于 `(echo hello; echo world) > output.txt` 这样的命令序列有什么影响？
 
 4.  **`cd` 命令的特殊性**: 为什么 `cd` 命令必须作为 shell 的内置命令来实现，而 [`ls`](/source/xv6-riscv/user/ls.c.md)、[`cat`](/source/xv6-riscv/user/cat.c.md) 等命令可以作为独立的程序存在？如果你尝试将 `cd` 实现为一个独立的程序，会发生什么？
 

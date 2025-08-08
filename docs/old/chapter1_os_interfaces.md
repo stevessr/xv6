@@ -36,9 +36,9 @@ while(getcmd(buf, sizeof(buf)) >= 0){
 
 ## 1.3 进程创建与管理 ([`fork`](/source/xv6-riscv/user/user.h.md), [`exec`](/source/xv6-riscv/user/user.h.md), [`wait`](/source/xv6-riscv/user/user.h.md))
 
-### 1.3.1 `fork()`: 创建一个新进程
+### 1.3.1 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c): 创建一个新进程
 
-`fork()` 是 Unix 系统中创建新进程的唯一方式。它会创建一个与调用进程（父进程）几乎完全相同的副本（子进程）。
+[`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 是 Unix 系统中创建新进程的唯一方式。它会创建一个与调用进程（父进程）几乎完全相同的副本（子进程）。
 
 *   **用户视角**: 在 [`sh.c`](/source/xv6-riscv/user/sh.c.md) 中，shell 通过调用 [[`fork1`](/source/xv6-riscv/user/sh.c.md)](source/xv6-riscv/user/sh.c.md)（一个 [`fork`](/source/xv6-riscv/user/user.h.md) 的简单封装）来为每个命令创建一个新的子进程。[`fork`](/source/xv6-riscv/user/user.h.md) 调用在父子进程中都会返回：在父进程中返回子进程的 PID，在子进程中返回 0。这种机制使得程序可以根据返回值区分父子进程，执行不同的逻辑。
 
@@ -49,9 +49,9 @@ while(getcmd(buf, sizeof(buf)) >= 0){
     4.  将子进程的状态设置为 `RUNNABLE`，使其可以被调度器调度运行。
     5.  巧妙地设置子进程的陷阱帧，使其 [`fork`](/source/xv6-riscv/user/user.h.md) 系统调用的返回值（`a0` 寄存器）为 0。
 
-### 1.3.2 `exec()`: 加载并执行一个程序
+### 1.3.2 [`exec()`](/source/xv6-riscv/user/usertests.c.md#exec-user-usertests-c): 加载并执行一个程序
 
-`exec()` 系统调用用于将一个新程序加载到当前进程的内存空间中，并从该程序的入口点开始执行。它会替换当前进程的内存映像，但 PID 和文件描述符表保持不变。
+[`exec()`](/source/xv6-riscv/user/usertests.c.md#exec-user-usertests-c) 系统调用用于将一个新程序加载到当前进程的内存空间中，并从该程序的入口点开始执行。它会替换当前进程的内存映像，但 PID 和文件描述符表保持不变。
 
 *   **用户视角**: 在 [`sh.c`](/source/xv6-riscv/user/sh.c.md) 的 [[`runcmd`](/source/xv6-riscv/user/sh.c.md)](source/xv6-riscv/user/sh.c.md) 函数中，对于简单的执行命令（`EXEC` 类型），子进程最终会调用 [`exec`](/source/xv6-riscv/user/user.h.md)。例如，当用户输入 `ls -l` 时，子进程会调用 `exec("ls", {"ls", "-l", 0})`。如果 [`exec`](/source/xv6-riscv/user/user.h.md) 成功，它将永不返回；如果失败（例如找不到文件），则会返回 -1。
 
@@ -65,11 +65,11 @@ while(getcmd(buf, sizeof(buf)) >= 0){
 
 [`fork`](/source/xv6-riscv/user/user.h.md) 和 [`exec`](/source/xv6-riscv/user/user.h.md) 的分离是 Unix 设计的一大亮点。它允许 shell 在 [`fork`](/source/xv6-riscv/user/user.h.md) 之后、[`exec`](/source/xv6-riscv/user/user.h.md) 之前执行一些额外的操作，最典型的就是 I/O 重定向。
 
-### 1.3.3 `wait()`: 等待子进程结束
+### 1.3.3 [`wait()`](/source/xv6-riscv/kernel/sysproc.c.md#wait-kernel-sysproc-c): 等待子进程结束
 
-父进程通常需要等待子进程执行完毕并收集其退出状态。`wait()` 系统调用就是为此设计的。
+父进程通常需要等待子进程执行完毕并收集其退出状态。[`wait()`](/source/xv6-riscv/kernel/sysproc.c.md#wait-kernel-sysproc-c) 系统调用就是为此设计的。
 
-*   **用户视角**: 在 [`sh.c`](/source/xv6-riscv/user/sh.c.md) 的主循环中，父进程在 [`fork`](/source/xv6-riscv/user/user.h.md) 之后会调用 [`wait(0)`](/source/xv6-riscv/user/sh.c.md)。这会使父进程（shell）暂停执行，直到子进程（正在执行的命令）调用 `exit()` 退出。
+*   **用户视角**: 在 [`sh.c`](/source/xv6-riscv/user/sh.c.md) 的主循环中，父进程在 [`fork`](/source/xv6-riscv/user/user.h.md) 之后会调用 [`wait(0)`](/source/xv6-riscv/user/sh.c.md)。这会使父进程（shell）暂停执行，直到子进程（正在执行的命令）调用 [`exit()`](/source/xv6-riscv/user/usertests.c.md#exit-user-usertests-c) 退出。
 
 *   **内核实现**: [`wait`](/source/xv6-riscv/user/user.h.md) 的实现位于 [`kernel/proc.c`](/source/xv6-riscv/kernel/proc.c.md) 的 [[`wait`](/source/xv6-riscv/user/user.h.md)](source/xv6-riscv/kernel/proc.c.md) 函数。它会扫描进程表：
     1.  查找调用进程的所有子进程。
@@ -79,7 +79,7 @@ while(getcmd(buf, sizeof(buf)) >= 0){
 ## 1.4 I/O 与文件描述符
 
 在 xv6 中，所有 I/O 操作都通过文件描述符 (File Descriptor) 进行抽象。文件描述符是一个小的非负整数，内核用它来索引每个进程打开的文件表。按照惯例：
-*   `0`: 标准输入 (stdin)
+*   [`0`](/source/xv6-riscv/kernel/kalloc.c.md#0-kernel-kalloc-c): 标准输入 (stdin)
 *   `1`: 标准输出 (stdout)
 *   `2`: 标准错误 (stderr)
 

@@ -82,7 +82,7 @@ struct buf {
 xv6 在多个地方使用了引用计数。例如，`struct inode`（[`kernel/fs.h`](/source/xv6-riscv/kernel/fs.h.md) 和 `struct file`（[`kernel/file.h`](/source/xv6-riscv/kernel/file.h.md)) 都有一个 `refcnt` 字段。
 
 *   **`struct inode`**: 代表一个文件在磁盘上的元数据。多个进程可能通过不同的文件描述符指向同一个文件，因此需要引用计数来跟踪有多少指针指向这个 inode。当 `refcnt` 为 0 时，可以回收这个 inode。
-*   **`struct file`**: 代表一个打开的文件。`fork()` 系统调用会复制父进程的文件描述符表，导致子进程和父进程共享同一个 `struct file`。`dup()` 系统调用也会创建对同一个 `struct file` 的新引用。
+*   **`struct file`**: 代表一个打开的文件。[`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 系统调用会复制父进程的文件描述符表，导致子进程和父进程共享同一个 `struct file`。`dup()` 系统调用也会创建对同一个 `struct file` 的新引用。
 
 [`kernel/file.c`](/source/xv6-riscv/kernel/file.c.md) 中的 [`filealloc`](/source/xv6-riscv/kernel/file.c.md)、[`filedup`](/source/xv6-riscv/kernel/file.c.md) 和 [`fileclose`](/source/xv6-riscv/kernel/defs.h.md) 函数共同管理着 `struct file` 的引用计数。
 
@@ -177,6 +177,6 @@ xv6 在设计上试图平衡这对矛盾。例如，`bcache` 使用了全局锁�
 
 ### 实验 3: 优化 [`fork`](/source/xv6-riscv/user/user.h.md) (Concurrent [`fork`](/source/xv6-riscv/user/user.h.md))
 
-**目标**：`fork()` 系统调用在复制父进程的地址空间时，需要持有多个锁，并且会执行密集的内存操作，这可能成为一个性能瓶颈。当前的 `fork()` 在复制页表时会持有父进程的 `pagetable_lock` 很长时间。请研究 `uvmcopy()` 函数，并尝试通过优化锁的粒度来减少 [`fork`](/source/xv6-riscv/user/user.h.md) 的延迟。
+**目标**：[`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 系统调用在复制父进程的地址空间时，需要持有多个锁，并且会执行密集的内存操作，这可能成为一个性能瓶颈。当前的 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 在复制页表时会持有父进程的 `pagetable_lock` 很长时间。请研究 `uvmcopy()` 函数，并尝试通过优化锁的粒度来减少 [`fork`](/source/xv6-riscv/user/user.h.md) 的延迟。
 
 **提示**：一个可能的思路是，在复制页表项（PTE）时，能否在不持有整个页表锁的情况下完成大部分工作？或者能否分阶段释放和重新获取锁，以允许其他线程在此期间运行？你需要非常小心，确保在任何时候都不会破坏页表的一致性。

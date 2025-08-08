@@ -1,0 +1,31 @@
+/* 主容器，用于实现双栏布局 */
+.code-comment-container {
+  display: flex;
+  flex-direction: row; /* 水平排列 */
+  gap: 1.5rem;         /* 两栏之间的间距 */
+  margin: 1.5rem 0;    /* 容器与其他内容的垂直间距 */
+}
+
+/* 左侧的代码块容器 */
+.code-comment-container .code-block {
+  flex: 1; /* 占据可用空间的一半 */
+  min-width: 0; /* 防止内容溢出 flex 容器 */
+}
+
+/* 右侧的注释块容器 */
+.code-comment-container .comment-block {
+  flex: 1; /* 占据可用空间的一半 */
+  min-width: 0; /* 防止内容溢出 flex 容器 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .code-comment-container {
+    flex-direction: column; /* 垂直堆叠 */
+  }
+}
+
+/* 确保注释块内的元素正确显示 */
+.code-comment-container .comment-block .custom-block {
+  margin-top: 0; /* 移除 ::: tip 容器的默认上边距 */
+}
