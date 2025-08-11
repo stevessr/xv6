@@ -1,5 +1,15 @@
 export default [
   {
+    "text": "__pycache__",
+    "collapsed": true,
+    "items": []
+  },
+  {
+    "text": "conf",
+    "collapsed": true,
+    "items": []
+  },
+  {
     "text": "kernel",
     "collapsed": true,
     "items": [
@@ -86,10 +96,6 @@ export default [
       {
         "text": "plic.c",
         "link": "/source/xv6-riscv/kernel/plic.c"
-      },
-      {
-        "text": "power.c",
-        "link": "/source/xv6-riscv/kernel/power.c"
       },
       {
         "text": "printf.c",
@@ -208,10 +214,6 @@ export default [
         "link": "/source/xv6-riscv/user/cat.c"
       },
       {
-        "text": "clear.c",
-        "link": "/source/xv6-riscv/user/clear.c"
-      },
-      {
         "text": "echo.c",
         "link": "/source/xv6-riscv/user/echo.c"
       },
@@ -256,20 +258,12 @@ export default [
         "link": "/source/xv6-riscv/user/printf.c"
       },
       {
-        "text": "reboot.c",
-        "link": "/source/xv6-riscv/user/reboot.c"
-      },
-      {
         "text": "rm.c",
         "link": "/source/xv6-riscv/user/rm.c"
       },
       {
         "text": "sh.c",
         "link": "/source/xv6-riscv/user/sh.c"
-      },
-      {
-        "text": "shutdown.c",
-        "link": "/source/xv6-riscv/user/shutdown.c"
       },
       {
         "text": "sleep.c",

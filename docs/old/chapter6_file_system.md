@@ -90,7 +90,7 @@ Inode（索引节点）是 Unix 文件系统的核心概念。它是一个数据
 ### 5.1. 磁盘上的 Inode (`struct dinode`)
 
 在磁盘上，inode 以 `struct dinode` 的形式存储在一个连续的区域中。每个 inode 都有一个唯一的**inode 编号 (inum)**。`struct dinode` 包含以下关键字段：
--   `type`: 文件类型（文件 `T_FILE`、目录 `T_DIR`、设备 `T_DEVICE`）。
+-   [`type`](/source/xv6-riscv/kernel/fs.c.md#type-kernel-fs-c): 文件类型（文件 `T_FILE`、目录 `T_DIR`、设备 `T_DEVICE`）。
 -   `nlink`: 硬链接计数，记录有多少个目录项指向这个 inode。
 -   `size`: 文件的大小（以字节为单位）。
 -   `addrs[]`: 一个包含 `NDIRECT + 1` 个条目的数组，用于记录存储文件内容的**数据块**的地址。

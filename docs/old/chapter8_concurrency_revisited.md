@@ -177,6 +177,6 @@ xv6 在设计上试图平衡这对矛盾。例如，`bcache` 使用了全局锁�
 
 ### 实验 3: 优化 [`fork`](/source/xv6-riscv/user/user.h.md) (Concurrent [`fork`](/source/xv6-riscv/user/user.h.md))
 
-**目标**：[`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 系统调用在复制父进程的地址空间时，需要持有多个锁，并且会执行密集的内存操作，这可能成为一个性能瓶颈。当前的 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 在复制页表时会持有父进程的 `pagetable_lock` 很长时间。请研究 `uvmcopy()` 函数，并尝试通过优化锁的粒度来减少 [`fork`](/source/xv6-riscv/user/user.h.md) 的延迟。
+**目标**：[`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 系统调用在复制父进程的地址空间时，需要持有多个锁，并且会执行密集的内存操作，这可能成为一个性能瓶颈。当前的 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 在复制页表时会持有父进程的 `pagetable_lock` 很长时间。请研究 [`uvmcopy()`](/source/xv6-riscv/kernel/vm.c.md#uvmcopy-kernel-vm-c) 函数，并尝试通过优化锁的粒度来减少 [`fork`](/source/xv6-riscv/user/user.h.md) 的延迟。
 
 **提示**：一个可能的思路是，在复制页表项（PTE）时，能否在不持有整个页表锁的情况下完成大部分工作？或者能否分阶段释放和重新获取锁，以允许其他线程在此期间运行？你需要非常小心，确保在任何时候都不会破坏页表的一致性。

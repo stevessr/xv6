@@ -14,7 +14,7 @@
 
 *   **进程 (Process)**: 一个正在执行的程序，拥有独立的内存空间和内核状态。xv6 使用 [`fork()`](/source/xv6-riscv/kernel/sysproc.c.md#fork-kernel-sysproc-c) 系统调用来创建一个新进程，新进程是父进程的副本。
 *   **内存 (Memory)**: 每个进程都有自己的用户空间内存，包括指令、数据和栈。[`exec()`](/source/xv6-riscv/user/usertests.c.md#exec-user-usertests-c) 系统调用会用新的程序内容替换当前进程的内存空间。
-*   **文件描述符 (File Descriptors)**: 一个小的非负整数，用于代表一个内核管理的对象（如文件、控制台、管道）。进程通过 `read()` 和 [`write()`](/source/xv6-riscv/user/usertests.c.md#write-user-usertests-c) 与文件描述符交互。按照惯例，[`0`](/source/xv6-riscv/kernel/kalloc.c.md#0-kernel-kalloc-c) 是标准输入，`1` 是标准输出，`2` 是标准错误。
+*   **文件描述符 (File Descriptors)**: 一个小的非负整数，用于代表一个内核管理的对象（如文件、控制台、管道）。进程通过 [`read()`](/source/xv6-riscv/kernel/console.c.md#read-kernel-console-c) 和 [`write()`](/source/xv6-riscv/user/usertests.c.md#write-user-usertests-c) 与文件描述符交互。按照惯例，[`0`](/source/xv6-riscv/kernel/kalloc.c.md#0-kernel-kalloc-c) 是标准输入，`1` 是标准输出，`2` 是标准错误。
 *   **管道 (Pipes)**: 一种简单的进程间通信机制，表现为一对文件描述符（一个读端，一个写端）。写入一端的数据可以从另一端读出。
 *   **文件系统 (File System)**: 将数据组织成目录和文件。目录是包含文件和其他目录引用的树状结构。
 
@@ -26,7 +26,7 @@
     *   代码链接: [`user/sh.c`](/source/xv6-riscv/user/sh.c.md)
 *   **Cat (`cat.c`)**: [`cat`](/source/xv6-riscv/user/cat.c.md) 程序简单地将其输入复制到输出。它的实现展示了文件描述符的通用性——[`cat`](/source/xv6-riscv/user/cat.c.md) 无需关心其输入/输出是来自文件、控制台还是管道。
     *   代码链接: [`user/cat.c`](/source/xv6-riscv/user/cat.c.md)
-*   **Grep (`grep.c`)**: [`grep`](/source/xv6-riscv/user/grep.c.md) 在其输入中搜索特定模式。与 [`cat`](/source/xv6-riscv/user/cat.c.md) 类似，它也是围绕 `read()` 系统调用构建的。
+*   **Grep (`grep.c`)**: [`grep`](/source/xv6-riscv/user/grep.c.md) 在其输入中搜索特定模式。与 [`cat`](/source/xv6-riscv/user/cat.c.md) 类似，它也是围绕 [`read()`](/source/xv6-riscv/kernel/console.c.md#read-kernel-console-c) 系统调用构建的。
     *   代码链接: [`user/grep.c`](/source/xv6-riscv/user/grep.c.md)
 *   **ls (`ls.c`)**: [`ls`](/source/xv6-riscv/user/ls.c.md) 列出目录内容，这需要与文件系统进行交互以读取目录条目。
     *   代码链接: [`user/ls.c`](/source/xv6-riscv/user/ls.c.md)

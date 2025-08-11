@@ -4,6 +4,7 @@ import footnote from "markdown-it-footnote";
 import llmstxt from "vitepress-plugin-llms";
 import sourceSidebarItems from "./sidebar-source.js";
 import courseSidebarItems from "./sidebar-course.js";
+import mit61810SidebarItems from "./sidebar-mit6.1810.js";
 
 export default defineConfig({
   title: "XV6 中文文档",
@@ -24,8 +25,18 @@ export default defineConfig({
         text: "xv6-riscv 源码",
         items: sourceSidebarItems,
       },
+      {
+        text: "MIT 6.1810",
+        items: mit61810SidebarItems,
+      },
     ],
     sidebar: {
+      "/mit6.1810/": [
+        {
+          text: "MIT 6.1810",
+          items: mit61810SidebarItems,
+        },
+      ],
       "/source/": [
         {
           text: "XV6 源码",

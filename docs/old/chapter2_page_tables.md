@@ -247,7 +247,7 @@ kvmmake(void)
 ## 6. 物理内存分配器
 
 物理内存页的分配和释放由 [`kernel/kalloc.c`](/source/xv6-riscv/kernel/kalloc.c.md) 中的代码负责。它维护一个空闲物理页的 **空闲链表 (freelist)**。
-*   **`kinit()`**: 在系统启动时被调用，将从内核末尾 (`end`) 到 `PHYSTOP` 之间的所有物理内存逐页加入空闲链表。
+*   **[`kinit()`](/source/xv6-riscv/kernel/kalloc.c.md#kinit-kernel-kalloc-c)**: 在系统启动时被调用，将从内核末尾 (`end`) 到 `PHYSTOP` 之间的所有物理内存逐页加入空闲链表。
 *   **[`kalloc()`](/source/xv6-riscv/kernel/kalloc.c.md#kalloc-kernel-kalloc-c)**: 从空闲链表的头部取下一个空闲页并返回其地址。
 *   **`kfree()`**: 将一个释放的物理页重新加入到空闲链表的头部。
 

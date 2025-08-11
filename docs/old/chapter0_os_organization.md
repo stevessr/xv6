@@ -120,14 +120,14 @@ assembly
     *   ... 初始化其他各种设备和子系统 ...
     *   **[`userinit()`](/source/xv6-riscv/kernel/proc.c.md): 创建第一个用户进程！**
     *   最后，设置 `started` 标志为 1，通知其他 CPU 初始化已完成。
-2.  **其他 CPU 等待**: 其他 hart 会在一个 `while` 循环中自旋，等待 `started` 标志变为 1。之后，它们会各自完成自己的 `kvminithart()` 和 `trapinithart()` 等初始化，然后和主 CPU 一样，进入调度器循环。
+2.  **其他 CPU 等待**: 其他 hart 会在一个 `while` 循环中自旋，等待 `started` 标志变为 1。之后，它们会各自完成自己的 [`kvminithart()`](/source/xv6-riscv/kernel/vm.c.md#kvminithart-kernel-vm-c) 和 [`trapinithart()`](/source/xv6-riscv/kernel/trap.c.md#trapinithart-kernel-trap-c) 等初始化，然后和主 CPU 一样，进入调度器循环。
 3.  **进入调度器**: 所有 CPU 在完成初始化后，都会调用 [`scheduler()`](/source/xv6-riscv/kernel/proc.c.md#scheduler-kernel-proc-c)，开始永不返回的进程调度循环。
 
 ### 阶段三：创建第一个进程 (proc.c -> initcode.S -> init.c)
 
 这是整个启动流程的高潮部分。
 
-1.  **`userinit()` 创建进程**: [`main()`](/source/xv6-riscv/kernel/main.c.md) 调用的 [`userinit()`](/source/xv6-riscv/kernel/proc.c.md) 函数负责创建第一个进程，通常称为 `init` 进程。
+1.  **[`userinit()`](/source/xv6-riscv/kernel/proc.c.md#userinit-kernel-proc-c) 创建进程**: [`main()`](/source/xv6-riscv/kernel/main.c.md) 调用的 [`userinit()`](/source/xv6-riscv/kernel/proc.c.md) 函数负责创建第一个进程，通常称为 `init` 进程。
     *   调用 [`allocproc()`](/source/xv6-riscv/kernel/proc.c.md#allocproc-kernel-proc-c) 分配一个 `proc` 结构体。
     *   调用 [`uvmfirst()`](/source/xv6-riscv/kernel/vm.c.md#uvmfirst-kernel-vm-c) 分配一页内存，并将一小段硬编码的二进制程序 `initcode` 复制进去。这段代码来自 [`user/initcode.S`](/source/xv6-riscv/user/initcode.S.md)。
     *   设置进程的陷阱帧（`trapframe`），使得当进程从内核态“返回”到用户态时，程序计数器 `epc` 指向地址 0，栈指针 `sp` 指向该页的最高地址。

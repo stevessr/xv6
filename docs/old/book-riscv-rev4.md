@@ -751,7 +751,7 @@ Production operating systems also provide applications with system calls to mana
 
 3. Implement COW fork.
 
-4. Is there a way to eliminate the special TRAPFRAME page mapping in every user address space? For example, could `uservec` be modified to simply push the 32 user registers onto the kernel stack, or store them in the `proc` structure?5. Could `xv6` be modified to eliminate the special TRAMPOLINE page mapping?6. Implement `map`.
+4. Is there a way to eliminate the special TRAPFRAME page mapping in every user address space? For example, could `uservec` be modified to simply push the 32 user registers onto the kernel stack, or store them in the `proc` structure?5. Could [`xv6`](/source/xv6-riscv/user/usertests.c.md#xv6-user-usertests-c) be modified to eliminate the special TRAMPOLINE page mapping?6. Implement `map`.
 
 # Chapter 5
 

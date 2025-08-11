@@ -224,7 +224,7 @@ syscall(void)
     *   [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md#usertrap-kernel-trap-c) 将 `epc` 加 4，然后调用 [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c)。
     *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 从陷阱帧的 `a7` 读出系统调用号 11。
     *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 在 `syscalls` 数组中找到第 11 项，即 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 函数，并调用它。
-    *   `sys_getpid()` (位于 `sysproc.c`) 执行 `return myproc()->pid;`，返回当前进程的 PID。
+    *   [`sys_getpid()`](/source/xv6-riscv/kernel/sysproc.c.md#sys_getpid-kernel-sysproc-c) (位于 `sysproc.c`) 执行 `return myproc()->pid;`，返回当前进程的 PID。
     *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 将 [`sys_getpid`](/source/xv6-riscv/kernel/sysproc.c.md) 的返回值（即 PID）存入 `p->trapframe->a0`。
     *   [`syscall()`](/source/xv6-riscv/kernel/syscall.c.md#syscall-kernel-syscall-c) 返回到 [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md#usertrap-kernel-trap-c)。
     *   [`usertrap()`](/source/xv6-riscv/kernel/trap.c.md#usertrap-kernel-trap-c) 调用 [`usertrapret()`](/source/xv6-riscv/kernel/trap.c.md#usertrapret-kernel-trap-c)。
