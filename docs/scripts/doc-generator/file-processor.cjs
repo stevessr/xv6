@@ -98,10 +98,6 @@ function processInlineComments(content) {
       if (commentPart) {
         // 使用正确的行号索引
         lineComments.set(currentLineIndex, commentPart);
-        // 调试信息
-        if (codePart.includes('IER_RX_ENABLE') || codePart.includes('IER_TX_ENABLE')) {
-          console.log(`Debug: Line ${currentLineIndex} (${codePart.trim()}) -> Comment: ${commentPart}`);
-        }
       }
     } else {
       // 非注释行，保持原样
@@ -119,7 +115,7 @@ function processInlineComments(content) {
 }
 
 
-function createTransformer(functionDefinitions, currentFilePath, lineComments = new Map()) {
+function createTransformer(functionDefinitions, currentFilePath, lineComments = new Map(), processedContent = "") {
   let lineNum = 0;
   const commentPlaceholders = new Map();
   let placeholderIndex = 0;
@@ -195,15 +191,35 @@ function createTransformer(functionDefinitions, currentFilePath, lineComments = 
     line(node) {
       let hasDocComment = false;
 
-      // 检查是否有同行注释 - lineNum从0开始，与processInlineComments的索引对齐
-      const inlineComment = lineComments.get(lineNum); // 直接使用lineNum作为索引
+      // 获取当前行的文本内容
+      const lineText = node.children.map(child => 
+        child.children ? child.children.map(c => c.value || '').join('') : (child.value || '')
+      ).join('').trim();
+
+      // 检查是否有同行注释 - 使用内容匹配而不是行号
+      let inlineComment = null;
+      
+      // 遍历lineComments，找到匹配的注释
+      for (const [storedLineIndex, comment] of lineComments.entries()) {
+        // 获取处理后内容的对应行
+        const processedLines = processedContent.split('\n');
+        if (processedLines[storedLineIndex] && processedLines[storedLineIndex].trim() === lineText) {
+          inlineComment = comment;
+          break;
+        }
+      }
+      
+      // 调试信息：查看特定行的内容
+      if (currentFilePath.includes('uart.c') && lineText.includes('IER_')) {
+        console.log(`=== Content Match Debug ===`);
+        console.log(`Line text: "${lineText}"`);
+        console.log(`Found comment:`, inlineComment);
+        console.log(`========================`);
+      }
+      
       if (inlineComment) {
         node.properties.class = `${node.properties.class || ""} with-inline-comment`.trim();
         node.properties["data-inline-comment"] = escapeHtml(inlineComment);
-        // 调试信息
-        if (inlineComment.includes('使能')) {
-          console.log(`Debug Transformer: Line ${lineNum + 1} (0-based: ${lineNum}) -> Comment: ${inlineComment}`);
-        }
       }
 
       lineNum++; // 在处理完当前行后递增
@@ -301,7 +317,20 @@ async function processFile(filePath, highlighter, functionDefinitions) {
   if (language === "c" || language === "asm") {
     // 处理同行注释和块注释
     const { processedContent, lineComments, blockComments } = processInlineComments(content);
-    const transformer = createTransformer(functionDefinitions, filePath, lineComments);
+    
+    // 调试：打印处理后的内容的相关行
+    if (filename.includes('uart.c')) {
+      const lines = processedContent.split('\n');
+      console.log('=== Processed Content Debug for uart.c ===');
+      for (let i = 13; i <= 18; i++) {
+        if (lines[i]) {
+          console.log(`Line ${i}: ${lines[i]}`);
+        }
+      }
+      console.log('=== End Debug ===');
+    }
+    
+    const transformer = createTransformer(functionDefinitions, filePath, lineComments, processedContent);
 
     // 将代码按块注释分割
     const codeLines = processedContent.split('\n');
