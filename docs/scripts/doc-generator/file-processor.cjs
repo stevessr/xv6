@@ -356,7 +356,7 @@ async function processFile(filePath, highlighter, functionDefinitions) {
       }
 
       // 添加注释块
-      finalParts.push(`::: tip\n${block.content}\n:::`);
+      finalParts.push(`::: tip\n${escapeHtml(block.content)}\n:::`);
       
       // 跳过被注释占用的行
       let skipLines = 0;
