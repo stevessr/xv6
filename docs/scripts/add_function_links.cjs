@@ -41,7 +41,7 @@ function updateMarkdownFile(mdFile, funcIndex) {
     let linkCount = 0;
 
     // Split by code blocks, keeping the delimiters
-    const parts = content.split(/(```[\s\S]*?```)/);
+    const parts = content.split(/(```[\s\S]*?```|<pre[\s\S]*?<\/pre>)/);
     const newParts = parts.map((part, index) => {
         // Only process parts outside of code blocks
         if (index % 2 === 0) {
