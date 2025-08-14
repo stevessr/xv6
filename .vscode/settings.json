@@ -7,6 +7,7 @@
         "types.h": "c",
         "user.h": "c",
         "stat.h": "c",
-        "fs.h": "c"
+        "fs.h": "c",
+        "stdarg.h": "c"
     }
 }

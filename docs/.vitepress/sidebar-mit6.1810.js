@@ -4,44 +4,44 @@ export default [
     "collapsed": true,
     "items": [
       {
-        "text": "belay-dune.pdf",
-        "link": "/mit6.1810/homework/belay-dune.pdf"
+        "text": "belay-dune",
+        "link": "/mit6.1810/homework/belay-dune"
       },
       {
         "text": "journal-ext2fs",
         "link": "/mit6.1810/homework/journal-ext2fs.md"
       },
       {
-        "text": "l-crash.txt",
-        "link": "/mit6.1810/homework/l-crash.txt"
+        "text": "l-crash",
+        "link": "/mit6.1810/homework/l-crash.md"
       },
       {
-        "text": "l-fs2.pdf",
-        "link": "/mit6.1810/homework/l-fs2.pdf"
+        "text": "l-fs2",
+        "link": "/mit6.1810/homework/l-fs2.md"
       },
       {
-        "text": "l-journal.txt",
-        "link": "/mit6.1810/homework/l-journal.txt"
+        "text": "l-journal",
+        "link": "/mit6.1810/homework/l-journal.md"
       },
       {
-        "text": "l-uservm.txt",
-        "link": "/mit6.1810/homework/l-uservm.txt"
+        "text": "l-uservm",
+        "link": "/mit6.1810/homework/l-uservm.md"
       },
       {
-        "text": "meltdown.pdf",
-        "link": "/mit6.1810/homework/meltdown.pdf"
+        "text": "meltdown",
+        "link": "/mit6.1810/homework/meltdown"
       },
       {
-        "text": "microkernel.pdf",
-        "link": "/mit6.1810/homework/microkernel.pdf"
+        "text": "microkernel",
+        "link": "/mit6.1810/homework/microkernel"
       },
       {
         "text": "mmap.c",
         "link": "/mit6.1810/homework/mmap.c"
       },
       {
-        "text": "mogul96usenix.pdf",
-        "link": "/mit6.1810/homework/mogul96usenix.pdf"
+        "text": "mogul96usenix",
+        "link": "/mit6.1810/homework/mogul96usenix"
       },
       {
         "text": "q",
@@ -52,16 +52,16 @@ export default [
         "link": "/mit6.1810/homework/QA.md"
       },
       {
-        "text": "rcu-decade-later.pdf",
-        "link": "/mit6.1810/homework/rcu-decade-later.pdf"
+        "text": "rcu-decade-later",
+        "link": "/mit6.1810/homework/rcu-decade-later"
       },
       {
-        "text": "redleaf.pdf",
-        "link": "/mit6.1810/homework/redleaf.pdf"
+        "text": "redleaf",
+        "link": "/mit6.1810/homework/redleaf"
       },
       {
-        "text": "uservm-faq.txt",
-        "link": "/mit6.1810/homework/uservm-faq.txt"
+        "text": "uservm-faq",
+        "link": "/mit6.1810/homework/uservm-faq.md"
       }
     ]
   },
@@ -128,8 +128,8 @@ export default [
             "link": "/mit6.1810/lec/l-c/array.c"
           },
           {
-            "text": "l-c_slides.pdf",
-            "link": "/mit6.1810/lec/l-c/l-c_slides.pdf"
+            "text": "l-c_slides",
+            "link": "/mit6.1810/lec/l-c/l-c_slides"
           },
           {
             "text": "ptr.c",
@@ -188,112 +188,112 @@ export default [
         ]
       },
       {
-        "text": "16550.pdf",
-        "link": "/mit6.1810/lec/16550.pdf"
+        "text": "16550",
+        "link": "/mit6.1810/lec/16550"
       },
       {
-        "text": "dune-faq.txt",
-        "link": "/mit6.1810/lec/dune-faq.txt"
+        "text": "dune-faq",
+        "link": "/mit6.1810/lec/dune-faq.md"
       },
       {
-        "text": "gdb_slides.pdf",
-        "link": "/mit6.1810/lec/gdb_slides.pdf"
+        "text": "gdb_slides",
+        "link": "/mit6.1810/lec/gdb_slides"
       },
       {
-        "text": "l-c.txt",
-        "link": "/mit6.1810/lec/l-c.txt"
+        "text": "l-c",
+        "link": "/mit6.1810/lec/l-c.md"
       },
       {
-        "text": "l-fs.txt",
-        "link": "/mit6.1810/lec/l-fs.txt"
+        "text": "l-fs",
+        "link": "/mit6.1810/lec/l-fs.md"
       },
       {
-        "text": "l-fs1.pdf",
-        "link": "/mit6.1810/lec/l-fs1.pdf"
+        "text": "l-fs1",
+        "link": "/mit6.1810/lec/l-fs1"
       },
       {
-        "text": "l-internal.txt",
-        "link": "/mit6.1810/lec/l-internal.txt"
+        "text": "l-internal",
+        "link": "/mit6.1810/lec/l-internal.md"
       },
       {
-        "text": "l-interrupt.txt",
-        "link": "/mit6.1810/lec/l-interrupt.txt"
+        "text": "l-interrupt",
+        "link": "/mit6.1810/lec/l-interrupt.md"
       },
       {
-        "text": "l-lockv2.txt",
-        "link": "/mit6.1810/lec/l-lockv2.txt"
+        "text": "l-lockv2",
+        "link": "/mit6.1810/lec/l-lockv2.md"
       },
       {
-        "text": "l-meltdown.txt",
-        "link": "/mit6.1810/lec/l-meltdown.txt"
+        "text": "l-meltdown",
+        "link": "/mit6.1810/lec/l-meltdown.md"
       },
       {
-        "text": "l-net.txt",
-        "link": "/mit6.1810/lec/l-net.txt"
+        "text": "l-net",
+        "link": "/mit6.1810/lec/l-net.md"
       },
       {
-        "text": "l-organization.txt",
-        "link": "/mit6.1810/lec/l-organization.txt"
+        "text": "l-organization",
+        "link": "/mit6.1810/lec/l-organization.md"
       },
       {
-        "text": "l-os.txt",
-        "link": "/mit6.1810/lec/l-os.txt"
+        "text": "l-os",
+        "link": "/mit6.1810/lec/l-os.md"
       },
       {
-        "text": "l-overview.txt",
-        "link": "/mit6.1810/lec/l-overview.txt"
+        "text": "l-overview",
+        "link": "/mit6.1810/lec/l-overview.md"
       },
       {
-        "text": "l-pgfaults.txt",
-        "link": "/mit6.1810/lec/l-pgfaults.txt"
+        "text": "l-pgfaults",
+        "link": "/mit6.1810/lec/l-pgfaults.md"
       },
       {
-        "text": "l-QA1.txt",
-        "link": "/mit6.1810/lec/l-QA1.txt"
+        "text": "l-QA1",
+        "link": "/mit6.1810/lec/l-QA1.md"
       },
       {
-        "text": "l-rcu.txt",
-        "link": "/mit6.1810/lec/l-rcu.txt"
+        "text": "l-rcu",
+        "link": "/mit6.1810/lec/l-rcu.md"
       },
       {
-        "text": "l-redleaf.txt",
-        "link": "/mit6.1810/lec/l-redleaf.txt"
+        "text": "l-redleaf",
+        "link": "/mit6.1810/lec/l-redleaf.md"
       },
       {
-        "text": "l-riscv.txt",
-        "link": "/mit6.1810/lec/l-riscv.txt"
+        "text": "l-riscv",
+        "link": "/mit6.1810/lec/l-riscv.md"
       },
       {
-        "text": "l-threads.txt",
-        "link": "/mit6.1810/lec/l-threads.txt"
+        "text": "l-threads",
+        "link": "/mit6.1810/lec/l-threads.md"
       },
       {
-        "text": "l-vm.txt",
-        "link": "/mit6.1810/lec/l-vm.txt"
+        "text": "l-vm",
+        "link": "/mit6.1810/lec/l-vm.md"
       },
       {
-        "text": "l-vmm.txt",
-        "link": "/mit6.1810/lec/l-vmm.txt"
+        "text": "l-vmm",
+        "link": "/mit6.1810/lec/l-vmm.md"
       },
       {
-        "text": "l4-faq.txt",
-        "link": "/mit6.1810/lec/l4-faq.txt"
+        "text": "l4-faq",
+        "link": "/mit6.1810/lec/l4-faq.md"
       },
       {
-        "text": "livelock-faq.txt",
-        "link": "/mit6.1810/lec/livelock-faq.txt"
+        "text": "livelock-faq",
+        "link": "/mit6.1810/lec/livelock-faq.md"
       },
       {
-        "text": "meltdown-faq.txt",
-        "link": "/mit6.1810/lec/meltdown-faq.txt"
+        "text": "meltdown-faq",
+        "link": "/mit6.1810/lec/meltdown-faq.md"
       },
       {
-        "text": "rcu-faq.txt",
-        "link": "/mit6.1810/lec/rcu-faq.txt"
+        "text": "rcu-faq",
+        "link": "/mit6.1810/lec/rcu-faq.md"
       },
       {
-        "text": "redleaf-faq.txt",
-        "link": "/mit6.1810/lec/redleaf-faq.txt"
+        "text": "redleaf-faq",
+        "link": "/mit6.1810/lec/redleaf-faq.md"
       }
     ]
   },
@@ -302,12 +302,12 @@ export default [
     "collapsed": true,
     "items": [
       {
-        "text": "appel-li.pdf",
-        "link": "/mit6.1810/readings/appel-li.pdf"
+        "text": "appel-li",
+        "link": "/mit6.1810/readings/appel-li"
       },
       {
-        "text": "riscv-calling.pdf",
-        "link": "/mit6.1810/readings/riscv-calling.pdf"
+        "text": "riscv-calling",
+        "link": "/mit6.1810/readings/riscv-calling"
       }
     ]
   },
@@ -316,12 +316,12 @@ export default [
     "collapsed": true,
     "items": [
       {
-        "text": "book_zh.pdf",
-        "link": "/mit6.1810/xv6/book_zh.pdf"
+        "text": "book_zh",
+        "link": "/mit6.1810/xv6/book_zh"
       },
       {
-        "text": "book-riscv-rev4.pdf",
-        "link": "/mit6.1810/xv6/book-riscv-rev4.pdf"
+        "text": "book-riscv-rev4",
+        "link": "/mit6.1810/xv6/book-riscv-rev4"
       }
     ]
   },
