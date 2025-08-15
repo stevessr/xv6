@@ -5,3 +5,4 @@ docs/.vitepress/dist
 node_modules
 docs/scripts/doc-generator/function-map.json
 .idea
+docs/.vitepress/sidebar-source.js

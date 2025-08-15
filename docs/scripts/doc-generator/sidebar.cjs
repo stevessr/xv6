@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { projectRoot, sourceDir, targetDir, allowedExtensions, allowedFilenames } = require('./config.cjs');
+const { projectRoot, sourceDir, targetDir, allowedExtensions, allowedFilenames, ignoredDirs } = require('./config.cjs');
 
 function generateSidebarItems(dir) {
     return scanDirectory(dir, dir);
@@ -19,7 +19,7 @@ function scanDirectory(dir, rootDir) {
     for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
         if (entry.isDirectory()) {
-            if (entry.name === '.git') continue;
+            if (ignoredDirs.includes(entry.name)) continue;
             items.push({
                 text: entry.name,
                 collapsed: true,
@@ -56,7 +56,7 @@ function generateTreeWithLinks(dir, rootDir = dir, prefix = '') {
         const entryPrefix = prefix + (isLast ? '└─ ' : '├─ ');
 
         if (entry.isDirectory()) {
-            if (entry.name === '.git') return;
+            if (ignoredDirs.includes(entry.name)) return;
             result += `${entryPrefix}<strong>${entry.name}</strong>\n`;
             const newPrefix = prefix + (isLast ? '   ' : '│  ');
             result += generateTreeWithLinks(fullPath, rootDir, newPrefix);

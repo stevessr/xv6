@@ -16,6 +16,8 @@ const cKeywords = [
     'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile', 'while'
 ];
 
+const ignoredDirs = ['.git', '.claude', '.venv', 'conf', '__pycache__'];
+
 module.exports = {
     projectRoot,
     sourceDir,
@@ -23,4 +25,5 @@ module.exports = {
     allowedExtensions,
     allowedFilenames,
     cKeywords,
+    ignoredDirs,
 };

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { sourceDir, targetDir, allowedExtensions, allowedFilenames } = require('./config.cjs');
+const { sourceDir, targetDir, allowedExtensions, allowedFilenames, ignoredDirs } = require('./config.cjs');
 const functionExtractor = require('./function-extractor.cjs');
 const { processFile } = require('./file-processor.cjs');
 const sidebarGenerator = require('./sidebar.cjs');
@@ -11,7 +11,7 @@ async function traverseDir(dir, highlighter, functionDefinitions) {
         for (const entry of entries) {
             const fullPath = path.join(dir, entry.name);
             if (entry.isDirectory()) {
-                if (entry.name !== '.git') {
+                if (!ignoredDirs.includes(entry.name)) {
                     await traverseDir(fullPath, highlighter, functionDefinitions);
                 }
             } else if (entry.isFile()) {
