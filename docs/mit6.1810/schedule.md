@@ -83,7 +83,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 *   **Mon, Oct 14:** (Holiday) Indigenous Peoples Day
 *   **Tue, Oct 15:**
 *   **Wed, Oct 16:**
-    *   **LEC 12 (rtm):** [Coordination](/mit6.1810/lec/l-coordination.md), [code](/source/xv6-riscv/kernel/pipe.c)
+    *   **LEC 12 (rtm):** Coordination, [code](/source/xv6-riscv/kernel/pipe.c)
     *   **Preparation**: Read remainder of ["Scheduling"](/mit6.1810/xv6/book-riscv-rev4.pdf), and corresponding parts of [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c)
     *   **Homework 9 due:** [Question](/mit6.1810/homework/q.md)
 *   **Thu, Oct 17:** **DUE**: Lab cow

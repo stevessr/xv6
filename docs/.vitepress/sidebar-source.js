@@ -88,10 +88,6 @@ export default [
         "link": "/source/xv6-riscv/kernel/plic.c"
       },
       {
-        "text": "power.c",
-        "link": "/source/xv6-riscv/kernel/power.c"
-      },
-      {
         "text": "printf.c",
         "link": "/source/xv6-riscv/kernel/printf.c"
       },
@@ -152,6 +148,10 @@ export default [
         "link": "/source/xv6-riscv/kernel/sysfile.c"
       },
       {
+        "text": "sysinfo.h",
+        "link": "/source/xv6-riscv/kernel/sysinfo.h"
+      },
+      {
         "text": "sysproc.c",
         "link": "/source/xv6-riscv/kernel/sysproc.c"
       },
@@ -200,12 +200,16 @@ export default [
     "collapsed": true,
     "items": [
       {
-        "text": "cat.c",
-        "link": "/source/xv6-riscv/user/cat.c"
+        "text": "attack.c",
+        "link": "/source/xv6-riscv/user/attack.c"
       },
       {
-        "text": "clear.c",
-        "link": "/source/xv6-riscv/user/clear.c"
+        "text": "attacktest.c",
+        "link": "/source/xv6-riscv/user/attacktest.c"
+      },
+      {
+        "text": "cat.c",
+        "link": "/source/xv6-riscv/user/cat.c"
       },
       {
         "text": "echo.c",
@@ -252,28 +256,28 @@ export default [
         "link": "/source/xv6-riscv/user/printf.c"
       },
       {
-        "text": "reboot.c",
-        "link": "/source/xv6-riscv/user/reboot.c"
-      },
-      {
         "text": "rm.c",
         "link": "/source/xv6-riscv/user/rm.c"
+      },
+      {
+        "text": "secret.c",
+        "link": "/source/xv6-riscv/user/secret.c"
       },
       {
         "text": "sh.c",
         "link": "/source/xv6-riscv/user/sh.c"
       },
       {
-        "text": "shutdown.c",
-        "link": "/source/xv6-riscv/user/shutdown.c"
-      },
-      {
-        "text": "sleep.c",
-        "link": "/source/xv6-riscv/user/sleep.c"
-      },
-      {
         "text": "stressfs.c",
         "link": "/source/xv6-riscv/user/stressfs.c"
+      },
+      {
+        "text": "sysinfotest.c",
+        "link": "/source/xv6-riscv/user/sysinfotest.c"
+      },
+      {
+        "text": "trace.c",
+        "link": "/source/xv6-riscv/user/trace.c"
       },
       {
         "text": "ulib.c",
