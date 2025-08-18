@@ -90,6 +90,10 @@ export default [
         "link": "/mit6.1810/lec/l-threads.md"
       },
       {
+        "text": "LEC 12: Coordination",
+        "link": "/mit6.1810/lec/l-coordination.md"
+      },
+      {
         "text": "LEC 13: File systems",
         "link": "/mit6.1810/lec/l-fs.md"
       },
