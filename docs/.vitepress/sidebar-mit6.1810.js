@@ -107,7 +107,7 @@ export default [
       },
       {
         "text": "LEC 16: Virtual memory for applications",
-        "link": "/mit6.1810/homework/l-uservm.md"
+        "link": "/mit6.1810/homework/l-uservm/"
       },
       {
         "text": "LEC 17: OS Organization",

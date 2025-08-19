@@ -1,8 +1,7 @@
 ---
 title: l4-faq.txt
 ---
-
-```text
+ 
 Frequently Asked Questions about micro-kernels and L4
 
 Q: How do people use micro-kernels today?
@@ -179,4 +178,3 @@ representative of the performance you'd really observe, but it's also
 often hard to understand why macro-benchmarks get the performance they
 do.
 
-```

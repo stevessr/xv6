@@ -1,8 +1,7 @@
 ---
 title: l-riscv.txt
 ---
-
-```text
+ 
 6.1810 2022 Lecture 5: RISC-V calling convention, stack frames, and gdb
 
 C code is compiled to machine instructions.
@@ -276,4 +275,3 @@ References
   RISC-V assembly language reference: https://rv8.io/asm
     Overview of directives, pseudo-instructions, and more
 
-```

@@ -1,8 +1,7 @@
 ---
 title: l-net.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 20: Networking
 
 topics
@@ -246,4 +245,3 @@ AMD LANCE NIC interface:
   https://www.ardent-tool.com/datasheets/AMD_Am7990.pdf
   https://en.wikipedia.org/wiki/AMD_LANCE_Am7990
 
-```

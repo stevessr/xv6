@@ -1,8 +1,7 @@
 ---
 title: l-rcu.txt
 ---
-
-```text
+ 
 6.1810 2024 L22: Multi-Core scalability and RCU
 
 Today's topic: 
@@ -319,4 +318,3 @@ RDU implementation: http://www2.rdrop.com/users/paulmck/RCU/rclockpdcsproof.pdf
 Lockless patterns: https://lwn.net/Articles/850202/
 Detecting missing memory barriers with KCSAN: https://lwn.net/Articles/877200/
 
-```

@@ -1,8 +1,7 @@
 ---
 title: l-threads.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 11: Thread switching
 
 Topic: more "under the hood" with xv6
@@ -384,4 +383,3 @@ can a user-space process have multiple user-space threads?
 
 Next week: sleep() and wakeup() -- waiting for events
 
-```

@@ -1,8 +1,7 @@
 ---
 title: l-c.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 2: programming xv6 in C
 
 why C?
@@ -154,4 +153,3 @@ common C bugs
 References:
 https://blog.regehr.org/archives/1393
 
-```

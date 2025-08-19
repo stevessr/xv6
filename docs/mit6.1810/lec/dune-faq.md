@@ -2,7 +2,6 @@
 title: dune-faq.txt
 ---
 
-```text
 Frequently Asked Questions for "Dune: Safe User-level Access to
 Privileged CPU Features".
 
@@ -82,5 +81,3 @@ physical" address in that level's PTE to a "host physical" address).
 So more addresses have to be looked up (in the EPT), and thus there's
 more pressure on the part of the TLB that caches guest physical to
 host physical translations.
-
-```

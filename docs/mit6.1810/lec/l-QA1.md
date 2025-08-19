@@ -1,8 +1,3 @@
----
-title: l-QA1.txt
----
-
-```text
 6.1810 2022 Lecture 8: Q&A
 
 Plan: answering your questions
@@ -61,7 +56,7 @@ Demo
 
 Linux has vDSO (https://lwn.net/Articles/615809/)
   vDSO: virtual dynamic shared object
-    cat /proc/<pid>/maps
+    cat /proc/&lt;pid&gt;/maps
   read-only, shared memory region
   vdso library mapped into each user program
     library interprets data in the shared region
@@ -203,4 +198,3 @@ For pgtbl 1st question, other than understanding the permissions (valid,
 readable, executable, user), is there other things we can infer? How do
 we know what it would logically contain?
 
-```

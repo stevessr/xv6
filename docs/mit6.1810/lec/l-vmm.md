@@ -2,7 +2,6 @@
 title: l-vmm.txt
 ---
 
-```text
 6.1810 2024 Lecture 18: Virtual Machines, Dune
 
 Read: Dune: Safe User-level Access to Privileged CPU features, Belay et al,
@@ -311,4 +310,3 @@ How much can clever use of Dune speed up real apps?
 Next week:
   yet another different approach to kernel architecture!
 
-```

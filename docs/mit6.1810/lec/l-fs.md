@@ -1,8 +1,7 @@
 ---
 title: l-fs.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 13: File System
 
 why are file systems useful?
@@ -314,4 +313,3 @@ Let's look at namex() (kernel/fs.c)
     key idea: getting a reference separately from locking
 
 
-```

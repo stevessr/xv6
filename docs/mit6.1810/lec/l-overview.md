@@ -1,8 +1,7 @@
 ---
 title: l-overview.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 1: O/S overview
 
 Overview
@@ -270,4 +269,3 @@ Introduction to UNIX system calls
   - more about C programming
   - first lab due next thursday, you'll use these system calls
 
-```

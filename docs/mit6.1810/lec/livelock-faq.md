@@ -1,8 +1,7 @@
 ---
 title: livelock-faq.txt
 ---
-
-```text
+ 
 Frequently Asked Questions for Eliminating Receive Livelock in an
 Interrupt-Driven Kernel, by Mogul and Ramakrishnan, 1996.
 
@@ -200,4 +199,3 @@ can be told to put different kinds of received packets on different DMA
 rings. A clever router could use this to prioritize traffic under
 overload.
 
-```

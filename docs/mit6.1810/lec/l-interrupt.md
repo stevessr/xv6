@@ -1,8 +1,7 @@
 ---
 title: l-interrupt.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 9: Device drivers, interrupts
 
 Topic: device drivers
@@ -109,7 +108,7 @@ Let's look at the shell reading input from the console/UART
 (gdb) c
 (gdb) tbreak sys_read
 (gdb) c
-<press return>
+&lt;press return&gt;
 (gdb) tui enable
 (gdb) where
 sys_read()
@@ -128,7 +127,7 @@ Q: where should I tell gdb to put a breakpoint to see the interrupt?
 
 (gdb) tb *kernelvec
 (gdb) c
-<press return>
+&lt;press return&gt;
 
 how did we get here?
   (gdb) where
@@ -305,4 +304,3 @@ Interrupts and device handling a continuing area of concern
   We will be seeing these topics later in the course
 
 
-```

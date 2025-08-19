@@ -2,7 +2,6 @@
 title: l-meltdown.txt
 ---
 
-```text
 6.1810 2024 Lecture 21: Meltdown
 
 Why this paper?
@@ -20,12 +19,14 @@ Meltdown
     Linux:  grep . /sys/devices/system/cpu/vulnerabilities/*
 
 Here's the core of the attack (this is user code):
+```c
 1.  char buf[8192]
 2.  r1 = <a kernel virtual address>
 3.  r2 = *r1
 4.  r2 = r2 & 1
 5.  r2 = r2 * 4096
 6.  r3 = buf[r2]
+```
 
 Will the load at line 3 load kernel data into r2?
 
@@ -45,24 +46,26 @@ First, speculative execution.
   Imagine this ordinary code.
   This is C-like code; "r0" &c are registers, and "*r0" is a memory reference.
 
-  r0 = <some address>
-  r1 = load x from RAM  // r1 is a register; x is a variable in RAM
-  if(r1 == 1){
-    r2 = *r0
-    r3 = r2 + 1
-  } else {
-    r3 = 0
-  }
+```c
+r0 = <some address>
+r1 = load x from RAM  // r1 is a register; x is a variable in RAM
+if(r1 == 1){
+  r2 = *r0
+  r3 = r2 + 1
+} else {
+  r3 = 0
+}
+```
 
-  The "r1 = x" load from RAM takes 100s of cycles.
-  The "if(r1 == 1)" needs that RAM content.
-  It would be too bad if the CPU had to pause until the RAM fetch completed.
-  Instead, the CPU predicts which way the branch is likely to go,
-    and continues executing.
-  This is called "speculation".
-  So before the "r1 == 1" is resolved,
-    the CPU may speculatively execute the "r2 = *r0",
-    and then the "r3 = r2 + 1".
+The "r1 = x" load from RAM takes 100s of cycles.
+The "if(r1 == 1)" needs that RAM content.
+It would be too bad if the CPU had to pause until the RAM fetch completed.
+Instead, the CPU predicts which way the branch is likely to go,
+  and continues executing.
+This is called "speculation".
+So before the "r1 == 1" is resolved,
+  the CPU may speculatively execute the "r2 = *r0",
+  and then the "r3 = r2 + 1".
 
 What if the CPU mis-predicts a branch, e.g. x turns out to be zero?
   The CPU flushes the results of the incorrect speculation.
@@ -143,35 +146,38 @@ A useful trick: sense whether something is cached.
   4) load a byte from address Z
      (you need memory fences to ensure the load really happens)
   5) Record the time again.
-  6) If the difference in times is < (say) 50, the load in #4 hit,
+  6) If the difference in times is &lt; (say) 50, the load in #4 hit,
      which means f() probably used memory at address Z.
-     Otherwise not.
 
 Back to Meltdown -- this time with more detail:
 
-    char buf[8192]
+```c
+char buf[8192]
 
-    // the Flush of Flush+Reload
-    clflush buf[0]
-    clflush buf[4096]
+// the Flush of Flush+Reload
+clflush buf[0]
+clflush buf[4096]
 
 1.  r1 = <a kernel virtual address>
 2.  r2 = *r1
 3.  r2 = r2 & 1      // speculated
 4.  r2 = r2 * 4096   // speculated
 5.  r3 = buf[r2]     // speculated
+```
 
-    <page fault from *r1; r2 and r3 rolled back, but not cache>
-    <handle the page fault>
+&lt;page fault from *r1; r2 and r3 rolled back, but not cache&gt;
+&lt;handle the page fault&gt;
 
-    // the Reload of Flush+Reload
-    a = rdtsc
-    r0 = buf[0]
-    b = rdtsc
-    r1 = buf[4096]
-    c = rdtsc
-    if b-a > c-b:
-      low bit was probably a 1
+```c
+// the Reload of Flush+Reload
+a = rdtsc
+r0 = buf[0]
+b = rdtsc
+r1 = buf[4096]
+c = rdtsc
+if b-a > c-b:
+  low bit was probably a 1
+```
 
 That is, you can deduce the low bit of the kernel data based on which
 of two cache lines was loaded (buf[0] vs buf[4096]).
@@ -251,4 +257,3 @@ https://lwn.net/Articles/741878/
 
 
 
-```

@@ -1,8 +1,7 @@
 ---
 title: l-redleaf.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 19: Kernels and HLL
 
 Reading: "RedLeaf: Isolation and Communication in Safe Operating System" (2020)
@@ -110,26 +109,26 @@ RedLeaf ideas:
   git clone https://github.com/mars-research/redleaf.git
 
 RedLeaf inter-domain communication (fig 2)
- shared heap contains RRef<T>
+ shared heap contains RRef&lt;T&gt;
    domain owner, refcnt, T info
  domain's heap: two-level memory allocation
-   trusted crate for Box<T> allocations
+   trusted crate for Box&lt;T&gt; allocations
  exchangeable types
-   RRef<T> can point to other RRef<T>
+   RRef&lt;T&gt; can point to other RRef&lt;T&gt;
    IDL compiler checks interface definitions
  trusted proxy for isolation
-   update RRef<T> ownership (only the root RRef<T>)
+   update RRef&lt;T&gt; ownership (only the root RRef&lt;T&gt;)
    returns error when callee crashes
 
 Domain cleanup
  private heaps are private
    no other domain has a pointer to an object in private heap
  shared heap deallocation
-   find domain's RRef<T> roots
+   find domain's RRef&lt;T&gt; roots
      find drop() for T
      call drop(), which may deallocate children
  crashed callee may scribble on mutable reference
-   proxy returns RpcResult<T>
+   proxy returns RpcResult&lt;T&gt;
  for transparent recovery: references must be immutable
    
 RedLeaf implementation (fig 1)
@@ -158,16 +157,15 @@ Performance
     why is RedLeaf only 124 cycles?
   language tax (fig 5)
     high-order functions
-    Option<T>
+    Option&lt;T&gt;
   device driver (fig 8)
-    why is redleaf-driver < DPDK?
-    wh is redleaf-domain < redleaf-driver?s
+    why is redleaf-driver &lt; DPDK?
+    wh is redleaf-domain &lt; redleaf-driver?s
   
 HLL vs. hardware isolation
   RedLeaf TCB: Rust compiler, Rust core libraries, microkernel, IDL compiler
   xv6 TCB: RISC-V CPU, xv6-kernel (but less on compiler)
   language-level isolation in browser (e.g., WASM)
-  page tables are useful for other purposes than isolation    
+  page tables are useful for other purposes than isolation
 
 
-```

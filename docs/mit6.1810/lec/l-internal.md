@@ -2,7 +2,6 @@
 title: l-internal.txt
 ---
 
-```text
 6.1810 2024 Lecture 5: System Call Entry/Exit
 
 Today: user -> kernel transition
@@ -49,7 +48,7 @@ let's watch an xv6 system call entering/leaving the kernel
 
 let's start by putting a breakpoint on the ecall
   user/sh.asm
-  search for <write>:
+  search for &lt;write&gt;:
   write()'s ecall is at address 0xc24
 
 $ make qemu-gdb
@@ -370,4 +369,4 @@ summary
     can you think of ways to make the hardware or software simpler?
     can you think of ways to make traps faster?
 
-```
+

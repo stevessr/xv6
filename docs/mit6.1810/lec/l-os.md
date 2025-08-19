@@ -1,8 +1,7 @@
 ---
 title: l-os.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 3: OS design
 
 Lecture Topic:
@@ -100,7 +99,7 @@ How do system calls work?
 
 Solution: instruction to change mode in controlled way
   open():
-    ecall <n>
+    ecall &lt;n&gt;
   ecall does a few things
     change to supervisor mode
     start executing at a known point in kernel code
@@ -313,4 +312,3 @@ Next lecture:
   virtual memory and page tables
 
 
-```

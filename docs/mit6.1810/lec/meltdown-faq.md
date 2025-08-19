@@ -1,8 +1,7 @@
 ---
 title: meltdown-faq.txt
 ---
-
-```text
+ 
 Frequently Asked Questions for Lipp et al.'s "Meltdown: Reading Kernel
 Memory from User Space"
 
@@ -156,4 +155,3 @@ interest.  You can see from the XXs in listing 3 and 4 that indeed the
 attack isn't reliable.
 
 
-```

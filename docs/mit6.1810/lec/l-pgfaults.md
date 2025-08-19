@@ -1,8 +1,7 @@
 ---
 title: l-pgfaults.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 7: Page faults
 
 * plan: cool things you can do with vm
@@ -190,4 +189,3 @@ title: l-pgfaults.txt
   xv6 is simple, but you have enough information to extrapolate
 
 
-```

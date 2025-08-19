@@ -1,8 +1,7 @@
 ---
 title: l-lockv2.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 10: Locking
 
 Why talk about locking?
@@ -227,4 +226,3 @@ Advice:
   use fine-grained locks only as needed for parallel performance
   use an automated race detector
 
-```

@@ -1,8 +1,7 @@
 ---
 title: rcu-faq.txt
 ---
-
-```text
+ 
 FAQ for "RCU Usage In the Linux Kernel: One Decade Later", by
 McKenney, Boyd-Wickizer, and Walpole, 2012.
 
@@ -243,4 +242,3 @@ interrupt time. More generally, RCU needs to be used in a system in
 which context switches are frequent, and RCU can learn about them;
 this is easy in the kernel, but harder in user space.
 
-```

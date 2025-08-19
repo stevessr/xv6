@@ -1,8 +1,7 @@
 ---
 title: l-organization.txt
 ---
-
-```text
+ 
 6.1810 2024 L17: Operating System Organization, Microkernels
 
 Topic:
@@ -317,4 +316,3 @@ an earlier paper on the ideas behind L4:
 The Fiasco.OC Microkernel -- a current L4 descendent
   https://l4re.org/doc/
 
-```

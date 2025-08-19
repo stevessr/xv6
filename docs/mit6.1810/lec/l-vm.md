@@ -1,8 +1,7 @@
 ---
 title: l-vm.txt
 ---
-
-```text
+ 
 6.1810 2024 Lecture 4: Virtual Memory/Page tables
 
 * plan:
@@ -274,4 +273,3 @@ title: l-vm.txt
       2MB and 1GB
 
 
-```
