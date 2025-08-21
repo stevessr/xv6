@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+
+# Build output
+dist/
+*.map
+
+# Development
+.vite/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Extension development
+web-ext-artifacts/
+*.zip
+*.crx
+
+# Temporary files
+*.tmp
+*.temp
+.temp/

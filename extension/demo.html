@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Manager Extension Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f3f4f6;
+        }
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .demo-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .demo-popup {
+            width: 400px;
+            height: 600px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 20px;
+        }
+        .demo-options {
+            width: 800px;
+            height: 600px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: top;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .header {
+            background: linear-gradient(to right, #3b82f6, #2563eb);
+            color: white;
+            padding: 16px;
+            text-align: center;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .feature-card {
+            background: #f9fafb;
+            padding: 16px;
+            border-radius: 6px;
+            border-left: 4px solid #3b82f6;
+        }
+        .feature-card h3 {
+            margin: 0 0 8px 0;
+            color: #1f2937;
+        }
+        .feature-card p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="header">
+            <h1>🎭 Emoji Manager Browser Extension</h1>
+            <p>Advanced emoji management with Vue 3 + Vite + TailwindCSS + Ant Design Vue</p>
+        </div>
+
+        <div class="demo-section">
+            <h2>✨ Key Features</h2>
+            <div class="feature-list">
+                <div class="feature-card">
+                    <h3>📏 Image Scale Control</h3>
+                    <p>Adjust output image size from 5% to 150% with real-time preview</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Popup Interface</h3>
+                    <p>Compact popup with emoji grid, settings navigation, and secondary menu</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚙️ Options Management</h3>
+                    <p>Full-featured settings page for emoji group and content management</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔄 Drag & Drop</h3>
+                    <p>Intuitive reordering of emojis within groups and between groups</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📁 Group Management</h3>
+                    <p>Create, edit, and organize emoji groups with custom icons</p>
+                </div>
+                <div class="feature-card">
+                    <h3>☁️ Configuration Sync</h3>
+                    <p>Export/import configurations and cloud synchronization</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>🏗️ Technical Implementation</h2>
+            <div class="feature-list">
+                <div class="feature-card">
+                    <h3>🔧 Modern Tech Stack</h3>
+                    <p>Vue 3 Composition API + Vite 6 + TailwindCSS 3 + Ant Design Vue 4</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📦 Build Optimization</h3>
+                    <p>Code splitting, vendor chunking, and modern JavaScript output</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏪 State Management</h3>
+                    <p>Pinia for reactive state with Chrome storage API integration</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛡️ Extension Standards</h3>
+                    <p>Manifest V3 compliant with proper permissions and CSP</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📋 Project Structure</h2>
+            <pre style="background: #f3f4f6; padding: 16px; border-radius: 6px; overflow-x: auto;">
+extension/
+├── src/
+│   ├── popup/           # Popup window components
+│   ├── options/         # Settings page components  
+│   ├── stores/          # Pinia state management
+│   ├── styles/          # TailwindCSS styles
+│   └── components/      # Shared components
+├── public/
+│   ├── manifest.json    # Extension manifest
+│   └── icons/           # Extension icons
+└── dist/                # Built extension files
+            </pre>
+        </div>
+
+        <div class="demo-section">
+            <h2>🚀 Build Results</h2>
+            <div style="background: #f3f4f6; padding: 16px; border-radius: 6px;">
+                <p><strong>✅ Build Status:</strong> Successfully built with Vite</p>
+                <p><strong>📦 Output Size:</strong> ~560KB packaged extension</p>
+                <p><strong>🔄 Code Splitting:</strong> Vendor chunks separated for optimal loading</p>
+                <p><strong>🎯 Target:</strong> Modern browsers with Chrome Extensions API</p>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>🎛️ Extension Interface Preview</h2>
+            <p>The extension includes a compact popup interface and a comprehensive options page:</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <div style="display: inline-block; margin: 10px; text-align: center;">
+                    <div style="width: 400px; height: 300px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; position: relative; color: white; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                        <h3 style="margin: 0;">🎭 Popup Window</h3>
+                        <p style="margin: 10px 0;">400×600px compact interface</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 4px; margin-top: 10px;">
+                            Image Scale: <strong>100%</strong>
+                        </div>
+                    </div>
+                    <p style="margin-top: 10px; color: #6b7280;">Popup Interface</p>
+                </div>
+                <div style="display: inline-block; margin: 10px; text-align: center;">
+                    <div style="width: 500px; height: 300px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 8px; position: relative; color: white; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                        <h3 style="margin: 0;">⚙️ Options Page</h3>
+                        <p style="margin: 10px 0;">Full-screen settings interface</p>
+                        <div style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 4px; margin-top: 10px;">
+                            Drag & Drop + Group Management
+                        </div>
+                    </div>
+                    <p style="margin-top: 10px; color: #6b7280;">Settings Page</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

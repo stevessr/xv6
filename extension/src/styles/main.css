@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ant Design Vue custom styles */
+.ant-slider {
+  @apply my-4;
+}
+
+.ant-slider-handle {
+  @apply border-primary-500;
+}
+
+.ant-slider-track {
+  @apply bg-primary-500;
+}
+
+.ant-menu {
+  @apply border-r-0;
+}
+
+.ant-menu-item {
+  @apply rounded-lg mx-2 my-1;
+}
+
+.ant-menu-item-selected {
+  @apply bg-primary-50 text-primary-600;
+}
+
+/* Custom emoji grid */
+.emoji-grid {
+  @apply grid grid-cols-6 gap-2 p-4;
+}
+
+.emoji-item {
+  @apply p-2 rounded-lg border border-gray-200 hover:border-primary-300 cursor-pointer transition-all duration-200;
+}
+
+.emoji-item:hover {
+  @apply shadow-md transform scale-105;
+}
+
+.emoji-item.selected {
+  @apply border-primary-500 bg-primary-50;
+}
+
+/* Drag and drop styles */
+.sortable-ghost {
+  @apply opacity-50;
+}
+
+.sortable-chosen {
+  @apply transform scale-105;
+}
+
+.sortable-drag {
+  @apply transform rotate-3;
+}
+
+/* Image scaling preview */
+.image-preview {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-4 text-center;
+}
+
+.image-preview img {
+  @apply max-w-full h-auto mx-auto;
+}
+
+/* Secondary menu styles */
+.secondary-menu {
+  @apply absolute top-full left-0 right-0 bg-white shadow-lg border border-gray-200 rounded-b-lg z-50;
+}
+
+/* Animation for secondary menu */
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-down-enter-from,
+.slide-down-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+}
