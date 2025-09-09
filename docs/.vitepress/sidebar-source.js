@@ -148,10 +148,6 @@ export default [
         "link": "/source/xv6-riscv/kernel/sysfile.c"
       },
       {
-        "text": "sysinfo.h",
-        "link": "/source/xv6-riscv/kernel/sysinfo.h"
-      },
-      {
         "text": "sysproc.c",
         "link": "/source/xv6-riscv/kernel/sysproc.c"
       },
@@ -200,14 +196,6 @@ export default [
     "collapsed": true,
     "items": [
       {
-        "text": "attack.c",
-        "link": "/source/xv6-riscv/user/attack.c"
-      },
-      {
-        "text": "attacktest.c",
-        "link": "/source/xv6-riscv/user/attacktest.c"
-      },
-      {
         "text": "cat.c",
         "link": "/source/xv6-riscv/user/cat.c"
       },
@@ -252,6 +240,10 @@ export default [
         "link": "/source/xv6-riscv/user/mkdir.c"
       },
       {
+        "text": "pgtbltest.c",
+        "link": "/source/xv6-riscv/user/pgtbltest.c"
+      },
+      {
         "text": "printf.c",
         "link": "/source/xv6-riscv/user/printf.c"
       },
@@ -260,24 +252,12 @@ export default [
         "link": "/source/xv6-riscv/user/rm.c"
       },
       {
-        "text": "secret.c",
-        "link": "/source/xv6-riscv/user/secret.c"
-      },
-      {
         "text": "sh.c",
         "link": "/source/xv6-riscv/user/sh.c"
       },
       {
         "text": "stressfs.c",
         "link": "/source/xv6-riscv/user/stressfs.c"
-      },
-      {
-        "text": "sysinfotest.c",
-        "link": "/source/xv6-riscv/user/sysinfotest.c"
-      },
-      {
-        "text": "trace.c",
-        "link": "/source/xv6-riscv/user/trace.c"
       },
       {
         "text": "ulib.c",

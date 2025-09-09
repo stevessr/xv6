@@ -16,9 +16,9 @@ title: Labs
 - [Lab fs: File system](/mit6.1810/labs/fs.md)
 - [Lab mmap: Mmap](/mit6.1810/labs/mmap.md)
 
+📌 [查看中文翻译版本](/mit6.1810/labs/zh/)
+
 附加资源：
 
 - [Lab guidance](/mit6.1810/labs/guidance.md)
 - [Tools & 安装](/mit6.1810/labs/tools.md)
-
-如果你希望我同时在侧边栏添加“Labs”展开层级或调整标题显示，请告诉我，我可以继续修改 `docs/.vitepress/sidebar-mit6.1810.js`。

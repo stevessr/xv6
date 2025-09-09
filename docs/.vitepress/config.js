@@ -5,6 +5,8 @@ import llmstxt from "vitepress-plugin-llms";
 import sourceSidebarItems from "./sidebar-source.js";
 import courseSidebarItems from "./sidebar-course.js";
 import mit61810SidebarItems from "./sidebar-mit6.1810-by-schedule.js";
+import labsSidebarItems from "./sidebar-labs.js";
+import labsZhSidebarItems from "./sidebar-labs-zh.js";
 
 export default defineConfig({
   title: "XV6 中文文档",
@@ -29,6 +31,14 @@ export default defineConfig({
         text: "MIT 6.1810",
         items: mit61810SidebarItems,
       },
+      {
+        text: "Labs",
+        items: labsSidebarItems,
+      },
+      {
+        text: "Labs (中文版)",
+        items: labsZhSidebarItems,
+      },
     ],
     sidebar: {
       "/mit6.1810/": [
@@ -48,6 +58,18 @@ export default defineConfig({
           text: "课程内容",
           collapsed: false,
           items: courseSidebarItems,
+        },
+      ],
+      "/labs/": [
+        {
+          text: "Labs",
+          items: labsSidebarItems,
+        },
+      ],
+      "/labs-zh/": [
+        {
+          text: "Labs (中文版)",
+          items: labsZhSidebarItems,
         },
       ],
     },
