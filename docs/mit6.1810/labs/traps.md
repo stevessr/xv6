@@ -8,7 +8,7 @@ This lab explores how system calls are implemented using traps.
 You will first do a warm-up exercises with stacks and then you will
 implement an example of user-level trap handling.
 
-> Before you start coding, read Chapter 4 of the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf.md), and
+> Before you start coding, read Chapter 4 of the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf), and
 > related source files:
 > *   `kernel/trampoline.S`: the assembly involved in
 >     changing from user space to kernel space and back

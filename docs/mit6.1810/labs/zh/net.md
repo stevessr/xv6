@@ -16,7 +16,7 @@ $ make clean
 
 ## 背景
 
-> 在编写代码之前，你可能会发现查看 [xv6 书籍](/mit6.1810/xv6/book-riscv-rev4.pdf.md) 中的"第 5 章：中断和设备驱动程序"很有帮助。
+> 在编写代码之前，你可能会发现查看 [xv6 书籍](/mit6.1810/xv6/book-riscv-rev4.pdf) 中的"第 5 章：中断和设备驱动程序"很有帮助。
 
 你将使用一个名为 E1000 的网络设备来处理网络通信。对于 xv6（以及你编写的驱动程序），E1000 看起来像连接到真实以太网局域网（LAN）的真实硬件。实际上，你的驱动程序将与之通信的 E1000 是 qemu 提供的模拟，连接到 qemu 模拟的 LAN。在这个模拟的 LAN 上，xv6（"客户机"）的 IP 地址是 10.0.2.15。
 Qemu 安排运行 qemu 的计算机（"主机"）
@@ -43,7 +43,7 @@ tcpdump -XXnr packets.pcap
 代码以及传输和接收数据包的空函数，你将填充这些函数。
 `kernel/e1000_dev.h` 包含 E1000 定义的
 寄存器和标志位定义，并在 Intel E1000
-[软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf.md) 中描述。
+[软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf) 中描述。
 `kernel/net.c` 和 `kernel/net.h`
 包含实现
 [IP](https://en.wikipedia.org/wiki/Internet_Protocol)、[UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol) 和 [ARP](https://en.wikipedia.org/wiki/Address_Resolution_Protocol) 协议的简单网络栈；
@@ -62,14 +62,14 @@ tcpdump -XXnr packets.pcap
 > 当 `make grade` 说你的
 > 解决方案通过"txone"和"rxone"测试时，你就完成了这部分。
 
-> 在编写代码时，你会发现需要参考 E1000 [软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf.md)。以下部分可能特别有帮助：
+> 在编写代码时，你会发现需要参考 E1000 [软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf)。以下部分可能特别有帮助：
 > *   第 2 节是必不可少的，它概述了整个设备。
 > *   第 3.2 节概述了数据包接收。
 > *   第 3.3 节概述了数据包传输，以及第 3.4 节。
 > *   第 13 节概述了 E1000 使用的寄存器。
 > *   第 14 节可能有助于你理解我们提供的初始化代码。
 
-浏览 E1000 [软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf.md)。
+浏览 E1000 [软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf)。
 本手册涵盖了几个密切相关的以太网控制器。
 QEMU 模拟 82540EM。现在快速浏览第 2 章以了解
 设备。要编写你的驱动程序，你需要熟悉第 3 章

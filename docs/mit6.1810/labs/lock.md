@@ -12,7 +12,7 @@ reduce contention. You'll do this for the xv6 memory allocator and
 block cache.
 
 > Before writing code, make sure to read the following
-> parts from  the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf.md) :
+> parts from  the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf) :
 > * Chapter 6: "Locking" and the corresponding code.
 > * Section 3.5: "Code: Physical memory allocator"
 > * Section 8.1 through 8.3: "Overview", "Buffer cache layer", and

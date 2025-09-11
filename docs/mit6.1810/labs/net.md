@@ -19,7 +19,7 @@ $ make clean
 ## Background
 
 > Before writing code, you may find it helpful to review "Chapter 5: Interrupts and
-> device drivers" in the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf.md).
+> device drivers" in the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf).
 
 You'll use a network device called the E1000 to handle network
 communication. To xv6 (and the driver you write), the E1000 looks like a real
@@ -57,7 +57,7 @@ transmitting and receiving packets, which you'll fill in.
 `kernel/e1000_dev.h` contains definitions for
 registers and flag bits defined by the E1000 and
 described in the Intel E1000
-[Software Developer's Manual](/mit6.1810/readings/8254x_GBe_SDM.pdf.md).
+[Software Developer's Manual](/mit6.1810/readings/8254x_GBe_SDM.pdf).
 `kernel/net.c` and `kernel/net.h`
 contain simple network stack that implements the
 [IP](https://en.wikipedia.org/wiki/Internet_Protocol), [UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol), and [ARP](https://en.wikipedia.org/wiki/Address_Resolution_Protocol) protocols;
@@ -77,14 +77,14 @@ searches for an E1000 card on the PCI bus when xv6 boots.
 > You are done with this part when `make grade` says your
 > solution passes the "txone" and "rxone" tests.
 
-> While writing your code, you'll find yourself referring to the E1000 [Software Developer's Manual](/mit6.1810/readings/8254x_GBe_SDM.pdf.md). Of particular help may be the following sections:
+> While writing your code, you'll find yourself referring to the E1000 [Software Developer's Manual](/mit6.1810/readings/8254x_GBe_SDM.pdf). Of particular help may be the following sections:
 > *   Section 2 is essential and gives an overview of the entire device.
 > *   Section 3.2 gives an overview of packet receiving.
 > *   Section 3.3 gives an overview of packet transmission, alongside section 3.4.
 > *   Section 13 gives an overview of the registers used by the E1000.
 > *   Section 14 may help you understand the init code that we've provided.
 
-Browse the E1000 [Software Developer's Manual](/mit6.1810/readings/8254x_GBe_SDM.pdf.md).
+Browse the E1000 [Software Developer's Manual](/mit6.1810/readings/8254x_GBe_SDM.pdf).
 This manual covers several closely related Ethernet controllers.
 QEMU emulates the 82540EM. Skim Chapter 2 now to get a feel for
 the device.  To write your driver, you'll need to be familiar with Chapters 3
