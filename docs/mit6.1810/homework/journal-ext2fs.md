@@ -4,7 +4,7 @@ title: journal-ext2fs
 
 # Journaling
 
-Read: [Journaling the Linux ext2fs Filesystem](/mit6.1810/readings/journal-design.pdf).
+Read: [Journaling the Linux ext2fs Filesystem](/assets/mit6.1810/journal-design.pdf).
 
 The paper uses "journal" to refer to the same idea that
 xv6 calls a "log". The file system described in the paper is now called ext3.

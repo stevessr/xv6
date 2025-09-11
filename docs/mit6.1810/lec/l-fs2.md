@@ -3,7 +3,7 @@ title: "LEC 7: File System 2"
 ---
 下面为完整讲义页面：已嵌入本讲的幻灯片，并附带要点摘要与参考资料。
 
-<iframe src="../../public/assets/mit6.1810/l-fs2.pdf" width="100%" height="800px"></iframe>
+<iframe src="/assets/mit6.1810/l-fs2.pdf" width="100%" height="800px"></iframe>
 
 ## 讲义要点（摘要）
 

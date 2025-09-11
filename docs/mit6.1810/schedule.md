@@ -43,7 +43,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Sep 23
 *   **Mon, Sep 23:**
     *   **LEC 6 (TAs):** [GDB](/mit6.1810/lec/gdb_slides.pdf) [Calling conventions](/mit6.1810/lec/l-riscv.md)
-    *   **Preparation**: Read [Calling Convention](/mit6.1810/readings/riscv-calling.pdf)
+    *   **Preparation**: Read [Calling Convention](/assets/mit6.1810/riscv-calling.pdf)
 *   **Tue, Sep 24:**
 *   **Wed, Sep 25:**
     *   **LEC 7 (fk):** [Page faults](/mit6.1810/lec/l-pgfaults.md) 
@@ -129,7 +129,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 *   **Tue, Nov 12:**
 *   **Wed, Nov 13:**
     *   **LEC 16 (fk):** [Virtual memory for applications](/mit6.1810/homework/l-uservm.md), [FAQ](/mit6.1810/homework/uservm-faq.md) ([sqrt example](/source/xv6-riscv/user/usertests.c))
-    *   **Preparation**: Read [Virtual Memory Primitives for User Programs (1991)](/mit6.1810/readings/appel-li.pdf)
+    *   **Preparation**: Read [Virtual Memory Primitives for User Programs (1991)](/assets/mit6.1810/appel-li.pdf)
     *   **Homework 13 due:** [Question](/mit6.1810/homework/q.md)
     *   **Assignment**: [Lab fs: File system](/mit6.1810/labs/fs.md)
 *   **Thu, Nov 14:** **DUE**: Lab lock
@@ -138,13 +138,13 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Nov 18
 *   **Mon, Nov 18:**
     *   **LEC 17 (rtm):** [OS Organization](/mit6.1810/lec/l-organization.md), [FAQ](/mit6.1810/lec/l4-faq.md)
-    *   **Preparation**: Read [The Performance of micro-Kernel-Based Systems (1997)](/mit6.1810/readings/microkernel.pdf)
+    *   **Preparation**: Read [The Performance of micro-Kernel-Based Systems (1997)](/assets/mit6.1810/microkernel.pdf)
     *   **Homework 14 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Nov 19:**
 *   **Wed, Nov 20:**
     *   **DROP DATE**
     *   **LEC 18 (rtm):** [Virtual Machines](/mit6.1810/lec/l-vmm.md), [FAQ](/mit6.1810/lec/dune-faq.md)
-    *   **Preparation**: Read [Dune: Safe User-level Access to Privileged CPU Features (2012)](/mit6.1810/readings/belay-dune.pdf)
+    *   **Preparation**: Read [Dune: Safe User-level Access to Privileged CPU Features (2012)](/assets/mit6.1810/belay-dune.pdf)
     *   **Homework 15 due:** [Question](/mit6.1810/homework/q.md)
     *   **Assignment**: [Lab mmap: Mmap](/mit6.1810/labs/mmap.md)
 *   **Thu, Nov 21:** **DUE**: Lab fs
@@ -153,7 +153,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Nov 25
 *   **Mon, Nov 25:**
     *   **LEC 19 (fk):** [Kernels and HLL](/mit6.1810/lec/l-redleaf.md), [FAQ](/mit6.1810/lec/redleaf-faq.md)
-    *   **Preparation**: Read [the RedLeaf paper (2020)](/mit6.1810/readings/redleaf.pdf)
+    *   **Preparation**: Read [the RedLeaf paper (2020)](/assets/mit6.1810/redleaf.pdf)
     *   **Homework 16 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Nov 26:**
 *   **Wed, Nov 27:** (Holiday) Hacking day: no class meeting; work on the lab
@@ -162,7 +162,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Dec 2
 *   **Mon, Dec 2:**
     *   **LEC 20 (rtm):** [Networking](/mit6.1810/lec/l-net.md)
-    *   **Preparation**: Read [Receive Livelock (1996)](/mit6.1810/readings/mogul96usenix.pdf), [FAQ](/mit6.1810/lec/livelock-faq.md)
+    *   **Preparation**: Read [Receive Livelock (1996)](/assets/mit6.1810/mogul96usenix.pdf), [FAQ](/mit6.1810/lec/livelock-faq.md)
     *   **Homework 17 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Dec 3:**
 *   **Wed, Dec 4:** (Holiday) Hacking day: no class meeting; work on the lab
@@ -172,13 +172,13 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Dec 9
 *   **Mon, Dec 9:**
     *   **LEC 21 (fk):** [Meltdown](/mit6.1810/lec/l-meltdown.md), [FAQ](/mit6.1810/lec/meltdown-faq.md)
-    *   **Preparation**: Read [Meltdown (2018)](/mit6.1810/readings/meltdown.pdf)
+    *   **Preparation**: Read [Meltdown (2018)](/assets/mit6.1810/meltdown.pdf)
     *   **Homework 18 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Dec 10:**
 *   **Wed, Dec 11:**
     *   **LAST DAY OF CLASSES**
     *   **LEC 22 (rtm):** [Multi-Core scalability and RCU](/mit6.1810/lec/l-rcu.md) 
-    *   **Preparation**: Read [RCU paper (2013)](/mit6.1810/readings/rcu-decade-later.pdf), [FAQ](/mit6.1810/lec/rcu-faq.md)
+    *   **Preparation**: Read [RCU paper (2013)](/assets/mit6.1810/rcu-decade-later.pdf), [FAQ](/mit6.1810/lec/rcu-faq.md)
     *   **Homework 19 due:** [Question](/mit6.1810/homework/q.md)
 *   **Thu, Dec 12:**
 *   **Fri, Dec 13:**

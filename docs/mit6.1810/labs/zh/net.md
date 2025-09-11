@@ -43,7 +43,7 @@ tcpdump -XXnr packets.pcap
 代码以及传输和接收数据包的空函数，你将填充这些函数。
 `kernel/e1000_dev.h` 包含 E1000 定义的
 寄存器和标志位定义，并在 Intel E1000
-[软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf) 中描述。
+[软件开发者手册](/assets/mit6.1810/8254x_GBe_SDM.pdf) 中描述。
 `kernel/net.c` 和 `kernel/net.h`
 包含实现
 [IP](https://en.wikipedia.org/wiki/Internet_Protocol)、[UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol) 和 [ARP](https://en.wikipedia.org/wiki/Address_Resolution_Protocol) 协议的简单网络栈；
@@ -62,14 +62,14 @@ tcpdump -XXnr packets.pcap
 > 当 `make grade` 说你的
 > 解决方案通过"txone"和"rxone"测试时，你就完成了这部分。
 
-> 在编写代码时，你会发现需要参考 E1000 [软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf)。以下部分可能特别有帮助：
+> 在编写代码时，你会发现需要参考 E1000 [软件开发者手册](/assets/mit6.1810/8254x_GBe_SDM.pdf)。以下部分可能特别有帮助：
 > *   第 2 节是必不可少的，它概述了整个设备。
 > *   第 3.2 节概述了数据包接收。
 > *   第 3.3 节概述了数据包传输，以及第 3.4 节。
 > *   第 13 节概述了 E1000 使用的寄存器。
 > *   第 14 节可能有助于你理解我们提供的初始化代码。
 
-浏览 E1000 [软件开发者手册](/mit6.1810/readings/8254x_GBe_SDM.pdf)。
+浏览 E1000 [软件开发者手册](/assets/mit6.1810/8254x_GBe_SDM.pdf)。
 本手册涵盖了几个密切相关的以太网控制器。
 QEMU 模拟 82540EM。现在快速浏览第 2 章以了解
 设备。要编写你的驱动程序，你需要熟悉第 3 章
