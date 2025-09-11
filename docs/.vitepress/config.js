@@ -41,9 +41,9 @@ export default defineConfig({
       },
     ],
     sidebar: {
-      "/mit6.1810/": [
+      "/mit6.1810/lec/": [
         {
-          text: "MIT 6.1810",
+          text: "MIT 6.1810 lec",
           items: mit61810SidebarItems,
         },
       ],
@@ -53,20 +53,20 @@ export default defineConfig({
           items: sourceSidebarItems,
         },
       ],
-      "/": [
+      "/xv6/": [
         {
           text: "课程内容",
           collapsed: false,
           items: courseSidebarItems,
         },
       ],
-      "/labs/": [
+      "/mit6.1810/labs/": [
         {
           text: "Labs",
           items: labsSidebarItems,
         },
       ],
-      "/labs-zh/": [
+      "/mit6.1810/labs/zh/": [
         {
           text: "Labs (中文版)",
           items: labsZhSidebarItems,

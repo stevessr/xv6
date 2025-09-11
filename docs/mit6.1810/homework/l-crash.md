@@ -1,8 +1,6 @@
 ---
 title: l-crash.txt
 ---
-
-```text
 6.1810 2024 Lecture 14: Crash Recovery, Logging
 
 Plan
@@ -301,5 +299,3 @@ what's wrong with xv6's logging?
       but must still write the log first
   trouble with operations that don't fit in the log
     unlink might dirty many blocks while truncating file
-
-```

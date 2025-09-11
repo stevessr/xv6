@@ -1,36 +1,6 @@
 // Variant sidebar for MIT 6.1810: ordered by the course schedule (LEC 1..LEC 22)
 export default [
   {
-    text: "Labs",
-    items: [
-      { text: "Labs", link: "/mit6.1810/labs/" },
-      { text: "util", link: "/mit6.1810/labs/util/" },
-      { text: "syscall", link: "/mit6.1810/labs/syscall/" },
-      { text: "pgtbl", link: "/mit6.1810/labs/pgtbl/" },
-      { text: "traps", link: "/mit6.1810/labs/traps/" },
-      { text: "cow", link: "/mit6.1810/labs/cow/" },
-      { text: "net", link: "/mit6.1810/labs/net/" },
-      { text: "lock", link: "/mit6.1810/labs/lock/" },
-      { text: "fs", link: "/mit6.1810/labs/fs/" },
-      { text: "mmap", link: "/mit6.1810/labs/mmap/" },
-    ],
-  },
-  {
-    text: "实验室 中文翻译",
-    items: [
-      { text: "实验室", link: "/mit6.1810/labs/zh" },
-      { text: "工具", link: "/mit6.1810/labs/zh/util/" },
-      { text: "系统调用", link: "/mit6.1810/labs/zh/syscall/" },
-      { text: "页表", link: "/mit6.1810/labs/zh/pgtbl/" },
-      { text: "陷阱", link: "/mit6.1810/labs/zh/traps/" },
-      { text: "写时复制", link: "/mit6.1810/labs/zh/cow/" },
-      { text: "网络", link: "/mit6.1810/labs/zh/net/" },
-      { text: "锁", link: "/mit6.1810/labs/zh/lock/" },
-      { text: "文件系统", link: "/mit6.1810/labs/zh/fs/" },
-      { text: "内存映射", link: "/mit6.1810/labs/zh/mmap/" },
-    ],
-  },
-  {
     text: "时间表",
     link: "/mit6.1810/schedule",
   },

@@ -2,7 +2,6 @@
 title: l-journal.txt
 ---
 
-```text
 6.1810 2024 Lecture 15: Linux ext3 crash recovery
 
 This lecture: a case study of logging in Linux's ext3 file system
@@ -385,5 +384,3 @@ Stephen Tweedie 2000 talk transcript "EXT3, Journaling Filesystem"
 log format details
   https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout
 https://www.usenix.org/system/files/login/articles/04_tso_018-021_final.pdf
-
-```
