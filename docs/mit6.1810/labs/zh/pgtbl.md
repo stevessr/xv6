@@ -14,7 +14,7 @@ title: 页表
 >
 > *   `kernel/kalloc.c`，它包含分配和释放物理内存的代码。
 >
-> 查阅 [RISC-V 特权架构手册](https://drive.google.com/file/d/17GeetSnT5wW3xNuAHI95-SI1gPGd5sJ_/view?usp=drive_link) 也可能有帮助。
+> 查阅 [RISC-V 特权架构手册](/assets/mit6.1810/riscv-privileged.pdf) 也可能有帮助。
 
 要开始实验，请切换到 pgtbl 分支：
 ```

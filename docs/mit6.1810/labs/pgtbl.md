@@ -17,7 +17,7 @@ implement common OS features.
 > *   `kernel/kalloc.c`, which contains code for allocating and
 >     freeing physical memory.
 >
-> It may also help to consult the [RISC-V privileged architecture manual](https://drive.google.com/file/d/17GeetSnT5wW3xNuAHI95-SI1gPGd5sJ_/view?usp=drive_link).
+> It may also help to consult the [RISC-V privileged architecture manual](/assets/mit6.1810/riscv-privileged.pdf).
 
 To start the lab, switch to the pgtbl branch:
 ```
