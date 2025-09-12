@@ -15,9 +15,9 @@ export default [
       { text: "第6讲：文件系统 1", link: "/mit6.1810/lec/zh/l-fs.zh.md" },
       { text: "第7讲：文件系统 2", link: "/mit6.1810/lec/zh/l-fs2.zh.md" },
       { text: "第8讲：调度", link: "/mit6.1810/lec/zh/l-threads.zh.md" },
-      { text: "第9讲：锁", link: "/mit6.1810/lec/zh/l-lockv2.zh.md" },
-      { text: "第10讲：锁 2", link: "/mit6.1810/lec/zh/l-lockv2.zh.md" },
-      { text: "第11讲：竞争与原子操作", link: "/mit6.1810/lec/zh/l-lockv2.zh.md" },
+      { text: "第9讲：锁", link: "/mit6.1810/lec/zh/l-locks.zh.md" },
+      { text: "第10讲：锁 2", link: "/mit6.1810/lec/zh/l-locks2.zh.md" },
+      { text: "第11讲：竞争与原子操作", link: "/mit6.1810/lec/zh/l-race-atomic.zh.md" },
       {
         text: "第12讲：协调",
         link: "/mit6.1810/lec/zh/l-coordination.zh.md",

@@ -8,6 +8,7 @@ import mit61810SidebarItems from "./sidebar-mit6.1810-by-schedule.js";
 import mit61810ZHSidebarItems from "./sidebar-mit6.1810-by-schedule-zh.js";
 import labsSidebarItems from "./sidebar-labs.js";
 import labsZhSidebarItems from "./sidebar-labs-zh.js";
+import pdp11SidebarItems from "./sidebar-pdp11.js";
 
 export default defineConfig({
   title: "XV6 中文文档",
@@ -43,6 +44,10 @@ export default defineConfig({
       {
         text: "Labs (中文版)",
         items: labsZhSidebarItems,
+      },
+      {
+        text: "PDP-11",
+        items: pdp11SidebarItems,
       },
     ],
     sidebar: {
@@ -81,6 +86,12 @@ export default defineConfig({
         {
           text: "Labs (中文版)",
           items: labsZhSidebarItems,
+        },
+      ],
+      "/mit6.1810/pdp11/": [
+        {
+          text: "PDP-11",
+          items: pdp11SidebarItems,
         },
       ],
     },
