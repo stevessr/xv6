@@ -88,6 +88,10 @@ export default [
         "link": "/source/xv6-riscv/kernel/plic.c"
       },
       {
+        "text": "power.c",
+        "link": "/source/xv6-riscv/kernel/power.c"
+      },
+      {
         "text": "printf.c",
         "link": "/source/xv6-riscv/kernel/printf.c"
       },
@@ -200,6 +204,10 @@ export default [
         "link": "/source/xv6-riscv/user/cat.c"
       },
       {
+        "text": "clear.c",
+        "link": "/source/xv6-riscv/user/clear.c"
+      },
+      {
         "text": "echo.c",
         "link": "/source/xv6-riscv/user/echo.c"
       },
@@ -240,12 +248,12 @@ export default [
         "link": "/source/xv6-riscv/user/mkdir.c"
       },
       {
-        "text": "pgtbltest.c",
-        "link": "/source/xv6-riscv/user/pgtbltest.c"
-      },
-      {
         "text": "printf.c",
         "link": "/source/xv6-riscv/user/printf.c"
+      },
+      {
+        "text": "reboot.c",
+        "link": "/source/xv6-riscv/user/reboot.c"
       },
       {
         "text": "rm.c",
@@ -254,6 +262,14 @@ export default [
       {
         "text": "sh.c",
         "link": "/source/xv6-riscv/user/sh.c"
+      },
+      {
+        "text": "shutdown.c",
+        "link": "/source/xv6-riscv/user/shutdown.c"
+      },
+      {
+        "text": "sleep.c",
+        "link": "/source/xv6-riscv/user/sleep.c"
       },
       {
         "text": "stressfs.c",
