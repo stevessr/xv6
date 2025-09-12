@@ -5,8 +5,10 @@ import llmstxt from "vitepress-plugin-llms";
 import sourceSidebarItems from "./sidebar-source.js";
 import courseSidebarItems from "./sidebar-course.js";
 import mit61810SidebarItems from "./sidebar-mit6.1810-by-schedule.js";
+import mit61810ZHSidebarItems from "./sidebar-mit6.1810-by-schedule-zh.js";
 import labsSidebarItems from "./sidebar-labs.js";
 import labsZhSidebarItems from "./sidebar-labs-zh.js";
+import pdp11SidebarItems from "./sidebar-pdp11.js";
 
 export default defineConfig({
   title: "XV6 中文文档",
@@ -32,6 +34,10 @@ export default defineConfig({
         items: mit61810SidebarItems,
       },
       {
+        text: "MIT 6.1810 (中文版)",
+        items: mit61810ZHSidebarItems,
+      },
+      {
         text: "Labs",
         items: labsSidebarItems,
       },
@@ -39,12 +45,22 @@ export default defineConfig({
         text: "Labs (中文版)",
         items: labsZhSidebarItems,
       },
+      {
+        text: "PDP-11",
+        items: pdp11SidebarItems,
+      },
     ],
     sidebar: {
       "/mit6.1810/lec/": [
         {
           text: "MIT 6.1810 lec",
           items: mit61810SidebarItems,
+        },
+      ],
+      "/mit6.1810/lec/zh/": [
+        {
+          text: "MIT 6.1810 lec",
+          items: mit61810ZHSidebarItems,
         },
       ],
       "/source/": [
@@ -70,6 +86,12 @@ export default defineConfig({
         {
           text: "Labs (中文版)",
           items: labsZhSidebarItems,
+        },
+      ],
+      "/mit6.1810/pdp11/": [
+        {
+          text: "PDP-11",
+          items: pdp11SidebarItems,
         },
       ],
     },
