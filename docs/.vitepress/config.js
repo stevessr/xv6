@@ -5,6 +5,7 @@ import llmstxt from "vitepress-plugin-llms";
 import sourceSidebarItems from "./sidebar-source.js";
 import courseSidebarItems from "./sidebar-course.js";
 import mit61810SidebarItems from "./sidebar-mit6.1810-by-schedule.js";
+import mit61810ZHSidebarItems from "./sidebar-mit6.1810-by-schedule-zh.js";
 import labsSidebarItems from "./sidebar-labs.js";
 import labsZhSidebarItems from "./sidebar-labs-zh.js";
 
@@ -32,6 +33,10 @@ export default defineConfig({
         items: mit61810SidebarItems,
       },
       {
+        text: "MIT 6.1810 (中文版)",
+        items: mit61810ZHSidebarItems,
+      },
+      {
         text: "Labs",
         items: labsSidebarItems,
       },
@@ -45,6 +50,12 @@ export default defineConfig({
         {
           text: "MIT 6.1810 lec",
           items: mit61810SidebarItems,
+        },
+      ],
+      "/mit6.1810/lec/zh/": [
+        {
+          text: "MIT 6.1810 lec",
+          items: mit61810ZHSidebarItems,
         },
       ],
       "/source/": [
