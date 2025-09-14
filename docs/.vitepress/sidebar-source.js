@@ -88,10 +88,6 @@ export default [
         "link": "/source/xv6-riscv/kernel/plic.c"
       },
       {
-        "text": "power.c",
-        "link": "/source/xv6-riscv/kernel/power.c"
-      },
-      {
         "text": "printf.c",
         "link": "/source/xv6-riscv/kernel/printf.c"
       },
@@ -182,6 +178,10 @@ export default [
       {
         "text": "vm.c",
         "link": "/source/xv6-riscv/kernel/vm.c"
+      },
+      {
+        "text": "vm.h",
+        "link": "/source/xv6-riscv/kernel/vm.h"
       }
     ]
   },
@@ -204,8 +204,8 @@ export default [
         "link": "/source/xv6-riscv/user/cat.c"
       },
       {
-        "text": "clear.c",
-        "link": "/source/xv6-riscv/user/clear.c"
+        "text": "dorphan.c",
+        "link": "/source/xv6-riscv/user/dorphan.c"
       },
       {
         "text": "echo.c",
@@ -214,6 +214,10 @@ export default [
       {
         "text": "forktest.c",
         "link": "/source/xv6-riscv/user/forktest.c"
+      },
+      {
+        "text": "forphan.c",
+        "link": "/source/xv6-riscv/user/forphan.c"
       },
       {
         "text": "grep.c",
@@ -228,16 +232,16 @@ export default [
         "link": "/source/xv6-riscv/user/init.c"
       },
       {
-        "text": "initcode.S",
-        "link": "/source/xv6-riscv/user/initcode.S"
-      },
-      {
         "text": "kill.c",
         "link": "/source/xv6-riscv/user/kill.c"
       },
       {
         "text": "ln.c",
         "link": "/source/xv6-riscv/user/ln.c"
+      },
+      {
+        "text": "logstress.c",
+        "link": "/source/xv6-riscv/user/logstress.c"
       },
       {
         "text": "ls.c",
@@ -252,24 +256,12 @@ export default [
         "link": "/source/xv6-riscv/user/printf.c"
       },
       {
-        "text": "reboot.c",
-        "link": "/source/xv6-riscv/user/reboot.c"
-      },
-      {
         "text": "rm.c",
         "link": "/source/xv6-riscv/user/rm.c"
       },
       {
         "text": "sh.c",
         "link": "/source/xv6-riscv/user/sh.c"
-      },
-      {
-        "text": "shutdown.c",
-        "link": "/source/xv6-riscv/user/shutdown.c"
-      },
-      {
-        "text": "sleep.c",
-        "link": "/source/xv6-riscv/user/sleep.c"
       },
       {
         "text": "stressfs.c",

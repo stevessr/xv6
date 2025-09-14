@@ -6,8 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:prepare": "node scripts/prepare-source-docs.cjs",
-    "docs:dev": "pnpm docs:prepare && vitepress dev .",
-    "docs:build": "pnpm docs:prepare && vitepress build .",
+    "predocs:check": "node scripts/check-initcode-doc.cjs",
+    "predocs:dev": "node scripts/check-initcode-doc.cjs",
+    "predocs:build": "node scripts/check-initcode-doc.cjs",
+    "docs:dev": "pnpm predocs:dev && vitepress dev .",
+    "docs:build": "pnpm predocs:build && vitepress build .",
     "docs:preview": "vitepress preview d"
   },
   "keywords": [],
@@ -18,7 +21,8 @@
     "cytoscape": "^3.33.1",
     "cytoscape-cose-bilkent": "^4.1.0",
     "dayjs": "^1.11.18",
-    "debug": "^4.4.1",
+    "debug": "^4.4.3",
+    "esbuild": "^0.25.9",
     "mermaid": "^11.11.0",
     "vitepress": "^1.6.4",
     "vitepress-plugin-llms": "^1.7.5",
@@ -27,7 +31,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@braintree/sanitize-url": "6.0.4"
+      "@braintree/sanitize-url": "6.0.4",
+      "vite": "npm:rolldown-vite@latest"
     }
   },
   "dependencies": {

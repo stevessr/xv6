@@ -5,19 +5,20 @@ const functionExtractor = require('./function-extractor.cjs');
 const { processFile } = require('./file-processor.cjs');
 const sidebarGenerator = require('./sidebar.cjs');
 
-async function traverseDir(dir, highlighter, functionDefinitions) {
+// Recursively collect files that should be processed (respecting allowedExtensions/allowedFilenames/ignoredDirs)
+function collectFiles(dir, files) {
     try {
         const entries = fs.readdirSync(dir, { withFileTypes: true });
         for (const entry of entries) {
             const fullPath = path.join(dir, entry.name);
             if (entry.isDirectory()) {
                 if (!ignoredDirs.includes(entry.name)) {
-                    await traverseDir(fullPath, highlighter, functionDefinitions);
+                    collectFiles(fullPath, files);
                 }
             } else if (entry.isFile()) {
                 const ext = path.extname(entry.name);
                 if (allowedExtensions.includes(ext) || allowedFilenames.includes(entry.name)) {
-                    await processFile(fullPath, highlighter, functionDefinitions);
+                    files.push(fullPath);
                 }
             }
         }
@@ -25,6 +26,21 @@ async function traverseDir(dir, highlighter, functionDefinitions) {
         console.error(`Error reading directory ${dir}: ${error.message}`);
         throw error;
     }
+}
+
+// Process files with a simple CLI progress indicator
+async function processFilesWithProgress(files, highlighter, functionDefinitions) {
+    const total = files.length;
+    let idx = 0;
+    for (const file of files) {
+        idx++;
+        const percent = Math.round((idx / total) * 100);
+        // Clear line and print progress (works in most terminals)
+        process.stdout.write(`\r[${percent}%] ${idx}/${total}  Processing: ${path.relative(sourceDir, file)}                `);
+        await processFile(file, highlighter, functionDefinitions);
+    }
+    // Newline after progress finished
+    process.stdout.write('\n');
 }
 
 async function main() {
@@ -66,9 +82,13 @@ async function main() {
         }
         fs.mkdirSync(targetDir, { recursive: true });
 
-        sidebarGenerator.generate();
+    sidebarGenerator.generate();
 
-        await traverseDir(sourceDir, highlighter, functionDefinitions);
+    // Collect files first so we can show progress
+    const filesToProcess = [];
+    collectFiles(sourceDir, filesToProcess);
+    console.log(`Found ${filesToProcess.length} files to process.`);
+    await processFilesWithProgress(filesToProcess, highlighter, functionDefinitions);
 
         console.log('✅ Source documentation generation complete.');
     } catch (error) {
