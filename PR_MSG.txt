@@ -1,0 +1,31 @@
+[lab-pgtbl] Implement per-process USYSCALL, vmprint, and 2MB superpage support
+
+Summary (简要说明):
+- Implement per-process USYSCALL page to allow user-space fast read of PID (avoid syscall trap).
+- Add vmprint() to print page tables in grader-expected format.
+- Add 2MB superpage allocator (superalloc/superfree), VM helpers for 2MB mappings (mappages_super, walk_level), and fork-time copy semantics for superpages.
+- Remove temporary debug printf introduced during development and fix grader Python3 compatibility.
+
+Why (原因):
+- These changes implement the pgtbl lab requirements: an optimized user-visible syscall area (USYSCALL), a vmprint utility expected by the grader, and support for large-page mappings required by the superpg test.
+
+Files changed (主要文件):
+- kernel/proc.c, kernel/memlayout.h: USYSCALL allocation & safe header for assembler
+- kernel/vm.c: vmprint, walk_level, mappages_super, uvmcopy/uvmalloc/uvmunmap adjustments
+- kernel/kalloc.c: superpage pool, superalloc/superfree, split_superpage_into_kmem fallback
+- gradelib.py: Python3 compatibility fix
+- lab/pgbtl/tasks.md: PR-ready changelog (this file)
+
+Testing (测试):
+- Build: cd xv6-riscv && make
+- Run grading script: ./grade-lab-pgtbl -v
+- Expected: pgtbltest (ugetpid, print_kpgtbl, superpg) OK; usertests OK; Score: 51/51
+
+Notes / 注意事项:
+- Debug prints were removed. Panic and invariant checks retained to avoid hiding real errors.
+- Kernel printf format constraints were respected to avoid build warnings treated as errors.
+- Optionally, debug output can be wrapped with a macro for easy re-enablement.
+
+Co-authors / Reviewers: @stevessr
+
+Detailed description and verification steps are in `lab/pgbtl/tasks.md` (bilingual changelog).
