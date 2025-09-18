@@ -27,7 +27,7 @@ $ make clean
 
 在许多情况下，打印语句就足以调试你的内核，但有时单步执行代码或获取堆栈回溯很有用。GDB 调试器可以提供帮助。
 
-为了帮助你熟悉 gdb，运行 `make qemu-gdb` 然后在另一个窗口中启动 gdb（参见 [指导页面](/mit6.1810/labs/guidance.html.md) 上的 gdb 材料）。当你打开两个窗口后，在 gdb 窗口中输入：
+为了帮助你熟悉 gdb，运行 `make qemu-gdb` 然后在另一个窗口中启动 gdb（参见 [指导页面](/mit6.1810/labs/guidance..md) 上的 gdb 材料）。当你打开两个窗口后，在 gdb 窗口中输入：
 ```
 (gdb) b syscall
 Breakpoint 1 at 0x80002142: file kernel/syscall.c, line 243.
@@ -97,7 +97,7 @@ Thread 3 hit Breakpoint 1, syscall () at kernel/syscall.c:138
 
 > 内核恐慌时正在运行的进程名称是什么？它的进程 ID（`pid`）是什么？
 
-你可能需要根据需要重新访问 [使用 GNU 调试器](https://pdos.csail.mit.edu/6.828/2019/lec/gdb_slides.pdf)。[指导页面](/mit6.1810/labs/guidance.html.md) 也有调试提示。
+你可能需要根据需要重新访问 [使用 GNU 调试器](https://pdos.csail.mit.edu/6.828/2019/lec/gdb_slides.pdf)。[指导页面](/mit6.1810/labs/guidance..md) 也有调试提示。
 
 ## 系统调用跟踪
 

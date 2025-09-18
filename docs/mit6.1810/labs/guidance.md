@@ -26,7 +26,7 @@ The exercises in general require not many lines of code (tens to a
 few hundred lines), but the code is conceptually complicated and often
 details matter a lot.  So, make sure you do the assigned reading for
 the labs, read the relevant files through, consult the documentation
-(the RISC-V manuals etc. are on the [reference page](/mit6.1810/quiz.html.md))
+(the RISC-V manuals etc. are on the [reference page](/mit6.1810/quiz.md))
 before you write any code. 
 Implement your solution in small steps (the assignments often suggest
 how to break the problem down) and test whether each

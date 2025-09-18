@@ -21,7 +21,7 @@ $ make clean
 
 理解一点 RISC-V 汇编很重要，你在 6.1910 (6.004) 中已经接触过。在你的 xv6 仓库中有一个文件 `user/call.c`。`make fs.img` 会编译它，并且还会在 `user/call.asm` 中生成程序的可读汇编版本。
 
-阅读 call.asm 中函数 `g`、`f` 和 [`main`](/source/xv6-riscv/user/zombie.c.md#main-user-zombie-c) 的代码。RISC-V 的指令手册在 [参考页面](/mit6.1810/quiz.html.md) 上。在 `answers-traps.txt` 中回答以下问题：
+阅读 call.asm 中函数 `g`、`f` 和 [`main`](/source/xv6-riscv/user/zombie.c.md#main-user-zombie-c) 的代码。RISC-V 的指令手册在 [参考页面](/mit6.1810/quiz.md) 上。在 `answers-traps.txt` 中回答以下问题：
 
 > 哪些寄存器包含函数的参数？例如，在 main 调用 [`printf`](/source/xv6-riscv/user/printf.c.md#printf-user-printf-c) 时，哪个寄存器持有 13？
 

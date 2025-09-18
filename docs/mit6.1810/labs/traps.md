@@ -31,7 +31,7 @@ and also produces a readable assembly version of the program in
 
 Read the code in call.asm for the functions `g`, `f`, and [`main`](/source/xv6-riscv/user/zombie.c.md#main-user-zombie-c).
 The instruction
-manual for RISC-V is on the [reference page](/mit6.1810/quiz.html.md).
+manual for RISC-V is on the [reference page](/mit6.1810/quiz.md).
 Answer the following questions in `answers-traps.txt`:
 
 > Which registers contain arguments to functions?  For example, which

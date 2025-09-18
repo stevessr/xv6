@@ -9,7 +9,7 @@ This lab will familiarize you with xv6 and its system calls.
 ## Boot xv6
 
 Have a look at the
-[lab tools page](/mit6.1810/labs/tools.html.md) for information
+[lab tools page](/mit6.1810/labs/tools..md) for information
 about how to set up your computer to run these labs.
 
 Fetch the git repository for the xv6 source for the lab:
