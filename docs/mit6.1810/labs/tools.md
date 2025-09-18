@@ -124,7 +124,7 @@ should mention `i686 GNU/Linux` or
 `x86_64 GNU/Linux`.
 
 ## Testing your Installation
-To test your installation, you should be able to compile and run xv6. You can try this by following the instructions in the [first lab](/mit6.1810/labs/util..md).
+To test your installation, you should be able to compile and run xv6. You can try this by following the instructions in the [first lab](/mit6.1810/labs/util.md).
 
 You can also double check your installation is correct by running the following:
 

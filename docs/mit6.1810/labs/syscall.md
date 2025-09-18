@@ -46,7 +46,7 @@ The GDB debugger can help.
 
 To help you become familiar with gdb, run `make qemu-gdb` and
 then fire up gdb in another window
-(see the gdb material on the [guidance page](/mit6.1810/labs/guidance..md)). Once you have two windows open, type in the gdb window:
+(see the gdb material on the [guidance page](/mit6.1810/labs/guidance.md)). Once you have two windows open, type in the gdb window:
 ```
 (gdb) b syscall
 Breakpoint 1 at 0x80002142: file kernel/syscall.c, line 243.
@@ -149,7 +149,7 @@ process's name:
 
 You may want to revisit
 [Using the GNU Debugger](https://pdos.csail.mit.edu/6.828/2019/lec/gdb_slides.pdf) as needed.
-The [guidance page](/mit6.1810/labs/guidance..md) also has
+The [guidance page](/mit6.1810/labs/guidance.md) also has
 debugging tips.
 
 ## System call tracing
