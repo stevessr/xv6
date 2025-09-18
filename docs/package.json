@@ -10,7 +10,7 @@
     "predocs:dev": "node scripts/check-initcode-doc.cjs",
     "predocs:build": "node scripts/check-initcode-doc.cjs",
     "docs:dev": "pnpm predocs:dev && vitepress dev .",
-    "docs:build": "pnpm predocs:build && vitepress build .",
+    "docs:build": "pnpm docs:prepare && pnpm predocs:build && vitepress build .",
     "docs:preview": "vitepress preview d"
   },
   "keywords": [],
