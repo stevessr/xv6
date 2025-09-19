@@ -11,5 +11,5 @@ title: Readings
 
 其他资源（在仓库中以 PDF 存放）：
 
-- xv6 book: /mit6.1810/xv6/book-riscv-rev4.pdf
+- xv6 book: /assets/mit6.1810/book-riscv-rev4.pdf
 - RedLeaf paper 等也位于 `public/assets/mit6.1810`，侧边栏中已有链接。

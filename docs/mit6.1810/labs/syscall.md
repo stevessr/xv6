@@ -11,7 +11,7 @@ internals of the xv6 kernel.  You will add more system calls in later
 labs.
 
 > Before you start coding, read Chapter 2 of
-> the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf), and
+> the [xv6 book](/assets/mit6.1810/book-riscv-rev4.pdf), and
 > Sections 4.3 and 4.4 of Chapter 4, and
 > related source files:
 >

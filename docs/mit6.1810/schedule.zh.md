@@ -8,8 +8,8 @@ title: 课程表
 *   **9月2日，星期一：** (假日) 劳动节
 *   **9月3日，星期二：** (特殊) 注册日
 *   **9月4日，星期三：**
-    *   **第1讲 (rtm):** [简介](/mit6.1810/lec/l-overview.md) (讲义: [xv6 手册](/mit6.1810/xv6/book-riscv-rev4.pdf))
-    *   **准备**: [阅读第1章](/mit6.1810/xv6/book-riscv-rev4.pdf) (娱乐一下: [Unix](https://www.youtube.com/watch?v=tc4ROCJYbm0))
+    *   **第1讲 (rtm):** [简介](/mit6.1810/lec/l-overview.md) (讲义: [xv6 手册](/assets/mit6.1810/book-riscv-rev4.pdf))
+    *   **准备**: [阅读第1章](/assets/mit6.1810/book-riscv-rev4.pdf) (娱乐一下: [Unix](https://www.youtube.com/watch?v=tc4ROCJYbm0))
     *   **作业**: [实验 util: Unix 工具](/mit6.1810/labs/util.md)
 *   **9月5日，星期四：**
 *   **9月6日，星期五：**
@@ -21,7 +21,7 @@ title: 课程表
 *   **9月10日，星期二：**
 *   **9月11日，星期三：**
     *   **第3讲 (fk):** [操作系统设计](/mit6.1810/lec/l-os.md)
-    *   **准备**: [阅读第2章](/mit6.1810/xv6/book-riscv-rev4.pdf) 和 xv6 代码: [kernel/proc.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.h), [kernel/defs.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/defs.h), [kernel/entry.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S), [kernel/main.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/main.c), [user/initcode.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/initcode.S), [user/init.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/init.c), 并略读 [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c) 和 [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
+    *   **准备**: [阅读第2章](/assets/mit6.1810/book-riscv-rev4.pdf) 和 xv6 代码: [kernel/proc.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.h), [kernel/defs.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/defs.h), [kernel/entry.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S), [kernel/main.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/main.c), [user/initcode.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/initcode.S), [user/init.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/init.c), 并略读 [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c) 和 [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
     *   **作业1截止:** [问题](/mit6.1810/homework/q.md)
     *   **作业**: [实验 syscall: 系统调用](/mit6.1810/labs/syscall.md)
 *   **9月12日，星期四：** **截止**: 实验 util
@@ -30,12 +30,12 @@ title: 课程表
 ### 9月16日当周
 *   **9月16日，星期一：**
     *   **第4讲 (fk):** [页表](/mit6.1810/lec/l-vm.md)
-    *   **准备**: 阅读 [第3章](/mit6.1810/xv6/book-riscv-rev4.pdf) 和 [kernel/memlayout.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/memlayout.h), [kernel/vm.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/vm.c), [kernel/kalloc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kalloc.c), [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), 和 [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
+    *   **准备**: 阅读 [第3章](/assets/mit6.1810/book-riscv-rev4.pdf) 和 [kernel/memlayout.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/memlayout.h), [kernel/vm.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/vm.c), [kernel/kalloc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kalloc.c), [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), 和 [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
     *   **作业2截止:** [问题](/mit6.1810/homework/q.md)
 *   **9月17日，星期二：**
 *   **9月18日，星期三：**
     *   **第5讲 (rtm):** [系统调用入口/出口](/mit6.1810/lec/l-internal.md)
-    *   **准备**: 阅读 [第4章, 4.6节除外](/mit6.1810/xv6/book-riscv-rev4.pdf) 和 [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), [kernel/trampoline.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trampoline.S), 和 [kernel/trap.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trap.c)
+    *   **准备**: 阅读 [第4章, 4.6节除外](/assets/mit6.1810/book-riscv-rev4.pdf) 和 [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), [kernel/trampoline.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trampoline.S), 和 [kernel/trap.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trap.c)
     *   **作业3截止:** [问题](/mit6.1810/homework/q.md)
     *   **作业**: [实验 pgtbl: 页表](/mit6.1810/labs/pgtbl.md)
 *   **9月19日，星期四：** **截止**: 实验 syscall
@@ -48,7 +48,7 @@ title: 课程表
 *   **9月24日，星期二：**
 *   **9月25日，星期三：**
     *   **第7讲 (fk):** [页错误](/mit6.1810/lec/l-pgfaults.md) 
-    *   **准备**: 阅读 [4.6节](/mit6.1810/xv6/book-riscv-rev4.pdf)
+    *   **准备**: 阅读 [4.6节](/assets/mit6.1810/book-riscv-rev4.pdf)
     *   **作业4截止:** [问题](/mit6.1810/homework/q.md)
     *   **作业**: [实验 traps: 陷阱](/mit6.1810/labs/traps.md)
 *   **9月26日，星期四：** **截止**: 实验 pgtbl
@@ -61,7 +61,7 @@ title: 课程表
 *   **10月1日，星期二：**
 *   **10月2日，星期三：**
     *   **第9讲 (rtm):** [设备驱动](/mit6.1810/lec/l-interrupt.md), [16550.pdf](/mit6.1810/lec/16550.pdf)
-    *   **准备**: 阅读 [第5章](/mit6.1810/xv6/book-riscv-rev4.pdf) 和 [kernel/kernelvec.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kernelvec.S), [kernel/plic.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/plic.c), [kernel/console.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/console.c), [kernel/uart.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c), [kernel/printf.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/printf.c)
+    *   **准备**: 阅读 [第5章](/assets/mit6.1810/book-riscv-rev4.pdf) 和 [kernel/kernelvec.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kernelvec.S), [kernel/plic.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/plic.c), [kernel/console.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/console.c), [kernel/uart.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c), [kernel/printf.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/printf.c)
     *   **作业6截止:** [问题](/mit6.1810/homework/q.md)
     *   **作业**: [实验 cow: 写时复制 fork](/mit6.1810/labs/cow.md)
 *   **10月3日，星期四：** **截止**: 实验 traps
@@ -70,12 +70,12 @@ title: 课程表
 ### 10月7日当周
 *   **10月7日，星期一：**
     *   **第10讲 (fk):** [锁](/mit6.1810/lec/l-lockv2.md)
-    *   **准备**: 阅读 ["锁"](/mit6.1810/xv6/book-riscv-rev4.pdf) 以及 [kernel/spinlock.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.h) 和 [kernel/spinlock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.c)
+    *   **准备**: 阅读 ["锁"](/assets/mit6.1810/book-riscv-rev4.pdf) 以及 [kernel/spinlock.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.h) 和 [kernel/spinlock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.c)
     *   **作业7截止:** [问题](/mit6.1810/homework/q.md)
 *   **10月8日，星期二：**
 *   **10月9日，星期三：**
     *   **第11讲 (rtm):** [调度 1](/mit6.1810/lec/l-threads.md)
-    *   **准备**: 阅读 ["调度"](/mit6.1810/xv6/book-riscv-rev4.pdf) 至 7.4 节, 以及 [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/swtch.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/swtch.S)
+    *   **准备**: 阅读 ["调度"](/assets/mit6.1810/book-riscv-rev4.pdf) 至 7.4 节, 以及 [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/swtch.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/swtch.S)
     *   **作业8截止:** [问题](/mit6.1810/homework/q.md)
 *   **10月10日，星期四：**
 *   **10月11日，星期五：**
@@ -85,7 +85,7 @@ title: 课程表
 *   **10月15日，星期二：**
 *   **10月16日，星期三：**
     *   **第12讲 (rtm):** 协调, [代码](/source/xv6-riscv/kernel/pipe.c)
-    *   **准备**: 阅读 ["调度"](/mit6.1810/xv6/book-riscv-rev4.pdf) 的剩余部分, 以及 [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c) 的相应部分
+    *   **准备**: 阅读 ["调度"](/assets/mit6.1810/book-riscv-rev4.pdf) 的剩余部分, 以及 [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c) 的相应部分
     *   **作业9截止:** [问题](/mit6.1810/homework/q.md)
 *   **10月17日，星期四：** **截止**: 实验 cow
 *   **10月18日，星期五：**
@@ -93,7 +93,7 @@ title: 课程表
 ### 10月21日当周
 *   **10月21日，星期一：**
     *   **第13讲 (fk):** [文件系统](/mit6.1810/lec/l-fs.md) ([幻灯片](/mit6.1810/lec/l-fs1.pdf))
-    *   **准备**: 阅读 [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), [kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), [kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), [kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) 和 ["文件系统" (日志部分除外)](/mit6.1810/xv6/book-riscv-rev4.pdf)
+    *   **准备**: 阅读 [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), [kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), [kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), [kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) 和 ["文件系统" (日志部分除外)](/assets/mit6.1810/book-riscv-rev4.pdf)
     *   **作业10截止:** [问题](/mit6.1810/homework/q.md)
 *   **10月22日，星期二：**
 *   **10月23日，星期三：**
@@ -107,7 +107,7 @@ title: 课程表
 ### 10月28日当周
 *   **10月28日，星期一：**
     *   **第14讲 (fk):** [崩溃恢复](/mit6.1810/homework/l-crash.md) ([幻灯片](/mit6.1810/lec/l-fs2.pdf))
-    *   **准备**: 阅读 [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) 和 ["文件系统" 章节的日志部分](/mit6.1810/xv6/book-riscv-rev4.pdf)
+    *   **准备**: 阅读 [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) 和 ["文件系统" 章节的日志部分](/assets/mit6.1810/book-riscv-rev4.pdf)
     *   **作业11截止:** [问题](/mit6.1810/homework/q.md)
 *   **10月29日，星期二：**
 *   **10月30日，星期三：**

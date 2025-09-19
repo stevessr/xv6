@@ -6,7 +6,7 @@ title: 页表
 
 在这个实验中，你将探索页表并修改它们以实现常见的操作系统功能。
 
-> 在开始编码之前，阅读 [xv6 书籍](/mit6.1810/xv6/book-riscv-rev4.pdf) 的第 3 章，以及相关文件：
+> 在开始编码之前，阅读 [xv6 书籍](/assets/mit6.1810/book-riscv-rev4.pdf) 的第 3 章，以及相关文件：
 >
 > *   `kernel/memlayout.h`，它捕获了内存布局。
 >

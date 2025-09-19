@@ -9,7 +9,7 @@ In this lab you will add large files and symbolic links to the xv6
 
 > Before writing code, you should read "Chapter 8:
 >   File system" from the [xv6
->   book](/mit6.1810/xv6/book-riscv-rev4.pdf) and study the corresponding code.
+>   book](/assets/mit6.1810/book-riscv-rev4.pdf) and study the corresponding code.
 
 Fetch the xv6 source for the lab and check out the `util` branch:
 

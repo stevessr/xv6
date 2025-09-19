@@ -8,7 +8,7 @@ In this lab you will explore page tables and modify them to
 implement common OS features.
 
 > Before you start coding, read Chapter 3 of
-> the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf), and related files:
+> the [xv6 book](/assets/mit6.1810/book-riscv-rev4.pdf), and related files:
 >
 > *   `kernel/memlayout.h`, which captures the layout of memory.
 >

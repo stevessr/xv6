@@ -99,7 +99,7 @@ export default [
     "items": [
       {
         "text": "xv6 book",
-        "link": "/mit6.1810/xv6/book-riscv-rev4.pdf"
+        "link": "/assets/mit6.1810/book-riscv-rev4.pdf"
       },
       {
         "text": "Calling Convention",

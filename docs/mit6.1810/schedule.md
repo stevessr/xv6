@@ -8,8 +8,8 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 *   **Mon, Sep 2:** (Holiday) Labor Day
 *   **Tue, Sep 3:** (Special) Reg Day
 *   **Wed, Sep 4:**
-    *   **LEC 1 (rtm):** [Introduction](/mit6.1810/lec/l-overview.md) (handouts: [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf))
-    *   **Preparation**: [Read chapter 1](/mit6.1810/xv6/book-riscv-rev4.pdf) (for your amusement: [Unix](https://www.youtube.com/watch?v=tc4ROCJYbm0))
+    *   **LEC 1 (rtm):** [Introduction](/mit6.1810/lec/l-overview.md) (handouts: [xv6 book](/assets/mit6.1810/book-riscv-rev4.pdf))
+    *   **Preparation**: [Read chapter 1](/assets/mit6.1810/book-riscv-rev4.pdf) (for your amusement: [Unix](https://www.youtube.com/watch?v=tc4ROCJYbm0))
     *   **Assignment**: [Lab util: Unix utilities](/mit6.1810/labs/util.md)
 *   **Thu, Sep 5:**
 *   **Fri, Sep 6:**
@@ -20,7 +20,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 *   **Tue, Sep 10:**
 *   **Wed, Sep 11:**
     *   **LEC 3 (fk):** [OS design](/mit6.1810/lec/l-os.md)
-    *   **Preparation**: [Read chapter 2](/mit6.1810/xv6/book-riscv-rev4.pdf) and xv6 code: [kernel/proc.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.h), [kernel/defs.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/defs.h), [kernel/entry.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S), [kernel/main.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/main.c), [user/initcode.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/initcode.S), [user/init.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/init.c), and skim [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c) and [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
+    *   **Preparation**: [Read chapter 2](/assets/mit6.1810/book-riscv-rev4.pdf) and xv6 code: [kernel/proc.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.h), [kernel/defs.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/defs.h), [kernel/entry.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S), [kernel/main.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/main.c), [user/initcode.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/initcode.S), [user/init.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/init.c), and skim [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c) and [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
     *   **Homework 1 due:** [Question](/mit6.1810/homework/q.md)
     *   **Assignment**: [Lab syscall: System calls](/mit6.1810/labs/syscall.md)
 *   **Thu, Sep 12:** **DUE**: Lab util
@@ -29,12 +29,12 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Sep 16
 *   **Mon, Sep 16:**
     *   **LEC 4 (fk):** [page tables](/mit6.1810/lec/l-vm.md)
-    *   **Preparation**: Read [Chapter 3](/mit6.1810/xv6/book-riscv-rev4.pdf) and [kernel/memlayout.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/memlayout.h), [kernel/vm.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/vm.c), [kernel/kalloc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kalloc.c), [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), and [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
+    *   **Preparation**: Read [Chapter 3](/assets/mit6.1810/book-riscv-rev4.pdf) and [kernel/memlayout.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/memlayout.h), [kernel/vm.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/vm.c), [kernel/kalloc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kalloc.c), [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), and [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
     *   **Homework 2 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Sep 17:**
 *   **Wed, Sep 18:**
     *   **LEC 5 (rtm):** [System call entry/exit](/mit6.1810/lec/l-internal.md)
-    *   **Preparation**: Read [Chapter 4, except 4.6](/mit6.1810/xv6/book-riscv-rev4.pdf) and [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), [kernel/trampoline.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trampoline.S), and [kernel/trap.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trap.c)
+    *   **Preparation**: Read [Chapter 4, except 4.6](/assets/mit6.1810/book-riscv-rev4.pdf) and [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), [kernel/trampoline.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trampoline.S), and [kernel/trap.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trap.c)
     *   **Homework 3 due:** [Question](/mit6.1810/homework/q.md)
     *   **Assignment**: [Lab pgtbl: Page tables](/mit6.1810/labs/pgtbl.md)
 *   **Thu, Sep 19:** **DUE**: Lab syscall
@@ -47,7 +47,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 *   **Tue, Sep 24:**
 *   **Wed, Sep 25:**
     *   **LEC 7 (fk):** [Page faults](/mit6.1810/lec/l-pgfaults.md) 
-    *   **Preparation**: Read [Section 4.6](/mit6.1810/xv6/book-riscv-rev4.pdf)
+    *   **Preparation**: Read [Section 4.6](/assets/mit6.1810/book-riscv-rev4.pdf)
     *   **Homework 4 due:** [Question](/mit6.1810/homework/q.md)
     *   **Assignment**: [Lab traps: Traps](/mit6.1810/labs/traps.md)
 *   **Thu, Sep 26:** **DUE**: Lab pgtbl
@@ -60,7 +60,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 *   **Tue, Oct 1:**
 *   **Wed, Oct 2:**
     *   **LEC 9 (rtm):** [Device drivers](/mit6.1810/lec/l-interrupt.md), [16550.pdf](/mit6.1810/lec/16550.pdf)
-    *   **Preparation**: Read [Chapter 5](/mit6.1810/xv6/book-riscv-rev4.pdf) and [kernel/kernelvec.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kernelvec.S), [kernel/plic.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/plic.c), [kernel/console.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/console.c), [kernel/uart.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c), [kernel/printf.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/printf.c)
+    *   **Preparation**: Read [Chapter 5](/assets/mit6.1810/book-riscv-rev4.pdf) and [kernel/kernelvec.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kernelvec.S), [kernel/plic.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/plic.c), [kernel/console.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/console.c), [kernel/uart.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c), [kernel/printf.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/printf.c)
     *   **Homework 6 due:** [Question](/mit6.1810/homework/q.md)
     *   **Assignment**: [Lab cow: Copy-on-write fork](/mit6.1810/labs/cow.md)
 *   **Thu, Oct 3:** **DUE**: Lab traps
@@ -69,12 +69,12 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Oct 7
 *   **Mon, Oct 7:**
     *   **LEC 10 (fk):** [Locking](/mit6.1810/lec/l-lockv2.md)
-    *   **Preparation**: Read ["Locking"](/mit6.1810/xv6/book-riscv-rev4.pdf) with [kernel/spinlock.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.h) and [kernel/spinlock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.c)
+    *   **Preparation**: Read ["Locking"](/assets/mit6.1810/book-riscv-rev4.pdf) with [kernel/spinlock.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.h) and [kernel/spinlock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.c)
     *   **Homework 7 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Oct 8:**
 *   **Wed, Oct 9:**
     *   **LEC 11 (rtm):** [Scheduling 1](/mit6.1810/lec/l-threads.md)
-    *   **Preparation**: Read ["Scheduling"](/mit6.1810/xv6/book-riscv-rev4.pdf) through Section 7.4, and [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/swtch.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/swtch.S)
+    *   **Preparation**: Read ["Scheduling"](/assets/mit6.1810/book-riscv-rev4.pdf) through Section 7.4, and [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/swtch.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/swtch.S)
     *   **Homework 8 due:** [Question](/mit6.1810/homework/q.md)
 *   **Thu, Oct 10:**
 *   **Fri, Oct 11:**
@@ -84,7 +84,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 *   **Tue, Oct 15:**
 *   **Wed, Oct 16:**
     *   **LEC 12 (rtm):** Coordination, [code](/source/xv6-riscv/kernel/pipe.c)
-    *   **Preparation**: Read remainder of ["Scheduling"](/mit6.1810/xv6/book-riscv-rev4.pdf), and corresponding parts of [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c)
+    *   **Preparation**: Read remainder of ["Scheduling"](/assets/mit6.1810/book-riscv-rev4.pdf), and corresponding parts of [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c)
     *   **Homework 9 due:** [Question](/mit6.1810/homework/q.md)
 *   **Thu, Oct 17:** **DUE**: Lab cow
 *   **Fri, Oct 18:**
@@ -92,7 +92,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Oct 21
 *   **Mon, Oct 21:**
     *   **LEC 13 (fk):** [File systems](/mit6.1810/lec/l-fs.md) ([slides](/mit6.1810/lec/l-fs1.pdf))
-    *   **Preparation**: Read [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), [kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), [kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), [kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) and ["File system" (except for the logging sections)](/mit6.1810/xv6/book-riscv-rev4.pdf)
+    *   **Preparation**: Read [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), [kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), [kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), [kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) and ["File system" (except for the logging sections)](/assets/mit6.1810/book-riscv-rev4.pdf)
     *   **Homework 10 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Oct 22:**
 *   **Wed, Oct 23:**
@@ -106,7 +106,7 @@ Links to notes, videos etc. on future days are copies of materials from the 2023
 ### Week of Oct 28
 *   **Mon, Oct 28:**
     *   **LEC 14 (fk):** [Crash recovery](/mit6.1810/homework/l-crash.md) ([slides](/mit6.1810/lec/l-fs2.pdf))
-    *   **Preparation**: Read [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) and [the logging sections of the "File system" chapter](/mit6.1810/xv6/book-riscv-rev4.pdf)
+    *   **Preparation**: Read [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) and [the logging sections of the "File system" chapter](/assets/mit6.1810/book-riscv-rev4.pdf)
     *   **Homework 11 due:** [Question](/mit6.1810/homework/q.md)
 *   **Tue, Oct 29:**
 *   **Wed, Oct 30:**

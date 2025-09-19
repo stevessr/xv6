@@ -19,7 +19,7 @@ $ make clean
 ## Background
 
 > Before writing code, you may find it helpful to review "Chapter 5: Interrupts and
-> device drivers" in the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf).
+> device drivers" in the [xv6 book](/assets/mit6.1810/book-riscv-rev4.pdf).
 
 You'll use a network device called the E1000 to handle network
 communication. To xv6 (and the driver you write), the E1000 looks like a real

@@ -11,5 +11,5 @@ title: 阅读材料
 
 其他资源（在仓库中以 PDF 存放）：
 
-- xv6 手册: /mit6.1810/xv6/book-riscv-rev4.pdf
+- xv6 手册: /assets/mit6.1810/book-riscv-rev4.pdf
 - RedLeaf 论文等也位于 `public/assets/mit6.1810`，侧边栏中已有链接。

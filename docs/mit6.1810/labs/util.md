@@ -115,7 +115,7 @@ To quit qemu type: `Ctrl-a x` (press `Ctrl` and `a` at the same time, followed b
 
 Some hints:
 *   Before you start coding, read Chapter 1 of
-    the [xv6 book](/mit6.1810/xv6/book-riscv-rev4.pdf).
+    the [xv6 book](/assets/mit6.1810/book-riscv-rev4.pdf).
 
 *   Put your code in `user/sleep.c`.
     Look at some of the other programs in `user/`
