@@ -11,7 +11,7 @@ export default [
       { text: "第2讲：C语言/用户空间", link: "/mit6.1810/lec/zh/l-c.zh.md" },
       { text: "第3讲：xv6与工具", link: "/mit6.1810/lec/zh/l-tools.zh.md" },
       { text: "第4讲：进程", link: "/mit6.1810/lec/zh/l-processes.zh.md" },
-      { text: "第5讲：用户虚拟机", link: "/mit6.1810/homework/l-uservm.zh.md" },
+      { text: "第5讲：用户虚拟机", link: "/mit6.1810/lec/zh/l-uservm.zh.md" },
       { text: "第6讲：文件系统 1", link: "/mit6.1810/lec/zh/l-fs.zh.md" },
       { text: "第7讲：文件系统 2", link: "/mit6.1810/lec/zh/l-fs2.zh.md" },
       { text: "第8讲：调度", link: "/mit6.1810/lec/zh/l-threads.zh.md" },
@@ -32,7 +32,7 @@ export default [
       },
       {
         text: "第18讲：RCU/并发再探",
-        link: "/mit6.1810/lec/l-rcu.md",
+        link: "/mit6.1810/lec/zh/l-rcu.zh.md",
       },
       { text: "第19讲：Redleaf", link: "/mit6.1810/lec/zh/l-redleaf.zh.md" },
       { text: "第20讲：Meltdown", link: "/mit6.1810/lec/zh/l-meltdown.zh.md" },

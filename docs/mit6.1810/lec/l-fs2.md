@@ -1,21 +1,21 @@
 ---
 title: "LEC 7: File System 2"
 ---
-下面为完整讲义页面：已嵌入本讲的幻灯片，并附带要点摘要与参考资料。
+This is the full lecture page: the lecture slides are embedded below with a summary of key points and references.
 
 <iframe src="/assets/mit6.1810/l-fs2.pdf" width="100%" height="800px"></iframe>
 
-## 讲义要点（摘要）
+## Lecture highlights (summary)
 
-- Crash recovery 的核心问题：崩溃可能使文件系统处于不一致状态（例如目录项指向未初始化的 inode）。
-- 常见解决方案：写前日志（write-ahead log / journaling），确保事务要么全部生效要么全部不生效。
-- xv6 的实现要点：在内存中维护日志条目，commit 时先写日志并标记完成，然后再将日志中的块安装到它们的目标位置，最后清空日志头。
-- 设计权衡：正确性 vs 性能（日志会导致块被写两次），与并发/日志大小的折衷（大型事务需拆分）。
+- The core problem of crash recovery: a crash can leave the file system in an inconsistent state (for example, directory entries pointing to uninitialized inodes).
+- Common solution: write-ahead logging (journaling) so a transaction either fully completes or not at all.
+- xv6 implementation notes: maintain log entries in memory, write and mark the log completed at commit, then install the blocks from the log to their target locations, and finally clear the log head.
+- Design tradeoffs: correctness vs performance (logging causes blocks to be written twice), and tradeoffs with concurrency/log size (large transactions need splitting).
 
-## 参考资料
+## References
 
-- 幻灯片（嵌入于上方）
-- Crash recovery 详细笔记：[/mit6.1810/homework/l-crash.md](/mit6.1810/homework/l-crash.md)
-- xv6 源码中有关日志和缓冲区缓存的实现：查看 `fs.c`, `log.c`, `bio.c`（xv6 源码仓库）
+- Slides (embedded above)
+- Detailed crash recovery notes: [/mit6.1810/homework/l-crash.md](/mit6.1810/homework/l-crash.md)
+- xv6 source implementations for logging and the buffer cache: see `fs.c`, `log.c`, `bio.c` in the xv6 source repository
 
-如果你希望我把 `2024` 年的原始讲稿文本提取并把讲义扩展为更详细的 Markdown（包含代码片段和示例），我可以继续把 `homework/l-crash.md` 的内容整合进来并生成更长的讲义页面。
+If you'd like, I can extract the original 2024 lecture notes and expand this into a more detailed Markdown lecture (including code snippets and examples) by incorporating `homework/l-crash.md`.
