@@ -1,0 +1,1522 @@
+[
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/homework/QA.html",
+    "local_path": "docs/mit6.1810/homework/QA.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/homework/journal-ext2fs.html",
+    "local_path": "docs/mit6.1810/homework/journal-ext2fs.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/homework/l-crash.html",
+    "local_path": "docs/mit6.1810/homework/l-crash.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/homework/l-journal.html",
+    "local_path": "docs/mit6.1810/homework/l-journal.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/homework/l-uservm.html",
+    "local_path": "docs/mit6.1810/homework/l-uservm.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/homework/q.html",
+    "local_path": "docs/mit6.1810/homework/q.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/homework/uservm-faq.html",
+    "local_path": "docs/mit6.1810/homework/uservm-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/cow.html",
+    "local_path": "docs/mit6.1810/labs/cow.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/fs.html",
+    "local_path": "docs/mit6.1810/labs/fs.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/guidance.html",
+    "local_path": "docs/mit6.1810/labs/guidance.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/lock.html",
+    "local_path": "docs/mit6.1810/labs/lock.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/mmap.html",
+    "local_path": "docs/mit6.1810/labs/mmap.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/net.html",
+    "local_path": "docs/mit6.1810/labs/net.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/pgtbl.html",
+    "local_path": "docs/mit6.1810/labs/pgtbl.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/syscall.html",
+    "local_path": "docs/mit6.1810/labs/syscall.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/tools.html",
+    "local_path": "docs/mit6.1810/labs/tools.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/traps.html",
+    "local_path": "docs/mit6.1810/labs/traps.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/labs/util.html",
+    "local_path": "docs/mit6.1810/labs/util.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/dune-faq.html",
+    "local_path": "docs/mit6.1810/lec/dune-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-QA1.html",
+    "local_path": "docs/mit6.1810/lec/l-QA1.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-atomic.html",
+    "local_path": "docs/mit6.1810/lec/l-atomic.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-c.html",
+    "local_path": "docs/mit6.1810/lec/l-c.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-coordination.html",
+    "local_path": "docs/mit6.1810/lec/l-coordination.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-drivers.html",
+    "local_path": "docs/mit6.1810/lec/l-drivers.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-fs.html",
+    "local_path": "docs/mit6.1810/lec/l-fs.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-fs2.html",
+    "local_path": "docs/mit6.1810/lec/l-fs2.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-internal.html",
+    "local_path": "docs/mit6.1810/lec/l-internal.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-interrupt.html",
+    "local_path": "docs/mit6.1810/lec/l-interrupt.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-lock.html",
+    "local_path": "docs/mit6.1810/lec/l-lock.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-lock2.html",
+    "local_path": "docs/mit6.1810/lec/l-lock2.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-lockv2.html",
+    "local_path": "docs/mit6.1810/lec/l-lockv2.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-meltdown.html",
+    "local_path": "docs/mit6.1810/lec/l-meltdown.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-net.html",
+    "local_path": "docs/mit6.1810/lec/l-net.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-organization.html",
+    "local_path": "docs/mit6.1810/lec/l-organization.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-os.html",
+    "local_path": "docs/mit6.1810/lec/l-os.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-overview.html",
+    "local_path": "docs/mit6.1810/lec/l-overview.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-pgfaults.html",
+    "local_path": "docs/mit6.1810/lec/l-pgfaults.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-processes.html",
+    "local_path": "docs/mit6.1810/lec/l-processes.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-rcu.html",
+    "local_path": "docs/mit6.1810/lec/l-rcu.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-redleaf.html",
+    "local_path": "docs/mit6.1810/lec/l-redleaf.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-riscv.html",
+    "local_path": "docs/mit6.1810/lec/l-riscv.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-sched.html",
+    "local_path": "docs/mit6.1810/lec/l-sched.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-threads.html",
+    "local_path": "docs/mit6.1810/lec/l-threads.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-tools.html",
+    "local_path": "docs/mit6.1810/lec/l-tools.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-uservm.html",
+    "local_path": "docs/mit6.1810/lec/l-uservm.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-vm.html",
+    "local_path": "docs/mit6.1810/lec/l-vm.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-vmm.html",
+    "local_path": "docs/mit6.1810/lec/l-vmm.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l4-faq.html",
+    "local_path": "docs/mit6.1810/lec/l4-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/livelock-faq.html",
+    "local_path": "docs/mit6.1810/lec/livelock-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/meltdown-faq.html",
+    "local_path": "docs/mit6.1810/lec/meltdown-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/rcu-faq.html",
+    "local_path": "docs/mit6.1810/lec/rcu-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/redleaf-faq.html",
+    "local_path": "docs/mit6.1810/lec/redleaf-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000001.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000001.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000002.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000002.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000003.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000003.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000004.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000004.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000005.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000005.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000006.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000006.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000007.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000007.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000008.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000008.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000009.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000009.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000010.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000010.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000011.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000011.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000012.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000012.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000013.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000013.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000014.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000014.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000015.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000015.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000016.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000016.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000017.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000017.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000018.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000018.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000019.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000019.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000020.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000020.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000021.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000021.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000022.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000022.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000023.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000023.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000024.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000024.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000025.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000025.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000026.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000026.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000027.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000027.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000028.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000028.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000029.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000029.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000030.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000030.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000031.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000031.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000032.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000032.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000033.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000033.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000034.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000034.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000035.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000035.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000036.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000036.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000037.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000037.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000038.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000038.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000039.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000039.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000040.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000040.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000041.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000041.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000042.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000042.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000043.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000043.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000044.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000044.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000045.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000045.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000046.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000046.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000047.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000047.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000048.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000048.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000049.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000049.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000050.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000050.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000051.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000051.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000052.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000052.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000053.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000053.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000054.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000054.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000055.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000055.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000056.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000056.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000057.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000057.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000058.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000058.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000059.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000059.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000060.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000060.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000061.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000061.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000062.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000062.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000063.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000063.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000064.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000064.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000065.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000065.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000066.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000066.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000067.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000067.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000068.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000068.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000069.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000069.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000070.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000070.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000071.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000071.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000072.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000072.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000073.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000073.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000074.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000074.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000075.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000075.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000076.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000076.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000077.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000077.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000078.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000078.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000079.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000079.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000080.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000080.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000081.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000081.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000082.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000082.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000083.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000083.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000084.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000084.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000085.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000085.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000086.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000086.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000087.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000087.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000088.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000088.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000089.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000089.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000090.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000090.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000091.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000091.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000092.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000092.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000093.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000093.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000094.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000094.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000095.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000095.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000096.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000096.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000097.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000097.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000098.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000098.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000099.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000099.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000100.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000100.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000101.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000101.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000102.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000102.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000103.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000103.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000104.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000104.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000105.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000105.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000106.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000106.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000107.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000107.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000108.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000108.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000109.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000109.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000110.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000110.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000111.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000111.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000112.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000112.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000113.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000113.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000114.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000114.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000115.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000115.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000116.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000116.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000117.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000117.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000118.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000118.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000119.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000119.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000120.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000120.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000121.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000121.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000122.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000122.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000123.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000123.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000124.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000124.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000125.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000125.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000126.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000126.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000127.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000127.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000128.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000128.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000129.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000129.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000130.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000130.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000131.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000131.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000132.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000132.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000133.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000133.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000134.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000134.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000135.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000135.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000136.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000136.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000137.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000137.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000138.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000138.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000139.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000139.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000140.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000140.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000141.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000141.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000142.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000142.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000143.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000143.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000144.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000144.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000145.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000145.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000146.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000146.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000147.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000147.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000148.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000148.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000149.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000149.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000150.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000150.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000151.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000151.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000152.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000152.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000153.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000153.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000154.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000154.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000155.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000155.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000156.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000156.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000157.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000157.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000158.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000158.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000159.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000159.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000160.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000160.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000161.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000161.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000162.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000162.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000163.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000163.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000164.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000164.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000165.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000165.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000166.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000166.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000167.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000167.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000168.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000168.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000169.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000169.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000170.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000170.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000171.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000171.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000172.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000172.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000173.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000173.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000174.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000174.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000175.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000175.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000176.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000176.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000177.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000177.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000178.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000178.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000179.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000179.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000180.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000180.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000181.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000181.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000182.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000182.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000183.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000183.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000184.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000184.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000185.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000185.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000186.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000186.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000187.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000187.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000188.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000188.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000189.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000189.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000190.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000190.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000191.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000191.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000192.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000192.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000193.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000193.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000194.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000194.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000195.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000195.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000196.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000196.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000197.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000197.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000198.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000198.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000199.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000199.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000200.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000200.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000201.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000201.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000202.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000202.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000203.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000203.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000204.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000204.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000205.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000205.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000206.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000206.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000207.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000207.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000208.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000208.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000209.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000209.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000210.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000210.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000211.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000211.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/pdp11/pdp11-40-000212.html",
+    "local_path": "docs/mit6.1810/pdp11/pdp11-40-000212.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/quiz.html",
+    "local_path": "docs/mit6.1810/quiz.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/schedule.html",
+    "local_path": "docs/mit6.1810/schedule.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/schedule.zh.html",
+    "local_path": "docs/mit6.1810/schedule.zh.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/dune-faq.txt",
+    "local_path": "docs/mit6.1810/lec/dune-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/ext3-faq.txt",
+    "local_path": "docs/mit6.1810/lec/ext3-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/faq-biscuit.txt",
+    "local_path": "docs/mit6.1810/lec/faq-biscuit.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-QA1.txt",
+    "local_path": "docs/mit6.1810/lec/l-QA1.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-biscuit.txt",
+    "local_path": "docs/mit6.1810/lec/l-biscuit.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-c.txt",
+    "local_path": "docs/mit6.1810/lec/l-c.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-coordination.txt",
+    "local_path": "docs/mit6.1810/lec/l-coordination.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-crash.txt",
+    "local_path": "docs/mit6.1810/lec/l-crash.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-extensibility.txt",
+    "local_path": "docs/mit6.1810/lec/l-extensibility.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-fs.txt",
+    "local_path": "docs/mit6.1810/lec/l-fs.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-internal.txt",
+    "local_path": "docs/mit6.1810/lec/l-internal.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-interrupt.txt",
+    "local_path": "docs/mit6.1810/lec/l-interrupt.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-janus.txt",
+    "local_path": "docs/mit6.1810/lec/l-janus.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-journal.txt",
+    "local_path": "docs/mit6.1810/lec/l-journal.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-lockv2.txt",
+    "local_path": "docs/mit6.1810/lec/l-lockv2.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-meltdown.txt",
+    "local_path": "docs/mit6.1810/lec/l-meltdown.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-net.txt",
+    "local_path": "docs/mit6.1810/lec/l-net.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-organization.txt",
+    "local_path": "docs/mit6.1810/lec/l-organization.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-os.txt",
+    "local_path": "docs/mit6.1810/lec/l-os.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-overview.txt",
+    "local_path": "docs/mit6.1810/lec/l-overview.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-pgfaults.txt",
+    "local_path": "docs/mit6.1810/lec/l-pgfaults.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-rcu.txt",
+    "local_path": "docs/mit6.1810/lec/l-rcu.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-redleaf.txt",
+    "local_path": "docs/mit6.1810/lec/l-redleaf.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-riscv.txt",
+    "local_path": "docs/mit6.1810/lec/l-riscv.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-superpages.txt",
+    "local_path": "docs/mit6.1810/lec/l-superpages.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-threads.txt",
+    "local_path": "docs/mit6.1810/lec/l-threads.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-uservm.txt",
+    "local_path": "docs/mit6.1810/lec/l-uservm.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-vm-again.txt",
+    "local_path": "docs/mit6.1810/lec/l-vm-again.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-vm.txt",
+    "local_path": "docs/mit6.1810/lec/l-vm.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-vmm.txt",
+    "local_path": "docs/mit6.1810/lec/l-vmm.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l-vmware.txt",
+    "local_path": "docs/mit6.1810/lec/l-vmware.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/l4-faq.txt",
+    "local_path": "docs/mit6.1810/lec/l4-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/livelock-faq.txt",
+    "local_path": "docs/mit6.1810/lec/livelock-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/meltdown-faq.txt",
+    "local_path": "docs/mit6.1810/lec/meltdown-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/rcu-faq.txt",
+    "local_path": "docs/mit6.1810/lec/rcu-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/redleaf-faq.txt",
+    "local_path": "docs/mit6.1810/lec/redleaf-faq.md",
+    "preserve_front_matter": true
+  },
+  {
+    "url": "https://pdos.csail.mit.edu/6.828/2025/lec/uservm-faq.txt",
+    "local_path": "docs/mit6.1810/lec/uservm-faq.md",
+    "preserve_front_matter": true
+  }
+]

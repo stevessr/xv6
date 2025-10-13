@@ -2,190 +2,124 @@
 title: schedule
 ---
 
-Links to notes, videos etc. on future days are copies of materials from the 2023 version of 6.1810. We will update the notes as the course progresses. The lecture notes may help you remember the lecture content, but they are *not* a replacement for attending lectures.
+Links to notes, videos etc. on future days are copies of materials from the 2024 version of 6.1810. We will update the notes as the course progresses. The lecture notes may help you remember the lecture content, but they are _not_ a replacement for attending lectures.   
+  
 
-### Week of Sep 2
-*   **Mon, Sep 2:** (Holiday) Labor Day
-*   **Tue, Sep 3:** (Special) Reg Day
-*   **Wed, Sep 4:**
-    *   **LEC 1 (rtm):** [Introduction](/mit6.1810/lec/l-overview.md) (handouts: [xv6 book](/assets/mit6.1810/book-riscv-rev4.pdf))
-    *   **Preparation**: [Read chapter 1](/assets/mit6.1810/book-riscv-rev4.pdf) (for your amusement: [Unix](https://www.youtube.com/watch?v=tc4ROCJYbm0))
-    *   **Assignment**: [Lab util: Unix utilities](/mit6.1810/labs/util.md)
-*   **Thu, Sep 5:**
-*   **Fri, Sep 6:**
 
-### Week of Sep 9
-*   **Mon, Sep 9:**
-    *   **LEC 2 (fk):** [C in xv6](/mit6.1810/lec/l-c.md), [slides](/mit6.1810/lec/l-c_slides.pdf)    *   **Preparation**: 2.9 (Bitwise operators) and 5.1 (Pointers and addresses) through 5.6 (Pointer arrays) and 6.4 (pointers to structures) by Kernighan and Ritchie (K&R)
-*   **Tue, Sep 10:**
-*   **Wed, Sep 11:**
-    *   **LEC 3 (fk):** [OS design](/mit6.1810/lec/l-os.md)
-    *   **Preparation**: [Read chapter 2](/assets/mit6.1810/book-riscv-rev4.pdf) and xv6 code: [kernel/proc.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.h), [kernel/defs.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/defs.h), [kernel/entry.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S), [kernel/main.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/main.c), [user/initcode.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/initcode.S), [user/init.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/init.c), and skim [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c) and [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
-    *   **Homework 1 due:** [Question](/mit6.1810/homework/q.md)
-    *   **Assignment**: [Lab syscall: System calls](/mit6.1810/labs/syscall.md)
-*   **Thu, Sep 12:** **DUE**: Lab util
-*   **Fri, Sep 13:**
+Monday| Tuesday | Wednesday| Thursday | Friday  
+---|---|---|---|---  
+sep 1  
+Labor Day | sep 2  
+Reg Day | sep 3  
+**LEC 1 (rtm):** [Introduction](lec/l-overview.txt) and [examples](lec/l-overview/)  
+**Handouts:** [xv6 code](https://github.com/mit-pdos/xv6-riscv) ([PDF booklet](xv6/xv6-src-booklet-rev5.pdf)) and [xv6 book](xv6/book-riscv-rev5.pdf)  
+**Homework 1 due:** [file descriptors](homework/xv6-intro.html)  
+**Lab _util_ assigned**: [Unix utilities](labs/util.html) | sep 4 | sep 5  
+sep 8  
+**LEC 2 (nz):** [C in xv6](lec/l-c.txt) and [examples](lec/l-c/)  
+**Homework 2 due:** [kernel C](homework/xv6-c.html) | sep 9 | sep 10  
+**LEC 3 (fk):** [OS design](lec/l-os.txt)  
+**Homework 3 due:** [kernel design](homework/xv6-design.html)  
+**Lab _syscall_ assigned**: [System calls](labs/syscall.html) | sep 11  
+**Lab _util_ due** | sep 12  
+sep 15  
+**LEC 4 (rtm):** [OS Organization](lec/l-organization.txt), [FAQ](lec/l4-faq.txt)  
+**Homework 4 due:** [microkernels](homework/paper-microkernel.html) | sep 16 | sep 17  
+**LEC 5 (nz):** [Page tables](lec/l-vm.txt)  
+**Homework 5 due:** [page tables](homework/xv6-pgtbl.html)  
+**Lab _pgtbl_ assigned**: [Page tables](labs/pgtbl.html) | sep 18  
+**Lab _syscall_ due** | sep 19  
+sep 22  
+**LEC 6 (fk):** [System call entry/exit](lec/l-internal.txt)  
+**Homework 6 due:** [Question](homework/xv6-trampoline.html) | sep 23 | sep 24  
+**LEC 7 (nz):** [System call interposition](lec/l-janus.txt)  
+**Homework 7 due:** [system call interposition](homework/paper-janus.html)  
+**Lab _traps_ assigned**: [Traps](labs/traps.html) | sep 25  
+**Lab _pgtbl_ due** | sep 26  
+sep 29  
+**LEC 8 (fk):** [Page faults](lec/l-pgfaults.txt)   
+**Homework 8 due:** [Question](homework/xv6-pgfault.html) | sep 30 | oct 1  
+**LEC 9 (rtm):** [Transparent super pages](lec/l-superpages.txt)  
+**Homework 9 due:** [superpages](homework/paper-superpages.html)  
+**Lab _cow_ assigned**: [Copy-on-write fork](labs/cow.html) | oct 2  
+**Lab _traps_ due** | oct 3  
+ADD DATE  
+oct 6  
+**LEC 10 (fk):** [Virtual memory for applications](lec/l-uservm.txt), [FAQ](lec/uservm-faq.txt) ([sqrt example](lec/mmap.c))  
+**Homework 10 due:** [Question](homework/paper-uvm.html) | oct 7 | oct 8  
+**LEC 11 (rtm):** [Device drivers](lec/l-interrupt.txt), [16550.pdf](lec/16550.pdf)  
+**Homework 11 due:** [Question](homework/xv6-interrupt.html) | oct 9 | oct 10  
+oct 13  
+Indigenous Peoples Day | oct 14 | oct 15  
+**LEC 12 (rtm):** [Locking](lec/l-lockv2.txt)  
+**Homework 12 due:** [Question](homework/xv6-locks.html)  
+**Lab _net_ assigned**: [Network driver](labs/net.html) | oct 16  
+**Lab _cow_ due** | oct 17  
+oct 20  
+Hacking day; no class meeting; work on the lab | oct 21 | oct 22  
+**Midterm**  
+**Location:** 50-340 (Walker)  
+**Time:** 1:05-2:25pm  
+**Policy:** open book and notes, closed network  
+**Scope:** lectures 1 through 12, labs through cow   
+**Practice:** [previous quizzes](quiz.html) | oct 23 | oct 24  
+oct 27  
+**LEC 13 (nz):** [Thread switching](lec/l-threads.txt)   
+**Homework 13 due:** [Thread switching](homework/xv6-threads.html) | oct 28 | oct 29  
+**LEC 14 (rtm):** [Coordination](lec/l-coordination.txt), [code](lec/l-coordination.c)  
+**Preparation** : Read remainder of ["Scheduling"](xv6/book-riscv-rev5.pdf), and corresponding parts of [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c)  
+**Homework 14 due:** [Question](homework/q.html) | oct 30 | oct 31  
+nov 3  
+**LEC 15 (nz):** [Networking](lec/l-net.txt)  
+**Homework 15 due:** [Receive livelock](homework/paper-livelock.html)  
+**Lab _lock_ assigned**: [Parallelism/locking](labs/lock.html) | nov 4  
+**Lab _net_ due** | nov 5  
+**LEC 16 (fk):** Scheduling  
+**Preparation** : Read [TBD](readings/xxx.pdf)  
+**Homework 16 due:** [Question](homework/q.html) | nov 6 | nov 7  
+nov 10  
+Student holiday | nov 11  
+Veteran's Day | nov 12  
+**LEC 17 (fk):** [Multi-Core scalability and RCU](lec/l-rcu.txt)   
+**Preparation** : Read [RCU paper (2013)](readings/rcu-decade-later.pdf), [FAQ](lec/rcu-faq.txt)  
+**Homework 17 due:** [Question](homework/q.html)  
+**Lab _fs_ assigned**: [File system](labs/fs.html) | nov 13  
+**Lab _lock_ due** | nov 14  
+nov 17  
+**LEC 18 (rtm):** [File systems](lec/l-fs.txt) ([slides](lec/l-fs1.pdf))  
+**Preparation** : Read [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), [kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), [kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), [kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) and ["File system" (except for the logging sections)](xv6/book-riscv-rev5.pdf)  
+**Homework 18 due:** [Question](homework/q.html) | nov 18 | nov 19  
+**DROP DATE**  
+**LEC 19 (fk):** [Crash recovery](lec/l-crash.txt) ([slides](lec/l-fs2.pdf))  
+**Preparation** : Read [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) and [the logging sections of the "File system" chapter](xv6-book-riscv-rev5.pdf)  
+**Homework 19 due:** [Question](homework/q.html)  
+**Lab _mmap_ assigned**: [Mmap](labs/mmap.html) | nov 20  
+**Lab _fs_ due** | nov 21  
+nov 24  
+**LEC 20 (nz):** [File system performance and fast crash recovery](lec/l-journal.txt)  
+**Homework 20 due:** [ext3](homework/paper-ext3.html) | nov 25 | nov 26  
+Hacking day: no class meeting; work on the lab | nov 27 - nov 28  
+Thanksgiving  
+dec 1  
+**LEC 21 (fk):** [Containers and Virtual Machines](lec/l-vmm.txt)  
+**Homework 21 due:** [Question](homework/paper-blending.html) | dec 2 | dec 3  
+Hacking day: no class meeting; work on the lab | dec 4 | dec 5  
+**Lab _mmap_ due**  
+dec 8  
+**LEC 22 (nz):** Kernel extensibility  
+**Homework 22 due:** [BPF](homework/paper-bpf.html) | dec 9 | dec 10  
+LAST DAY OF CLASSES  
+**LEC 23 (rtm):** [Meltdown](lec/l-meltdown.txt), [FAQ](lec/meltdown-faq.txt)  
+**Preparation** : Read [Meltdown (2018)](readings/meltdown.pdf)  
+**Homework 23 due:** [Question](homework/q.html) | dec 11 | dec 12  
+dec 15 | dec 16 | dec 17 | dec 18 | dec 19  
+**Final exam:** DuPont, 1:30-4:30pm.  
+**Policy:** Open book, open notes, closed network.  
+**Scope:** Lectures 13 through 22, labs net through mmap.  
+**Practice:** [previous quizzes](quiz.html).  
+  
+* * *
 
-### Week of Sep 16
-*   **Mon, Sep 16:**
-    *   **LEC 4 (fk):** [page tables](/mit6.1810/lec/l-vm.md)
-    *   **Preparation**: Read [Chapter 3](/assets/mit6.1810/book-riscv-rev4.pdf) and [kernel/memlayout.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/memlayout.h), [kernel/vm.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/vm.c), [kernel/kalloc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kalloc.c), [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), and [kernel/exec.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/exec.c)
-    *   **Homework 2 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Sep 17:**
-*   **Wed, Sep 18:**
-    *   **LEC 5 (rtm):** [System call entry/exit](/mit6.1810/lec/l-internal.md)
-    *   **Preparation**: Read [Chapter 4, except 4.6](/assets/mit6.1810/book-riscv-rev4.pdf) and [kernel/riscv.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h), [kernel/trampoline.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trampoline.S), and [kernel/trap.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/trap.c)
-    *   **Homework 3 due:** [Question](/mit6.1810/homework/q.md)
-    *   **Assignment**: [Lab pgtbl: Page tables](/mit6.1810/labs/pgtbl.md)
-*   **Thu, Sep 19:** **DUE**: Lab syscall
-*   **Fri, Sep 20:**
+Questions or comments regarding 6.1810? Send e-mail to the course staff at [_61810-staff@lists.csail.mit.edu_](mailto:61810-staff@lists.csail.mit.edu). 
 
-### Week of Sep 23
-*   **Mon, Sep 23:**
-    *   **LEC 6 (TAs):** [GDB](/mit6.1810/lec/gdb_slides.pdf) [Calling conventions](/mit6.1810/lec/l-riscv.md)
-    *   **Preparation**: Read [Calling Convention](/assets/mit6.1810/riscv-calling.pdf)
-*   **Tue, Sep 24:**
-*   **Wed, Sep 25:**
-    *   **LEC 7 (fk):** [Page faults](/mit6.1810/lec/l-pgfaults.md) 
-    *   **Preparation**: Read [Section 4.6](/assets/mit6.1810/book-riscv-rev4.pdf)
-    *   **Homework 4 due:** [Question](/mit6.1810/homework/q.md)
-    *   **Assignment**: [Lab traps: Traps](/mit6.1810/labs/traps.md)
-*   **Thu, Sep 26:** **DUE**: Lab pgtbl
-*   **Fri, Sep 27:**
-
-### Week of Sep 30
-*   **Mon, Sep 30:**
-    *   **LEC 8 (fk):** [Q&A labs](/mit6.1810/lec/l-QA1.md)
-    *   **Homework 5 due:** [Question](/mit6.1810/homework/QA.md)
-*   **Tue, Oct 1:**
-*   **Wed, Oct 2:**
-    *   **LEC 9 (rtm):** [Device drivers](/mit6.1810/lec/l-interrupt.md), [16550.pdf](/mit6.1810/lec/16550.pdf)
-    *   **Preparation**: Read [Chapter 5](/assets/mit6.1810/book-riscv-rev4.pdf) and [kernel/kernelvec.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/kernelvec.S), [kernel/plic.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/plic.c), [kernel/console.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/console.c), [kernel/uart.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c), [kernel/printf.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/printf.c)
-    *   **Homework 6 due:** [Question](/mit6.1810/homework/q.md)
-    *   **Assignment**: [Lab cow: Copy-on-write fork](/mit6.1810/labs/cow.md)
-*   **Thu, Oct 3:** **DUE**: Lab traps
-*   **Fri, Oct 4:** (Special) ADD DATE
-
-### Week of Oct 7
-*   **Mon, Oct 7:**
-    *   **LEC 10 (fk):** [Locking](/mit6.1810/lec/l-lockv2.md)
-    *   **Preparation**: Read ["Locking"](/assets/mit6.1810/book-riscv-rev4.pdf) with [kernel/spinlock.h](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.h) and [kernel/spinlock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/spinlock.c)
-    *   **Homework 7 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Oct 8:**
-*   **Wed, Oct 9:**
-    *   **LEC 11 (rtm):** [Scheduling 1](/mit6.1810/lec/l-threads.md)
-    *   **Preparation**: Read ["Scheduling"](/assets/mit6.1810/book-riscv-rev4.pdf) through Section 7.4, and [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/swtch.S](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/swtch.S)
-    *   **Homework 8 due:** [Question](/mit6.1810/homework/q.md)
-*   **Thu, Oct 10:**
-*   **Fri, Oct 11:**
-
-### Week of Oct 14
-*   **Mon, Oct 14:** (Holiday) Indigenous Peoples Day
-*   **Tue, Oct 15:**
-*   **Wed, Oct 16:**
-    *   **LEC 12 (rtm):** Coordination, [code](/source/xv6-riscv/kernel/pipe.c)
-    *   **Preparation**: Read remainder of ["Scheduling"](/assets/mit6.1810/book-riscv-rev4.pdf), and corresponding parts of [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c)
-    *   **Homework 9 due:** [Question](/mit6.1810/homework/q.md)
-*   **Thu, Oct 17:** **DUE**: Lab cow
-*   **Fri, Oct 18:**
-
-### Week of Oct 21
-*   **Mon, Oct 21:**
-    *   **LEC 13 (fk):** [File systems](/mit6.1810/lec/l-fs.md) ([slides](/mit6.1810/lec/l-fs1.pdf))
-    *   **Preparation**: Read [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), [kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), [kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), [kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) and ["File system" (except for the logging sections)](/assets/mit6.1810/book-riscv-rev4.pdf)
-    *   **Homework 10 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Oct 22:**
-*   **Wed, Oct 23:**
-    *   **Midterm**: in class during class hours, open book and notes but closed network.
-    *   **Scope**: Lectures 1 through 12, labs through lab cow.
-    *   **Practice**: [previous quizzes](/mit6.1810/quiz.md).
-    *   **Assignment**: [Lab net: Network driver](/mit6.1810/labs/net.md)
-*   **Thu, Oct 24:**
-*   **Fri, Oct 25:**
-
-### Week of Oct 28
-*   **Mon, Oct 28:**
-    *   **LEC 14 (fk):** [Crash recovery](/mit6.1810/homework/l-crash.md) ([slides](/mit6.1810/lec/l-fs2.pdf))
-    *   **Preparation**: Read [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) and [the logging sections of the "File system" chapter](/assets/mit6.1810/book-riscv-rev4.pdf)
-    *   **Homework 11 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Oct 29:**
-*   **Wed, Oct 30:**
-    *   **LEC 15 (rtm):** [File system performance and fast crash recovery](/mit6.1810/homework/l-journal.md)
-    *   **Preparation**: Read [Journaling the Linux ext2fs Filesystem (1998)](/mit6.1810/homework/journal-ext2fs.md)
-    *   **Homework 12 due:** [Question](/mit6.1810/homework/q.md)
-*   **Thu, Oct 31:**
-*   **Fri, Nov 1:**
-
-### Week of Nov 4
-*   **Mon, Nov 4:** (Holiday) Hacking day: no class meeting; work on the lab
-    *   **Assignment**: [Lab lock: Parallelism/locking](/mit6.1810/labs/lock.md)
-*   **Tue, Nov 5:** **DUE**: Lab net
-*   **Wed, Nov 6:** (Holiday) Hacking day: no class meeting; work on the lab
-*   **Thu, Nov 7:**
-*   **Fri, Nov 8:**
-
-### Week of Nov 11
-*   **Mon, Nov 11:** (Holiday) Veteran's Day
-*   **Tue, Nov 12:**
-*   **Wed, Nov 13:**
-    *   **LEC 16 (fk):** [Virtual memory for applications](/mit6.1810/homework/l-uservm.md), [FAQ](/mit6.1810/homework/uservm-faq.md) ([sqrt example](/source/xv6-riscv/user/usertests.c))
-    *   **Preparation**: Read [Virtual Memory Primitives for User Programs (1991)](/assets/mit6.1810/appel-li.pdf)
-    *   **Homework 13 due:** [Question](/mit6.1810/homework/q.md)
-    *   **Assignment**: [Lab fs: File system](/mit6.1810/labs/fs.md)
-*   **Thu, Nov 14:** **DUE**: Lab lock
-*   **Fri, Nov 15:**
-
-### Week of Nov 18
-*   **Mon, Nov 18:**
-    *   **LEC 17 (rtm):** [OS Organization](/mit6.1810/lec/l-organization.md), [FAQ](/mit6.1810/lec/l4-faq.md)
-    *   **Preparation**: Read [The Performance of micro-Kernel-Based Systems (1997)](/assets/mit6.1810/microkernel.pdf)
-    *   **Homework 14 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Nov 19:**
-*   **Wed, Nov 20:**
-    *   **DROP DATE**
-    *   **LEC 18 (rtm):** [Virtual Machines](/mit6.1810/lec/l-vmm.md), [FAQ](/mit6.1810/lec/dune-faq.md)
-    *   **Preparation**: Read [Dune: Safe User-level Access to Privileged CPU Features (2012)](/assets/mit6.1810/belay-dune.pdf)
-    *   **Homework 15 due:** [Question](/mit6.1810/homework/q.md)
-    *   **Assignment**: [Lab mmap: Mmap](/mit6.1810/labs/mmap.md)
-*   **Thu, Nov 21:** **DUE**: Lab fs
-*   **Fri, Nov 22:**
-
-### Week of Nov 25
-*   **Mon, Nov 25:**
-    *   **LEC 19 (fk):** [Kernels and HLL](/mit6.1810/lec/l-redleaf.md), [FAQ](/mit6.1810/lec/redleaf-faq.md)
-    *   **Preparation**: Read [the RedLeaf paper (2020)](/assets/mit6.1810/redleaf.pdf)
-    *   **Homework 16 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Nov 26:**
-*   **Wed, Nov 27:** (Holiday) Hacking day: no class meeting; work on the lab
-*   **Thu, Nov 28 - Fri, Nov 29:** (Holiday) Thanksgiving
-
-### Week of Dec 2
-*   **Mon, Dec 2:**
-    *   **LEC 20 (rtm):** [Networking](/mit6.1810/lec/l-net.md)
-    *   **Preparation**: Read [Receive Livelock (1996)](/assets/mit6.1810/mogul96usenix.pdf), [FAQ](/mit6.1810/lec/livelock-faq.md)
-    *   **Homework 17 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Dec 3:**
-*   **Wed, Dec 4:** (Holiday) Hacking day: no class meeting; work on the lab
-*   **Thu, Dec 5:**
-*   **Fri, Dec 6:** **DUE**: Lab mmap
-
-### Week of Dec 9
-*   **Mon, Dec 9:**
-    *   **LEC 21 (fk):** [Meltdown](/mit6.1810/lec/l-meltdown.md), [FAQ](/mit6.1810/lec/meltdown-faq.md)
-    *   **Preparation**: Read [Meltdown (2018)](/assets/mit6.1810/meltdown.pdf)
-    *   **Homework 18 due:** [Question](/mit6.1810/homework/q.md)
-*   **Tue, Dec 10:**
-*   **Wed, Dec 11:**
-    *   **LAST DAY OF CLASSES**
-    *   **LEC 22 (rtm):** [Multi-Core scalability and RCU](/mit6.1810/lec/l-rcu.md) 
-    *   **Preparation**: Read [RCU paper (2013)](/assets/mit6.1810/rcu-decade-later.pdf), [FAQ](/mit6.1810/lec/rcu-faq.md)
-    *   **Homework 19 due:** [Question](/mit6.1810/homework/q.md)
-*   **Thu, Dec 12:**
-*   **Fri, Dec 13:**
-
-### Week of Dec 16 - Dec 20
-*   **Mon, Dec 16 - Fri, Dec 20:**
-    *   **Final in finals week: Dec 19, DUPONT, 9am-11am**
-    *   **Open book and notes but closed network**
-    *   **Scope**: Lectures 13 through 22, labs net through mmap
-    *   **Practice**: [previous quizzes](/mit6.1810/quiz.md).
+[![Creative Commons License](https://i.creativecommons.org/l/by/3.0/us/88x31.png)](https://creativecommons.org/licenses/by/3.0/us/)
