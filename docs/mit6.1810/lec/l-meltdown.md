@@ -1,5 +1,128 @@
 ---
 title: l-meltdown.txt
 ---
+# Lecture 21: Meltdown
 
-6.1810 2024 Lecture 21: Meltdown Why this paper? Security is a critical O/S goal The kernel's main strategy: isolation User/supervisor mode, page tables, defensive system calls, &c; If you set it all up correctly, what could go wrong? Meltdown allows malicious user code to read kernel memory, despite page protections. surprising and disturbing one of a number of recent "micro-architectural" attacks exploiting hidden implementation details of CPUs fixable, but people fear an open-ended supply of related surprises Linux: grep . /sys/devices/system/cpu/vulnerabilities/* Here's the core of the attack (this is user code): 1\. char buf[8192] 2\. r1 =  3\. r2 = *r1 4\. r2 = r2 & 1 5\. r2 = r2 * 4096 6\. r3 = buf[r2] Will the load at line 3 load kernel data into r2? Assumes the kernel is mapped in user page table, with PTE_U clear. [diagram: 0 to 2^64] this was near universal until these attacks were discovered. user memory starts at zero; kernel in high addresses. mapping both user and kernel makes system calls faster. the point: *r1 is meaningful, even if forbidden. So how can this code possibly be useful to an attacker? The answer has to do with a bunch of mostly-hidden CPU implementation details. Speculative execution, and CPU caches. First, speculative execution. This is not yet about security. Imagine this ordinary code. This is C-like code; "r0" &c; are registers, and "*r0" is a memory reference. r0 =  r1 = load x from RAM // r1 is a register; x is a variable in RAM if(r1 == 1){ r2 = *r0 r3 = r2 + 1 } else { r3 = 0 } The "r1 = x" load from RAM takes 100s of cycles. The "if(r1 == 1)" needs that RAM content. It would be too bad if the CPU had to pause until the RAM fetch completed. Instead, the CPU predicts which way the branch is likely to go, and continues executing. This is called "speculation". So before the "r1 == 1" is resolved, the CPU may speculatively execute the "r2 = *r0", and then the "r3 = r2 + 1". What if the CPU mis-predicts a branch, e.g. x turns out to be zero? The CPU flushes the results of the incorrect speculation. Specifically, the CPU reverts the content of r2 and r3. And re-starts execution, in the "else" branch. Speculative execution helps performance, since it helps avoid stalls while the CPU is waiting for slow memory (other slow operations too, like divide). What if the CPU speculatively assumes r1 == 1, but r0 holds an illegal pointer? If it turns out x == 1, the "r2 = *r0" should raise an exception. If it turns out x == 0, the "r2 = *r0" should not raise an exception. The CPU "retires" instructions only after it is sure they won't need to be canceled due to mis-speculation. And the CPU retires instructions in order, only after all previous instructions have retired, since only then does it know that no previous instruction faulted. Thus a fault by an instruction that was speculatively executed may not occur until a while after the instruction finishes. Speculation is, in principle, invisible -- part of the CPU implemention, but not part of the specification. That is, speculation is intended to increase performance without changing the results that programs compute -- to be transparent. The CPU makes speculation transparent by un-doing register assignments if it realizes it speculated incorrectly, and doesn't raise exceptions from instructions incorrectly speculated. Some jargon: "Architectural features" -- things in the CPU manual, visible to programmers. "Micro-architectural" -- not in the manual, intended to be invisible. Another micro-architectural feature: CPU data and TLB caches. core L1: va,pa | data / TLB: va | pa L2: pa | data RAM If a load misses, data is fetched, and put into the cache. L1 ("level one") cache is virtually indexed, for speed. A system call leaves kernel data in L1 cache, after return to user space. (Assuming page table has both user and kernel mappings) CPU must consult both L1 and TLB, the latter for permissions and physical address for L1 associativity tag, to decide if a load hits in the L1. (Intel L1 is Virtually Indexed, Physically Tagged (VIPT)) On L1 miss: TLB lookup, L2 lookup with phys addr. Times: L1 hit -- a few cycles. L2 hit -- a dozen or two cycles. RAM -- 300 cycles. A cycle is 1/clockrate, e.g 0.5 nanosecond. When executing user code, L1 cache may contain kernel addresses and data. e.g. after a system call returns. Why is it safe for L1 to contain kernel data while executing user code? Can user programs read kernel data directly out of the cache? In real life, micro-architecture is not entirely invisible. It affects how long instructions and programs take. It's of intense interest to people who write performance-critical code. And to compiler writers. Intel &c; publish optimization guides, some details, but not all. A useful trick: sense whether something is cached. This is the paper's Flush+Reload. You want to know if function f() uses the memory at a address Z. 1) ensure that memory at Z is not cached. Intel CPUs have a clflush instructions. Or load enough memory locations to force everything else out of the cache. 2) call f() 3) Record the time. Modern CPUs let you read a cycle counter. For Intel CPUs, it's the rdtsc instruction. 4) load a byte from address Z (you need memory fences to ensure the load really happens) 5) Record the time again. 6) If the difference in times is < (say) 50, the load in #4 hit, which means f() probably used memory at address Z. Otherwise not. Back to Meltdown -- this time with more detail: char buf[8192] // the Flush of Flush+Reload clflush buf[0] clflush buf[4096] 1\. r1 =  2\. r2 = *r1 3\. r2 = r2 & 1 // speculated 4\. r2 = r2 * 4096 // speculated 5\. r3 = buf[r2] // speculated  // the Reload of Flush+Reload a = rdtsc r0 = buf[0] b = rdtsc r1 = buf[4096] c = rdtsc if b-a > c-b: low bit was probably a 1 That is, you can deduce the low bit of the kernel data based on which of two cache lines was loaded (buf[0] vs buf[4096]). Point: the fault from "r2 = *r1" is delayed until the load retires, which may take a while, giving time for the subsequent speculative instructions to execute. Point: apparently the "r2 = *r1" does the load, even if the PTE forbids it, and puts the result into r2, though only temporarily since reverted by the fault at retirement. Point: the "r3 = buf[r2]" loads some of buf[] into the cache, even though change to r3 is canceled due to mis-speculation. Since Intel views the cache content as hidden micro-architecture. The attack often doesn't work Each XX in Listing 3/4 is a failure It's not clear why the failures occur. Perhaps the desired kernel data isn't in the L1 cache? And isn't fetched from RAM due to PTE permissions? Or the load reaches retirement before RAM fetch completes? Perhaps cache conflicts kick out the array? Perhaps TLB misses or has conflicts? Perhaps other activity on the machine? Perhaps the load takes varying amounts of time to retire and fault? Section 6.2 says 10 bytes/second if kernel data not cached Retries help -- why? 1000s of retries may be needed -- why? The conditions for success are not clear. Perhaps reliable if kernel data is in L1, otherwise not. How could Meltdown be used in a real-world attack? The attacker needs to run their code on the victim machine. Timesharing: kernel may have other users' secrets, e.g. passwords, keys. And kernel may map all of physical memory, including other processes. Cloud: some container and VMM systems might be vulnerable, so you could steal data from other cloud customers. Your browser: it runs untrusted code in sandboxes, e.g. plug-ins, maybe a plug-in can steal your password from your kernel. However, Meltdown is not known to have been used in any actual attack. What about defenses? A software fix: Don't map the kernel in user page tables. The paper calls this "KAISER"; Linux now calls it KPTI. Requires a page table switch on each system call entry/exit. This is how RISC-V xv6 works. The page table switch can be slow -- it may require TLB flushes. PCID can avoid TLB flush, though still some expense. Many kernels adopted KAISER/KPTI soon after Meltdown was known. A hardware fix: Only return permitted data from speculative loads! If PTE_U/R/V is clear, return zero, not the actual data. This probably has little or no cost since CPU must look at PTE in TLB anyway for every L1 hit. AMD CPUs apparently worked like this all along. The latest Intel CPUs seem to do this (called RDCL_NO). These defenses are deployed and are believed to work; but: It was disturbing that page protections turned out to not be solid! More micro-architectural surprises have been emerging. Is the underlying issue just fixable bugs? Or an error in strategy? Stay tuned, this is still playing out. References: https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html https://cyber.wtf/2017/07/28/negative-result-reading-kernel-memory-from-user-mode/ https://eprint.iacr.org/2013/448.pdf https://gruss.cc/files/kaiser.pdf https://en.wikipedia.org/wiki/Kernel_page-table_isolation https://spectrum.ieee.org/computing/hardware/how-the-spectre-and-meltdown-hacks-really-worked https://lwn.net/Articles/741878/ 
+**6.1810 2024**
+
+**Topic:** Meltdown
+
+---
+
+## The Meltdown Threat
+
+*   **Security is a Critical OS Goal:** The kernel's main strategy is **isolation** (User/Supervisor mode, page tables, defensive system calls, etc.).
+*   **The Problem:** Meltdown allows malicious user code to **read kernel memory**, despite page table protections.
+*   **Nature of the Attack:** One of a number of recent "micro-architectural" attacks that exploit hidden implementation details of CPUs.
+
+---
+
+## The Core Attack Mechanism (User Code)
+
+This code is executed by an attacker in user space, assuming kernel memory is mapped in the user page table but with the User permission bit (`PTE_U`) clear (a near-universal practice until these attacks).
+
+```c
+1. char buf[8192] 
+2. r1 = <kernel_address> 
+3. r2 = *r1            // Load kernel data byte into r2
+4. r2 = r2 & 1         // Isolate the low bit
+5. r2 = r2 * 4096       // r2 is now 0 or 4096
+6. r3 = buf[r2]         // Load from buf[0] or buf[4096]
+```
+
+The pointer `*r1` is a meaningful address, even if forbidden by permissions.
+
+---
+
+## Micro-architectural Concepts
+
+The attack relies on two hidden CPU implementation details: **Speculative Execution** and **CPU Caches**.
+
+### 1. Speculative Execution
+
+**Goal:** Avoid stalls when waiting for slow operations (e.g., RAM load, which takes 100s of cycles).
+
+**Mechanism:**
+
+*   If a CPU is waiting for a branch condition (e.g., `if(r1 == 1)`) to be resolved, it **predicts** the outcome and continues executing instructions along the predicted path (**speculation**).
+*   If the prediction is correct, performance is gained.
+*   If the prediction is **incorrect (mis-prediction)**, the CPU **flushes** the results of the speculation (reverts register content) and restarts execution down the correct path.
+*   **Transparency:** Speculation is intended to be transparent (micro-architectural), increasing performance without changing the program's computed results. The CPU makes it transparent by un-doing register assignments and not raising exceptions from incorrectly speculated instructions.
+
+**Fault Handling:**
+
+*   The CPU "retires" instructions only after it is sure they won't be canceled.
+*   Retirement happens in order.
+*   A fault (like accessing forbidden memory at `*r0`) is **delayed** until the instruction retires, which can be a while after the instruction has finished executing speculatively.
+
+### 2. CPU Data and TLB Caches
+
+*   **L1 Cache:** Very fast (a few cycles), often virtually indexed.
+*   **System Calls:** A system call leaves kernel data in the L1 cache after returning to user space (assuming the page table maps both user and kernel).
+*   **Safety Question:** Why is it safe for L1 to contain kernel data while executing user code? Permissions are checked by the TLB/cache logic, preventing direct reads.
+
+### Micro-architectural Side-Channel
+
+While the micro-architecture is intended to be invisible, it affects **how long instructions take**.
+
+**The Flush+Reload Trick:**
+
+1.  **Flush:** Ensure memory at address $Z$ is not cached (using `clflush` or by forcing it out).
+2.  **Call Function $f()$**
+3.  **Reload:** Load a byte from address $Z$.
+4.  **Measure Time:** Record the time using a cycle counter (`rdtsc`).
+5.  **Deduction:** If the load time is fast (e.g., `< 50` cycles), the load was an **L1 hit**, meaning $f()$ probably used memory at $Z$.
+
+---
+
+## Meltdown: Combining the Concepts
+
+The Meltdown attack uses speculative execution to perform a forbidden kernel memory load, and uses the cache side-channel (Flush+Reload) to "leak" the result before the fault is retired.
+
+1.  **Flush:** `clflush buf[0]` and `clflush buf[4096]`.
+2.  **Speculative Code:** The 5 lines of code are run.
+    *   The load at line 3 (`r2 = *r1`) is executed speculatively. **The CPU performs the load, ignoring the `PTE_U` permission, and puts the result into `r2`** (temporarily).
+    *   The subsequent instructions (lines 4-6) are executed speculatively.
+    *   Line 6 (`r3 = buf[r2]`) loads either `buf[0]` or `buf[4096]` into the cache, depending on the lowest bit of the kernel data (from `*r1`).
+3.  **Fault Delay:** The fault from line 3 is delayed until the load instruction retires.
+4.  **Reload & Deduce:** Before the fault retires, the attacker uses the Flush+Reload trick to measure access time for `buf[0]` and `buf[4096]`.
+    *   The line that loads fast indicates which cache line was touched speculatively.
+    *   **The change to the cache content persists** (is not canceled) even though the register assignment to `r3` is canceled due to the mis-speculation.
+5.  **Result:** The attacker deduces one bit of kernel data per attempt.
+
+### Success Rate
+
+*   The attack often fails (indicated by 'XX' in the paper).
+*   Reasons for failure are complex and unclear (e.g., kernel data not in L1, load retiring too soon, cache conflicts, TLB misses, machine activity).
+*   Thousands of retries may be needed.
+
+---
+
+## Real-World Consequences
+
+*   **Timesharing:** An attacker could steal other users' secrets (passwords, keys) or physical memory from other processes.
+*   **Cloud:** Could potentially steal data from other cloud customers in container/VMM systems.
+*   **Browser:** Untrusted plug-ins could potentially steal your data from the kernel.
+*   **Note:** Meltdown is **not known** to have been used in any actual attack.
+
+---
+
+## Defenses
+
+### 1. Software Fix: KAISER/KPTI
+
+*   **Strategy:** **Don't map the kernel in user page tables.**
+*   The kernel is only mapped when executing in kernel mode.
+*   Requires a **page table switch** on each system call entry/exit.
+*   **Performance Cost:** The switch can be slow; it may require TLB flushes (though PCID can mitigate the flush cost).
+*   Many kernels (including Linux, as KPTI) adopted this soon after Meltdown was known. This is how RISC-V xv6 already works.
+
+### 2. Hardware Fix
+
+*   **Strategy:** Only return **permitted data** from speculative loads.
+*   If `PTE_U/R/V` is clear, the speculative load returns a safe value (e.g., zero) instead of the actual data.
+*   This likely has little performance cost.
+*   AMD CPUs apparently worked like this all along.
+*   Latest Intel CPUs now implement this (called `RDCL_NO`).
+
+**Conclusion:** These defenses are deployed and believed to work, but the discovery that page protections were not solid was highly disturbing, and more micro-architectural surprises have emerged since.

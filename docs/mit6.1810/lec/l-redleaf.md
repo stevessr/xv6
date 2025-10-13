@@ -1,5 +1,155 @@
 ---
 title: l-redleaf.txt
 ---
+# 6.1810 2024 Lecture 19: Kernels and HLL
 
-6.1810 2024 Lecture 19: Kernels and HLL Reading: "RedLeaf: Isolation and Communication in Safe Operating System" (2020) Outline: Commodity kernels written in C developer has total control but hard to get right Attractive alternative: Rust (much control, no GC) This paper: use HLL to design OS wo. hardware isolation all code runs in supervisor mode but w. language isolation Challenges with C Memory management left to programmer Serious problems for kernel developers: Concurrent data structures is challenging (RCU, next week) Memory safety bugs Use-after-free (notoriously difficult to debug) Buffer overflows (security vulnerabilities) Security impact and benefits of HLL: https://security.googleblog.com/2024/03/secure-by-design-googles-perspective-on.html https://security.googleblog.com/2019/05/queue-hardening-enhancements.html https://security.googleblog.com/2024/10/safer-with-google-advancing-memory.html High-level languages (HLL) HLL: automatic memory management Avoid large classes of C bugs HLLs enforces types, check bounds Many HLL have garbage collector GC automates memory deallocation Nice for concurrent programing But GC has costs CPU cycles at runtime Delays execution Extra memory https://www.usenix.org/conference/osdi18/presentation/cutler Rust: HLL without GC developer must follow ownership rule only one unique pointer to each live object https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html allows static analysis of lifetimes of objects: no GC small runtime bounds checking for memory safety Rust and Linux replace C with Rust challenging: C/Rust interaction pointers into C data structures unsafe Rust https://www.usenix.org/publications/loginonline/empirical-study-rust-linux-success-dissatisfaction-and-compromise Reminder: hardware isolation process: isolation enforced by page tables xv6/monolithic: address spaces for kernel and user processes l4/microkernel: splits kernel into processes RedLeaf: use HLL for isolation domain is the isolation unit isolation is enforced by HLL light-weight (no system calls) one domain calls a function in another domain rely on language to enforce isolation between domains cannot jump to arbitrary locations cannot cast arbitrarily why useful? performance fast cross-domain calls (e.g., compared to L4) direct-access to hardware/drivers more isolation e.g., factor kernel into many domains RedLeaf applications must be written in Rust cannot run arbitrary binaries long history: Lisp OSes, .., Singularity,... Challenge: domain cleanup domains crashes (panic, runtime violation) how to free its resources? another domain may have a pointer into crashed domain how do threads of another domain that called into the crashed domain return? how to free "kernel" resources associated with domain nice property of unix processes data is private to process no external pointers into the process killable exit frees up all resources Strawman design: pass data by value no external pointers into the crashed domain But large objects are expensive to pass goal: zero-copy communication RedLeaf ideas: heap isolation no outside pointers into private shared heap w. exchangeable types allows for zero-copy ownership tracking to deallaocate objects in shared heap interface validation enforce types are exchangeable cross-domain call proxying update ownership handle crashes git clone https://github.com/mars-research/redleaf.git RedLeaf inter-domain communication (fig 2) shared heap contains RRef domain owner, refcnt, T info domain's heap: two-level memory allocation trusted crate for Box allocations exchangeable types RRef can point to other RRef IDL compiler checks interface definitions trusted proxy for isolation update RRef ownership (only the root RRef) returns error when callee crashes Domain cleanup private heaps are private no other domain has a pointer to an object in private heap shared heap deallocation find domain's RRef roots find drop() for T call drop(), which may deallocate children crashed callee may scribble on mutable reference proxy returns RpcResult for transparent recovery: references must be immutable RedLeaf implementation (fig 1) Everything runs in supervisor mode many domains user processes in their own domain rv6 split in several domains xv6 in Rust core: "syscall" dispatcher drivers in their own domain microkernel Creating and downloading domains challenge: types across domains must be identical solution: trusted compilation signs domain "binary" IDL files and compiler flags no Rust unsafe generated domain entry point microkernel checks signature (and thus all types) Performance microbenchmark (table 1) why is L4 slower? why is RedLeaf only 124 cycles? language tax (fig 5) high-order functions Option device driver (fig 8) why is redleaf-driver < DPDK? wh is redleaf-domain < redleaf-driver?s HLL vs. hardware isolation RedLeaf TCB: Rust compiler, Rust core libraries, microkernel, IDL compiler xv6 TCB: RISC-V CPU, xv6-kernel (but less on compiler) language-level isolation in browser (e.g., WASM) page tables are useful for other purposes than isolation 
+**Reading:** "RedLeaf: Isolation and Communication in Safe Operating System" (2020)
+
+## I. Context and Motivation
+
+### Commodity Kernels (C)
+*   Developer has total control but hard to get right.
+
+### Attractive Alternative: Rust
+*   Much control, no GC (Garbage Collector).
+
+### RedLeaf Paper Goal
+*   Use HLL (High-level Language) to design OS *without* hardware isolation.
+*   All code runs in supervisor mode but with **language isolation**.
+
+## II. Challenges with C and High-Level Languages (HLL)
+
+### Challenges with C
+Memory management left to the programmer, leading to serious problems for kernel developers:
+1.  **Concurrent Data Structures:** Challenging (RCU, next week).
+2.  **Memory Safety Bugs:**
+    *   Use-after-free (notoriously difficult to debug).
+    *   Buffer overflows (security vulnerabilities).
+
+*Security Impact and Benefits of HLL (Links for Context):*
+*   `https://security.googleblog.com/2024/03/secure-by-design-googles-perspective-on.html`
+*   `https://security.googleblog.com/2019/05/queue-hardening-enhancements.html`
+*   `https://security.googleblog.com/2024/10/safer-with-google-advancing-memory.html`
+
+### High-Level Languages (HLL)
+*   **Automatic Memory Management:** Avoids large classes of C bugs.
+*   HLLs enforces types, checks bounds.
+
+#### HLL Memory Management
+*   **Garbage Collector (GC):** Automates memory deallocation. Nice for concurrent programing, but has costs:
+    *   CPU cycles at runtime.
+    *   Delays execution.
+    *   Extra memory.
+    *   *Reference:* `https://www.usenix.org/conference/osdi18/presentation/cutler`
+*   **Rust (HLL without GC):**
+    *   Developer must follow **ownership rule** (only one unique pointer to each live object).
+    *   *Reference:* `https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html`
+    *   Allows static analysis of lifetimes of objects: **no GC**.
+    *   Small runtime bounds checking for memory safety.
+
+#### Rust and Linux
+*   Replacing C with Rust is challenging: C/Rust interaction (pointers into C data structures) requires **unsafe Rust**.
+
+## III. Isolation Models
+
+### Hardware Isolation (Reminder)
+*   Isolation enforced by **page tables**.
+    *   **xv6/Monolithic:** Address spaces for kernel and user processes.
+    *   **L4/Microkernel:** Splits kernel into processes.
+
+### RedLeaf (HLL Isolation)
+*   The isolation unit is the **domain**.
+*   Isolation is enforced by **HLL**.
+*   **Light-weight:** No system calls.
+*   One domain calls a function in another domain.
+*   Relies on the language to enforce isolation between domains:
+    *   Cannot jump to arbitrary locations.
+    *   Cannot cast arbitrarily.
+
+### Why HLL Isolation is Useful
+*   **Performance:** Fast cross-domain calls (e.g., compared to L4).
+*   **Direct-Access:** Direct-access to hardware/drivers.
+*   **More Isolation:** Factor kernel into many domains.
+
+### Constraints and History
+*   RedLeaf applications must be written in Rust; cannot run arbitrary binaries.
+*   Long history: Lisp OSes, Singularity, etc.
+
+## IV. The Domain Cleanup Challenge
+
+**Problem:** Domains crash (panic, runtime violation). How to free its resources?
+*   Another domain may have a pointer into crashed domain.
+*   How do threads of another domain that called into the crashed domain return?
+*   How to free "kernel" resources associated with domain?
+
+**Nice Property of Unix Processes:** Data is private to process; no external pointers into the process. `killable exit` frees up all resources.
+
+**Strawman Design:** Pass data by value.
+*   *Benefit:* No external pointers into the crashed domain.
+*   *Drawback:* Large objects are expensive to pass.
+*   **Goal:** Zero-copy communication.
+
+## V. RedLeaf Design Ideas
+
+RedLeaf addresses the cleanup and zero-copy goal via:
+1.  **Heap Isolation:** No outside pointers into the **private** heap.
+2.  **Shared Heap w. Exchangeable Types:** Allows for **zero-copy**.
+3.  **Ownership Tracking:** To deallocate objects in the shared heap.
+4.  **Interface Validation:** Enforce types are exchangeable.
+5.  **Cross-Domain Call Proxying:** Update ownership, handle crashes.
+
+*Code Reference:* `git clone https://github.com/mars-research/redleaf.git`
+
+## VI. Implementation Details
+
+### Inter-Domain Communication (Fig 2)
+*   **Shared Heap:** Contains `RRef` (Remote Reference).
+    *   `RRef` info: domain owner, `refcnt`, `T` (type) info.
+*   **Domain's Heap:** Two-level memory allocation.
+*   **Trusted Crate:** For `Box` allocations.
+*   **Exchangeable Types:** `RRef` can point to other `RRef`.
+*   **IDL Compiler:** Checks interface definitions.
+*   **Trusted Proxy:** For isolation, updates `RRef` ownership (only the root `RRef`).
+*   Returns error when callee crashes.
+
+### Domain Cleanup
+*   **Private Heaps:** Private; no other domain has a pointer to an object in private heap.
+*   **Shared Heap Deallocation (on crash):**
+    1.  Find domain's `RRef` roots.
+    2.  Find `drop()` for `T`.
+    3.  Call `drop()`, which may deallocate children.
+*   **Crash Recovery:** Crashed callee may scribble on mutable reference.
+    *   Proxy returns `RpcResult` for transparent recovery.
+    *   *Crucial:* References must be **immutable**.
+
+### RedLeaf Architecture (Fig 1)
+*   Everything runs in **supervisor mode**.
+*   Many domains (user processes in their own domain).
+*   `rv6` split into several domains (`xv6` in Rust core).
+    *   Core: "syscall" dispatcher.
+    *   Drivers in their own domain (microkernel design).
+
+### Creating and Downloading Domains
+*   **Challenge:** Types across domains must be identical.
+*   **Solution: Trusted Compilation**
+    *   Signs domain "binary," IDL files, and compiler flags.
+    *   No Rust `unsafe` generated domain entry point.
+    *   Microkernel checks signature (and thus all types).
+
+## VII. Performance and TCB
+
+### Performance
+*   **Microbenchmark (Table 1):**
+    *   Why is L4 slower?
+    *   Why is RedLeaf only 124 cycles?
+*   **Language Tax (Fig 5):** High-order functions, `Option`.
+*   **Device Driver (Fig 8):**
+    *   Why is `redleaf-driver` < DPDK?
+    *   Why is `redleaf-domain` < `redleaf-driver`?
+
+### HLL vs. Hardware Isolation (TCB)
+*   **RedLeaf TCB (Trusted Computing Base):** Rust compiler, Rust core libraries, microkernel, IDL compiler.
+*   **xv6 TCB:** RISC-V CPU, xv6-kernel (but less on the compiler).
+
+*   **Context:** Language-level isolation in the browser (e.g., WASM).
+*   Page tables are useful for other purposes than isolation.
