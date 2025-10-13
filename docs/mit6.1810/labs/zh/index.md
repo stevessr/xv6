@@ -11,9 +11,13 @@ title: Labs (Chinese Translation)
 - [实验：页表](/mit6.1810/labs/zh/pgtbl.md)
 - [实验：陷阱](/mit6.1810/labs/zh/traps.md)
 - [实验：xv6 的写时复制 Fork](/mit6.1810/labs/zh/cow.md)
-- [实验：文件系统](/mit6.1810/labs/zh/fs.md)
 - [实验：网络驱动](/mit6.1810/labs/zh/net.md)
 - [实验：并行/锁](/mit6.1810/labs/zh/lock.md)
+- [实验：文件系统](/mit6.1810/labs/zh/fs.md)
 - [实验：mmap](/mit6.1810/labs/zh/mmap.md)
+
+附加资源：
+- [实验指导](/mit6.1810/labs/zh/guidance.zh.md)
+- [工具 & 安装](/mit6.1810/labs/zh/tools.zh.md)
 
 请注意，部分实验可能尚未完成中文翻译。如果您愿意帮助翻译，请联系我们。

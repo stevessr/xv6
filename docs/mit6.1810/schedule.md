@@ -2,7 +2,9 @@
 title: schedule
 ---
 
-Links to notes, videos etc. on future days are copies of materials from the 2024 version of 6.1810. We will update the notes as the course progresses. The lecture notes may help you remember the lecture content, but they are _not_ a replacement for attending lectures.   
+Links to notes, videos etc. on future days are copies of materials from the 2024 version 
+of 6.1810. We will update the notes as the course progresses. The lecture notes may help 
+you remember the lecture content, but they are _not_ a replacement for attending lectures.
   
 
 
@@ -12,7 +14,7 @@ sep 1
 Labor Day | sep 2  
 Reg Day | sep 3  
 **LEC 1 (rtm):** [Introduction](lec/l-overview.txt) and [examples](lec/l-overview/)  
-**Handouts:** [xv6 code](https://github.com/mit-pdos/xv6-riscv) ([PDF booklet](xv6/xv6-src-booklet-rev5.pdf)) and [xv6 book](xv6/book-riscv-rev5.pdf)  
+**Handouts:** [xv6 code](https://github.com/mit-pdos/xv6-riscv) \n([PDF booklet](xv6/xv6-src-booklet-rev5.pdf)) and [xv6 book](xv6/book-riscv-rev5.pdf)
 **Homework 1 due:** [file descriptors](homework/xv6-intro.html)  
 **Lab _util_ assigned**: [Unix utilities](labs/util.html) | sep 4 | sep 5  
 sep 8  
@@ -45,7 +47,7 @@ sep 29
 **Lab _traps_ due** | oct 3  
 ADD DATE  
 oct 6  
-**LEC 10 (fk):** [Virtual memory for applications](lec/l-uservm.txt), [FAQ](lec/uservm-faq.txt) ([sqrt example](lec/mmap.c))  
+**LEC 10 (fk):** [Virtual memory for applications](lec/l-uservm.txt), \n[FAQ](lec/uservm-faq.txt) ([sqrt example](lec/mmap.c))
 **Homework 10 due:** [Question](homework/paper-uvm.html) | oct 7 | oct 8  
 **LEC 11 (rtm):** [Device drivers](lec/l-interrupt.txt), [16550.pdf](lec/16550.pdf)  
 **Homework 11 due:** [Question](homework/xv6-interrupt.html) | oct 9 | oct 10  
@@ -67,7 +69,9 @@ oct 27
 **LEC 13 (nz):** [Thread switching](lec/l-threads.txt)   
 **Homework 13 due:** [Thread switching](homework/xv6-threads.html) | oct 28 | oct 29  
 **LEC 14 (rtm):** [Coordination](lec/l-coordination.txt), [code](lec/l-coordination.c)  
-**Preparation** : Read remainder of ["Scheduling"](xv6/book-riscv-rev5.pdf), and corresponding parts of [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), [kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c)  
+**Preparation** : Read remainder of ["Scheduling"](xv6/book-riscv-rev5.pdf), and 
+corresponding parts of [kernel/proc.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/proc.c), 
+[kernel/sleeplock.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sleeplock.c)
 **Homework 14 due:** [Question](homework/q.html) | oct 30 | oct 31  
 nov 3  
 **LEC 15 (nz):** [Networking](lec/l-net.txt)  
@@ -87,11 +91,16 @@ Veteran's Day | nov 12
 **Lab _lock_ due** | nov 14  
 nov 17  
 **LEC 18 (rtm):** [File systems](lec/l-fs.txt) ([slides](lec/l-fs1.pdf))  
-**Preparation** : Read [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), [kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), [kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), [kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) and ["File system" (except for the logging sections)](xv6/book-riscv-rev5.pdf)  
+**Preparation** : Read [kernel/bio.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/bio.c), 
+[kernel/fs.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/fs.c), 
+[kernel/sysfile.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/sysfile.c), 
+[kernel/file.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/file.c) and 
+["File system" (except for the logging sections)](xv6/book-riscv-rev5.pdf)
 **Homework 18 due:** [Question](homework/q.html) | nov 18 | nov 19  
 **DROP DATE**  
 **LEC 19 (fk):** [Crash recovery](lec/l-crash.txt) ([slides](lec/l-fs2.pdf))  
-**Preparation** : Read [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) and [the logging sections of the "File system" chapter](xv6-book-riscv-rev5.pdf)  
+**Preparation** : Read [kernel/log.c](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/log.c) and 
+[the logging sections of the "File system" chapter](xv6-book-riscv-rev5.pdf)
 **Homework 19 due:** [Question](homework/q.html)  
 **Lab _mmap_ assigned**: [Mmap](labs/mmap.html) | nov 20  
 **Lab _fs_ due** | nov 21  
@@ -120,6 +129,6 @@ dec 15 | dec 16 | dec 17 | dec 18 | dec 19
   
 * * *
 
-Questions or comments regarding 6.1810? Send e-mail to the course staff at [_61810-staff@lists.csail.mit.edu_](mailto:61810-staff@lists.csail.mit.edu). 
+Questions or comments regarding 6.1810? Send e-mail to the course staff at \n[_61810-staff@lists.csail.mit.edu_](mailto:61810-staff@lists.csail.mit.edu).
 
 [![Creative Commons License](https://i.creativecommons.org/l/by/3.0/us/88x31.png)](https://creativecommons.org/licenses/by/3.0/us/)

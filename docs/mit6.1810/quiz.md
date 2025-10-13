@@ -51,6 +51,7 @@ Note that JOS and xv6 change from year to year, so some questions on past quizze
 
 * * *
 
-Questions or comments regarding 6.1810? Send e-mail to the course staff at [_61810-staff@lists.csail.mit.edu_](mailto:61810-staff@lists.csail.mit.edu). 
+Questions or comments regarding 6.1810? Send e-mail to the course staff at 
+[_61810-staff@lists.csail.mit.edu_](mailto:61810-staff@lists.csail.mit.edu).
 
 [![Creative Commons License](https://i.creativecommons.org/l/by/3.0/us/88x31.png)](https://creativecommons.org/licenses/by/3.0/us/)
